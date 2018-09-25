@@ -1,0 +1,60 @@
+{
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "o_1": "-fecha",
+        "o_2": "-codigo",
+        "s_sh_estadopedidopda__ne": "Importado",
+        "f_pedidosUsuario": null
+    },
+    "schema": {},
+    "layout": {
+        "masterPedidoscli": {
+            "componente": "YBGrid",
+            "label": "Pedidos de venta",
+            "prefix": "sh_pedidosclipda",
+            "filter": "buscador",
+            "multiselectable": true,
+            "colorRowField": "rowColor",
+            "columns": [
+                {"tipo": "field", "listpos": "title", "key": "codigo"},
+                {"tipo": "field", "listpos": "body", "key": "fecha"},
+                {"tipo": "field", "listpos": "subtitle", "key": "nombrecliente"},
+                {"tipo": "field", "listpos": "secondaryitem", "key": "total"},
+                {
+                    "tipo": "act",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar"}
+                    ]
+                },
+                {
+                    "tipo": "act",
+                    "key": "enviar",
+                    "label": "Enviar Pedido",
+						"success": [{"slot": "toast", "tipo": "success", "mensaje": "Correo enviado"}, {"slot": "refrescar"}],
+                        "error": [{"slot": "toast", "mensaje": "Error inesperado, consulte administrador"}]
+                }
+            ],
+            "rowclick": "link"
+        },
+        "newRecordTelest": {
+            "componente": "YBNewRecord",
+            "class": "info",
+            "icon": "add"
+        }
+    },
+    "acciones": {
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
+        },
+         "enviar": {
+            "action": "legacy",
+            "serverAction": "enviarPedidoPDA",
+            "prefix": "sh_pedidosclipda",
+            "icon": "send"
+        }
+    }
+}

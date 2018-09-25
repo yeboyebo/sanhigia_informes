@@ -1,0 +1,57 @@
+{
+    "querystring": {},
+    "schema": {},
+    "layout": {
+        "formRecordLineaspedidoscli": {
+            "prefix": "lineaspedidoscli",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "update",
+            "success": [{"slot": "return"}],
+            "groupbox": "",
+            "return": true,
+            "fields": {
+                "gb__articulo": {
+                    "title": "Artículo",
+                    "fields": {
+                        "numlinea": {},
+                        "referencia": {},
+                        "descripcion": {}
+                    }
+                },
+                "gb__impuestos": {
+                    "title": "Impuestos",
+                    "fields": {
+                        "codimpuesto": {},
+                        "iva": {"disabled": true},
+                        "recargo": {"disabled": true},
+                        "irpf": {}
+                    }
+                },
+                "gb__cantidad": {
+                    "title": "Cantidad",
+                    "fields": {
+                        "cantidad": {},
+                        "pvpunitario": {},
+                        "pvpsindto": {"disabled": true},
+                        "dtolineal": {},
+                        "gb__": {
+                            "title": "",
+                            "fields": {
+                                "pvptotal": {"disabled": true}
+                            }
+                        }
+                    }
+                },
+                "gb__comision": {
+                    "title": "Comisión Agente",
+                    "fields": {
+                        "porcomision": {"disabled": true}
+                    }
+                }
+            },
+            "exclude": {}
+        }
+    },
+    "acciones": {}
+}

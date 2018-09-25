@@ -1,0 +1,42 @@
+{
+    "querystring": {
+        "p_l": 50,
+        "p_c": true
+    },
+    "schema": {},
+    "layout": {
+        "masterClientes": {
+            "componente": "YBGrid",
+            "label": "Clientes",
+            "prefix": "clientes",
+            "filter": "buscador",
+            "multiselectable": true,
+            "colorRowField": "rowColor",
+            "columns": [
+                {"tipo": "field", "listpos": "title", "key": "nombrecliente"},
+                {"tipo": "field", "listpos": "body", "key": "cifnif"},
+                {"tipo": "field", "listpos": "subtitle", "key": "direccion"}
+                {
+                    "tipo": "act",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar"}
+                    ]
+                }
+            ],
+            "rowclick": "link"
+        },
+        "newRecordTelest": {
+            "componente": "YBNewRecord",
+            "class": "info",
+            "icon": "add"
+        }
+    },
+    "acciones": {
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
+        }
+    }
+}

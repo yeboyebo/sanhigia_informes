@@ -1,0 +1,57 @@
+{
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "o_1": "-fecha",
+        "o_2": "-codigo",
+        "f_presupuestosUsuario": null
+    },
+    "schema": {},
+    "layout": {
+        "masterPresupuestoscli": {
+            "componente": "YBGrid",
+            "label": "Presupuestos de venta",
+            "prefix": "presupuestoscli",
+            "filter": "buscador",
+            "multiselectable": true,
+            "colorRowField": "rowColor",
+            "columns": [
+                {"tipo": "field", "listpos": "title", "key": "codigo"},
+                {"tipo": "field", "listpos": "body", "key": "fecha"},
+                {"tipo": "field", "listpos": "subtitle", "key": "nombrecliente"},
+                {"tipo": "field", "listpos": "secondaryitem", "key": "total"},
+                {
+                    "tipo": "act",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar"}
+                    ]
+                },
+                {
+                	"tipo": "act",
+                    "key": "imprimir",
+                    "label": "Imprimir presupuesto",
+                    "success": []
+                }
+            ],
+            "rowclick": "link"
+        },
+        "newRecordTelest": {
+            "componente": "YBNewRecord",
+            "class": "info",
+            "icon": "add"
+        }
+    },
+    "acciones": {
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
+        },
+         "imprimir": {
+            "action": "getReport",
+            "serverAction": "imprimirPresupuestoPDA",           
+            "icon": "cloud_download"
+        }
+    }
+}

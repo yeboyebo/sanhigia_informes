@@ -1,0 +1,67 @@
+{
+    "querystring": {},
+    "schema": {},
+    "layout": {
+        "i_pedidoscliForm": {
+            "prefix": "i_pedidoscli",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "update",
+            "return": true,
+            "success": [{"slot": "return"}],
+            "groupbox": "acordeon",
+            "fields": {
+                "gb__datosprincipales": {
+                    "title": "Datos principales",
+                    "fields": {
+                        "descripcion": {},
+                        "gb_mas" : {
+                            "title": " ",
+                            "fields": {
+                                "lineas": {},
+                                "solopdtes": {},
+                                "solodisponibles": {}
+                            }
+                        }
+                    }
+                },
+                "gb__masdatos": {
+                    "title": "Más datos",
+                    "fields": {
+                        "d_pedidoscli_codigo": {
+                            "rel": "pedidoscli",
+                            "aplic": "informes",
+                            "key": "idpedido",
+                            "desc": "codigo"
+                        },
+                        "h_pedidoscli_codigo": {
+                            "rel": "pedidoscli",
+                            "aplic": "informes",
+                            "key": "idpedido",
+                            "desc": "codigo"
+                        },
+                        "i_pedidoscli_codejercicio": {},
+                        "codintervalo": {},
+                        "d_pedidoscli_fecha": {},
+                        "h_pedidoscli_fecha": {},
+                        "i_pedidoscli_codcliente": {},
+                        "i_pedidoscli_codagente": {},
+                        "i_pedidoscli_servido": {},
+                        "orden1": {},
+                        "tipoorden1": {},
+                        "orden2": {},
+                        "tipoorden2": {},
+                        "i_pedidoscli_codserie": {}
+                    }
+                }
+            },
+            "exclude": {}
+        }
+    },
+    "acciones": {},
+    "drawIf": {
+        "gb__masdatos": {
+            "i_pedidoscli_codagente": "checkCodAgente"
+        }
+    }
+}

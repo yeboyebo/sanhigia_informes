@@ -1,0 +1,12 @@
+{
+    "querystring": {},
+    "schema": {
+        "ventasfamilia": {
+            "reportTable": "i_sh_ventasfamilia",
+            "querystring": {}
+        }
+    },
+    "layout": {
+    },
+    "acciones": {}
+}

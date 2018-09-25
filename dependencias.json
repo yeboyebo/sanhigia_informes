@@ -1,6 +1,6 @@
 {
     "fk": "True",
-    "fun_aq": null,
+    "fun_aq": "fun_jsenar",
     "dependencias": [
         {
             "key": "baseparche",

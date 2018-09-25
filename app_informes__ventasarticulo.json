@@ -1,0 +1,11 @@
+{
+    "querystring": {},
+    "schema": {
+        "ventasarticulo": {
+            "reportTable": "i_sh_ventasarticulo",
+            "querystring": {}
+        }
+    },
+    "layout": {},
+    "acciones": {}
+}

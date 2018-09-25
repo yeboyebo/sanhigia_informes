@@ -1,0 +1,45 @@
+{
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "o_1": "-fechadesde",
+        "f_filtroagente": null
+    },
+    "schema": {},
+    "layout": {
+        "masterGrid": {
+            "componente": "YBList",
+            "class": "claseGrid",
+            "label": "Vengas por Familia",
+            "prefix": "i_sh_ventasfamilia",
+            "filter": "buscador",
+            "columns": [
+                {"tipo": "field", "listpos": "body", "key": "descripcion", "avatar": true},
+                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "width": 200},
+                {
+                    "tipo": "act",
+                    "key": "gotofamilias",
+                    "label": "editar",
+                    "success": []
+                }
+            ],
+            "rowclick": "dameInforme"
+        },
+        "newRecord": {
+            "componente": "YBNewRecord",
+            "class": "info",
+            "icon": "add"
+        }
+    },
+    "acciones": {
+        "dameInforme": {
+            "action": "getReport",
+            "serverAction": "dameInformeVentasfamilia"
+        },
+        "gotofamilias": {
+            "action": "goto",
+            "icon": "edit",
+            "template": "form"
+        }
+    }
+}

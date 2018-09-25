@@ -1,0 +1,46 @@
+{
+    "items": [
+        {
+            "NAME": "Ventas por Artículo",
+            "TEXT": "Ventas por Artículo",
+            "URL": "informes/i_sh_ventasarticulo/master",
+            "ICON": "content_paste",
+            "COLOR": "rgb(30, 170, 30)"
+        },
+        {
+            "NAME": "Ventas por Familia",
+            "TEXT": "Ventas por Familia",
+            "URL": "informes/i_sh_ventasfamilia/master",
+            "ICON": "content_paste",
+            "COLOR": "rgb(30, 170, 30)"
+        },
+        {
+            "NAME": "Pedidos",
+            "TEXT": "Pedidos",
+            "URL": "informes/i_pedidoscli/master",
+            "ICON": "content_paste",
+            "COLOR": "rgb(30, 170, 30)"
+        },
+        {
+            "NAME": "Consumo Cliente",
+            "TEXT": "Consumo Cliente",
+            "URL": "informes/i_sh_consumocliente/master",
+            "ICON": "content_paste",
+            "COLOR": "rgb(30, 170, 30)"
+        },
+        {
+            "NAME": "Clientes por Artículo",
+            "TEXT": "Clientes por Artículo",
+            "URL": "informes/i_clientesventaart/master",
+            "ICON": "content_paste",
+            "COLOR": "rgb(30, 170, 30)"
+        },
+        {
+            "NAME": "Ventas por Población",
+            "TEXT": "Ventas por Población",
+            "URL": "informes/i_sh_ventaspoblacion/master",
+            "ICON": "content_paste",
+            "COLOR": "rgb(30, 170, 30)"
+        }
+    ]
+}

@@ -1,0 +1,73 @@
+{
+    "querystring": {},
+    "schema": {},
+    "layout": {
+        "newRecordLineaspedidoscli": {
+            "prefix": "sh_lineaspedidosclipda",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "create",
+            "success": [{"slot": "return"}],
+            "groupbox": "",
+            "return": true,
+            "fields": {
+                "gb__articulo": {
+                    "title": "Artículo",
+                    "fields": {
+                        "labelPrueba": {
+                            "componente": "YBLabel",
+                            "text": "%yb1",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "red"
+                            },
+                            "params": [{"type": "calc", "key": "recuentoDestinatarios"}]
+                        },
+                    	"referencia": {
+	                        "rel": "articulos",
+	                        "key": "referencia",
+	                        "desc": "descripcion",
+	                        "function":"getReferenciaDesc",
+	                        "params": ["descripcion"],
+                            "searchOn": "dot"
+                        },
+                        "descripcion": {}
+                    }
+                },
+                "gb__impuestos": {
+                    "title": "Impuestos",
+                    "fields": {
+                        "codimpuesto": {},
+                        "iva": {"disabled": true},
+                        "recargo": {"disabled": true},
+                        "irpf": {}
+                    }
+                },
+                "gb__cantidad": {
+                    "title": "Cantidad",
+                    "fields": {
+                        "cantidad": {},
+                        "pvpunitario": {},
+                        "pvpsindto": {"disabled": true},
+                        "dtolineal": {},
+                        "dtopor": {"disabled": true},
+                        "gb__": {
+                            "title": "",
+                            "fields": {
+                                "pvptotal": {"disabled": true}
+                            }
+                        }
+                    }
+                },
+                "gb__comision": {
+                    "title": "Comisión Agente",
+                    "fields": {
+                        "porcomision": {}
+                    }
+                }
+            },
+            "exclude": {}
+        }
+    },
+    "acciones": {}
+}

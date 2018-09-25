@@ -1,0 +1,45 @@
+{
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "o_1": "descripcion",
+        "f_filtroagente": null
+    },
+    "schema": {},
+    "layout": {
+        "masterGrid": {
+            "componente": "YBList",
+            "class": "claseGrid",
+            "label": "Ventas por Población",
+            "prefix": "i_sh_ventaspoblacion",
+            "filter": "buscador",
+            "columns": [
+                {"tipo": "field", "listpos": "body", "key": "descripcion", "avatar": true},
+                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "width": 200},
+                {
+                    "tipo": "act",
+                    "key": "gotoventaspoblacion",
+                    "label": "editar",
+                    "success": []
+                }
+            ],
+            "rowclick": "dameInforme"
+        },
+        "newRecord": {
+            "componente": "YBNewRecord",
+            "class": "info",
+            "icon": "add"
+        }
+    },
+    "acciones": {
+        "dameInforme": {
+            "action": "goto",
+            "serverAction": "dameInformeVentaspoblacion"
+        },
+        "gotoventaspoblacion": {
+            "action": "goto",
+            "icon": "edit",
+            "template": "form"
+        }
+    }
+}

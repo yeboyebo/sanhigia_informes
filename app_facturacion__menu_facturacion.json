@@ -1,0 +1,19 @@
+{
+    "items": [
+        {
+            "NAME": "Pedidos de cliente",
+            "TEXT": "Pedidos de cliente",
+            "URL": "facturacion/sh_pedidosclipda/master",
+            "ICON": "dashboard",
+            "VISIBLE": true,
+            "COLOR": "rgb(30, 170, 30)"
+        },
+        {
+            "NAME": "Toma de presupuestos",
+            "TEXT": "Toma de presupuestos",
+            "URL": "facturacion/presupuestoscli/master",
+            "ICON": "dashboard",
+            "COLOR": "rgb(30, 170, 30)"
+        }
+    ]
+}

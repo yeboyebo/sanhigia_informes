@@ -1,0 +1,11 @@
+{
+    "querystring": {},
+    "schema": {
+        "pedidoscli": {
+            "reportTable": "i_pedidoscli",
+            "querystring": {}
+        }
+    },
+    "layout": {},
+    "acciones": {}
+}

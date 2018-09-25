@@ -8,7 +8,420 @@
             }
         ],
         "deleteFile": [],
-        "addFile": [],
+        "addFile": [
+            {
+                "name": "model_flfactinfo__i_sh_ventasfamilia.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_sh_ventasfamilia_def.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_sh_ventasarticulo.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_sh_ventasarticulo_def.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_sh_ventaspoblacion.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_sh_ventaspoblacion_def.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_sh_productividad.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_sh_productividad_def.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_sh_consumocliente.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_sh_consumocliente_def.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_clientesventaart.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_clientesventaart_def.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_pedidoscli.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_pedidoscli_def.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactppal__agentes.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__agentes_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__intervalos.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__intervalos_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__series.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__series_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__clientes.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__clientes_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__usuarios.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__usuarios_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__ejercicios.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__ejercicios_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__dirclientes.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__dirclientes_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__impuestos.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__impuestos_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__secuenciasejercicios.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__secuenciasejercicios_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__secuencias.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__secuencias_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactalma__familias.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__familias_def.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__subfamilias.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__subfamilias_def.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__articulos.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__articulos_def.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfacturac__sh_pedidosclipda.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__sh_pedidosclipda_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__sh_lineaspedidosclipda.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__sh_lineaspedidosclipda_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__pedidoscli.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__pedidoscli_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__lineaspedidoscli.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__lineaspedidoscli_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__lineasalbaranescli.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__lineasalbaranescli_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__presupuestoscli.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__presupuestoscli_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__lineaspresupuestoscli.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__lineaspresupuestoscli_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__flfacturac_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "app_facturacion__menu_facturacion.json",
+                "path": "apps/facturacion/templates/facturacion/"
+            },
+            {
+                "name": "app_facturacion__pedidoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__presupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordsh_lineaspedidosclipda.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__masterpresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__sh_pedidosclipda.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__mastersh_pedidosclipda.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordpresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordlineaspresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__lineaspresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__lineaspedidoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordpedidoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__sh_lineaspedidosclipda.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordlineaspedidoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__masterpedidoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordsh_pedidosclipda.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__masterclientes.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_portal__menu_portal.json",
+                "path": "apps/portal/templates/portal/"
+            },
+            {
+                "name": "app_portal__views_portal.py",
+                "path": "apps/portal/viewset/"
+            },
+            {
+                "name": "app_informes__menu_informes.json",
+                "path": "apps/informes/templates/informes/"
+            },
+            {
+                "name": "app_informes__pedidoscli.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__newrecordi_sh_ventasarticulo.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__masteri_sh_ventaspoblacion.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__i_pedidoscli.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__masteri_clientesventaart.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__ventasarticulo.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__i_sh_ventasarticulo.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__newrecordi_pedidoscli.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__masteri_sh_ventasarticulo.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__clientesporarticulo.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__i_sh_consumocliente.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__i_clientesventaart.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__i_sh_ventasfamilia.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__consumocliente.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__i_sh_ventaspoblacion.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__masteri_sh_ventasfamilia.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__ventasfamilia.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__newrecordi_sh_ventasfamilia.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__masteri_sh_consumocliente.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__newrecordi_clientesventaart.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__newrecordi_sh_ventaspoblacion.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__newrecordi_sh_consumocliente.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__ventaspoblacion.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__masteri_pedidoscli.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "app_informes__views_informes.py",
+                "path": "apps/informes/viewset/"
+            },
+            {
+                "name": "app_facturacion__views_facturacion.py",
+                "path": "apps/facturacion/viewset/"
+            },
+            {
+                "name": "app_portal__login.html",
+                "path": "apps/portal/templates/portal/"
+            },
+            {
+                "name": "app_portal__index.html",
+                "path": "apps/portal/templates/portal/"
+            }
+        ],
         "patchJson": [
             {
                 "name": "urls.json",

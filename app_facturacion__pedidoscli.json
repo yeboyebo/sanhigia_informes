@@ -1,0 +1,211 @@
+{
+    "querystring": {},
+    "schema": {
+        "lineaspedidoscli": {
+            "rel": "idpedido",
+            "querystring": {
+                "p_l": 10,
+                "p_c": 1
+            }
+        }
+    },
+    "layout": {
+        "datoscabeceraForm": {
+            "prefix": "pedidoscli",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "update",
+            "send": false,
+            "success": [{"slot": "refrescar"}],
+            "groupbox": "",
+            "fields": {
+                "gb__": {
+                    "title": "",
+                    "fields": {
+                        "codigo": {"disabled": true},
+                        "codejercicio": {"disabled": true},
+                        "codserie": {"disabled": true},
+                        "numero": {"disabled": true}
+                    }
+                }
+            },
+            "exclude": {}
+        },
+        "groupBoxPestanas": {
+            "componente": "YBGroupBoxContainer",
+            "className": "",
+            "style": {},
+            "layout": {
+                "Cliente": {
+                    "componente": "YBGroupBox",
+                    "className": "",
+                    "style": {},
+                    "layout": {
+                        "pedidoscliForm": {
+                            "prefix": "pedidoscli",
+                            "componente": "YBForm",
+                            "class": "claseGrid",
+                            "submit": "update",
+                            "return": true,
+                            "send": true,
+                            "success": [{"slot": "refrescar"}],
+                            "groupbox": "",
+                            "fields": {
+                                "gb__": {
+                                    "title": "",
+                                    "fields": {
+                                        "codcliente": {},
+                                        "cifnif": {}
+                                    }
+                                },
+                                "gb__Cliente": {
+                                    "title": "",
+                                    "fields": {
+                                        "coddir":{},
+                                        "direccion":{},
+                                        "dirnum":{},
+                                        "dirotros": {},
+                                        "codpostal": {},
+                                        "ciudad": {},
+                                        "idprovincia":{"auto_name":"Provincia"},
+                                        "codpais":{}
+                                    }
+                                }
+                            },
+                            "exclude": {}
+                        }
+                    }
+                },
+                "Datos": {
+                    "componente": "YBGroupBox",
+                    "className": "",
+                    "style": {},
+                    "layout": {
+                        "articuosForm": {
+                            "prefix": "pedidoscli",
+                            "componente": "YBForm",
+                            "class": "claseGrid",
+                            "submit": "update",
+                            "return": true,
+                            "success": [{"slot": "refrescar"}],
+                            "groupbox": "",
+                            "fields": {
+                                "gb__": {
+                                    "title": "",
+                                    "fields": {
+                                        "fecha": {},
+                                        "fechasalida": {},
+                                        "codagente": {},
+                                        "recfinanciero": {},
+                                        "codalmacen": {},
+                                        "codpago": {},
+                                        "coddivisa": {},
+                                        "tasaconv": {},
+                                        "totaleuros": {"disabled": true},
+                                        "regimeniva": {},
+                                        "aplicarpvpparticular": {}
+
+                                    }
+                                }
+                            },
+                            "exclude": {}
+                        }
+                    }
+                },
+                "Observaciones": {
+                    "componente": "YBGroupBox",
+                    "className": "",
+                    "style": {},
+                    "layout": {
+                        "articuosForm": {
+                            "prefix": "pedidoscli",
+                            "componente": "YBForm",
+                            "class": "claseGrid",
+                            "submit": "update",
+                            "return": true,
+                            "success": [{"slot": "refrescar"}],
+                            "groupbox": "",
+                            "fields": {
+                                "gb__": {
+                                    "title": "",
+                                    "fields": {
+                                    	"copiarobservaciones": {},
+                                    	"impreso": {},
+                                        "observaciones": {}
+                                    }
+                                }
+                            },
+                            "exclude": {}
+                        }
+                    }
+                }
+
+            }
+        },
+        "articuosForm": {
+            "prefix": "pedidoscli",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "update",
+            "send": false,
+            "success": [{"slot": "refrescar"}],
+            "groupbox": "",
+            "fields": {
+                "gb__": {
+                    "title": "",
+                    "fields": {
+                        "neto": {"disabled": true},
+                        "totaliva": {"disabled": true},
+                        "totalirpf": {"disabled": true},
+                        "totalrecargo": {"disabled": true},
+                        "total": {"disabled": true}
+                    }
+                }
+            },
+            "exclude": {}
+        },
+        "masterlineaspedidoscli": {
+            "componente": "YBGrid",
+            "label": "Líneas",
+            "prefix": "lineaspedidoscli",
+            "filter": "buscador",
+            "columns": [
+                {"tipo": "field", "listpos": "title", "key": "referencia"},
+                {"tipo": "field", "listpos": "body", "key": "descripcion", "width": 200, "flex": 3},
+                {"tipo": "field", "listpos": "subtitle", "key": "cantidad"},
+                {"tipo": "field", "listpos": "secondaryitem", "key": "pvptotal"},
+                {
+                    "tipo": "act",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar"}
+                    ]
+                }
+            ],
+            "rowclick": "link",
+            "accionesGrid": [{
+                "key": "nuevaLinea",
+                "label": "Nuevo",
+                "success": []
+            }]
+        }
+
+    },
+    "acciones": {
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
+        },
+        "nuevaLinea": {
+            "label": "Nuevo",
+            "action": "newRow",
+            "icon": "add_circle"
+        },
+        "prueba": {
+            "label": "prueba",
+            "action": "legacy",
+            "serverAction": "prueba"
+        }
+    }
+}

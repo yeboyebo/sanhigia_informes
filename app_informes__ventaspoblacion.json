@@ -1,0 +1,11 @@
+{
+    "querystring": {},
+    "schema": {
+        "ventaspoblacion": {
+            "reportTable": "i_sh_ventaspoblacion",
+            "querystring": {}
+        }
+    },
+    "layout": {},
+    "acciones": {}
+}

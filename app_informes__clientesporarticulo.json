@@ -1,0 +1,11 @@
+{
+    "querystring": {},
+    "schema": {
+        "clientesporarticulo": {
+            "reportTable": "i_clientesventaart",
+            "querystring": {}
+        }
+    },
+    "layout": {},
+    "acciones": {}
+}

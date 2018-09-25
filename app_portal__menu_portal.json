@@ -1,0 +1,19 @@
+{
+    "items": [
+        {
+            "NAME": "informes",
+            "TEXT": "Informes",
+            "ICON": "dashboard",
+            "VISIBLE": false,
+            "COLOR": "rgb(30, 170, 30)"
+        },
+        {
+            "NAME": "facturacion",
+            "TEXT": "FACTURACIÓN",
+            "URL": "facturacion",
+            "ICON": "dashboard",
+            "VISIBLE": true,
+            "COLOR": "rgb(170, 30, 30)"
+        }
+    ]
+}

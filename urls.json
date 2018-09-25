@@ -1,3 +1,118 @@
 {
-    "modifications": []
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/portal/root",
+            "value": {
+                "authentication": {
+                    "url": "^login/$",
+                    "func": "auth_login"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/portal/authentication",
+            "value": {
+                "account": {
+                    "url": "^account/$",
+                    "func": "account_request"
+                }
+            }
+        },
+        {
+            "type": "deleteNode",
+            "path": "/portal/rest",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/portal/external",
+            "value": null
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/portal",
+            "value": {
+                "informes": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/informes",
+            "value": {
+                "facturacion": {}
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/root",
+            "value": {
+                "flsisppal": {
+                    "auth_group": null,
+                    "auth_user": null,
+                    "sis_acl": null
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flsisppal",
+            "value": {
+                "flfactinfo": {
+                    "i_sh_ventasfamilia": null,
+                    "i_sh_ventasarticulo": null,
+                    "i_sh_ventaspoblacion": null,
+                    "i_sh_productividad": null,
+                    "i_sh_consumocliente": null,
+                    "i_clientesventaart": null,
+                    "i_pedidoscli": null
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactinfo",
+            "value": {
+                "flfactppal": {
+                    "agentes": null,
+                    "intervalos": null,
+                    "series": null,
+                    "clientes": null,
+                    "usuarios": null,
+                    "ejercicios": null,
+                    "dirclientes": null,
+                    "impuestos": null,
+                    "secuenciasejercicios": null,
+                    "secuencias": null
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactppal",
+            "value": {
+                "flfactalma": {
+                    "familias": null,
+                    "subfamilias": null,
+                    "articulos": null
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactalma",
+            "value": {
+                "flfacturac": {
+                    "sh_pedidosclipda": null,
+                    "sh_lineaspedidosclipda": null,
+                    "pedidoscli": null,
+                    "lineaspedidoscli": null,
+                    "lineasalbaranescli": null,
+                    "presupuestoscli": null,
+                    "lineaspresupuestoscli": null
+                }
+            }
+        }
+    ]
 }

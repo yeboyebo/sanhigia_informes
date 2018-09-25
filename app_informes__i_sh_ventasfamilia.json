@@ -1,0 +1,40 @@
+{
+    "querystring": {},
+    "schema": {},
+    "layout": {
+        "ventasfamiliaForm": {
+            "prefix": "i_sh_ventasfamilia",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "update",
+            "return": true,
+            "success": [{"slot": "return"}],
+            "groupbox": "acordeon",
+            "fields": {
+                "gb__": {
+                    "title": "",
+                    "fields": {
+                        "descripcion": {}
+                    }
+                },
+                "gb__masdatos": {
+                    "title": "Más datos",
+                    "fields": {
+                        "codintervalo": {},
+                        "fechadesde": {},
+                        "fechahasta": {},
+                        "codagente": {},
+                        "codserie": {}
+                    }
+                }
+            },
+            "exclude": {}
+        }
+    },
+    "acciones": {},
+    "drawIf": {
+        "gb__masdatos": {
+            "codagente": "checkCodAgente"
+        }
+    }
+}

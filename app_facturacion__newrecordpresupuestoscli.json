@@ -1,0 +1,57 @@
+{
+    "querystring": {},
+    "schema": {},
+    "layout": {
+        "newRecordPresupuestoscli": {
+            "prefix": "presupuestoscli",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "create",
+            "success": [{"slot": "redirect"}],
+            "groupbox": "acordeon",
+            "return": true,
+            "fields": {
+                "gb__datosGenerales": {
+                    "title": "Datos generales",
+                    "fields": {
+                        "codigo": {"disabled": true},
+                        "codejercicio": {"disabled": true},
+                        "codserie": {"disabled": true},
+                        "numero": {"disabled": true},
+                        "codcliente": {
+                        	"rel": "clientes",
+                            "key": "codcliente",
+                            "desc": "nombre",
+                            "function":"getCliente",
+                            "showpk": false
+                        },
+                        "nombrecliente": {},
+                        "cifnif": {},
+                        "codagente": {},
+                        "gb__Direccion": {
+                            "title": "",
+                            "fields": {
+                                "coddir": {
+		                            "rel": "dirclientes",
+		                            "key": "id",
+		                            "desc": "descripcion",
+		                            "function":"getDireccion",
+		                            "params": ["codcliente"]
+		                        },
+                                "direccion":{},
+                                "dirnum":{},
+                                "dirotros": {},
+                                "codpostal": {},
+                                "ciudad": {},
+                                "provincia":{},
+                                "codpais":{}
+                            }
+                        }
+                    }
+                }
+            },
+            "exclude": {}
+        }
+    },
+    "acciones": {}
+}

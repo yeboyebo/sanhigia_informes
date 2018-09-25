@@ -1,0 +1,41 @@
+{
+    "querystring": {},
+    "schema": {},
+    "layout": {
+        "consumoclienteForm": {
+            "prefix": "i_sh_consumocliente",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "update",
+            "return": true,
+            "success": [{"slot": "return"}],
+            "groupbox": "acordeon",
+            "fields": {
+                "gb__": {
+                    "title": "",
+                    "fields": {
+                        "descripcion": {},
+                        "i_facturascli_codcliente": {}
+                    }
+                },
+                "gb__masdatos": {
+                    "title": "Más datos",
+                    "fields": {
+                        "codintervalo": {},
+                        "d_facturascli_fecha": {},
+                        "h_facturascli_fecha": {},
+                        "i_facturascli_codagente": {}
+                    }
+                }
+            },
+            "exclude": {}
+        }
+    },
+    "acciones": {},
+    "drawIf": {
+        "gb__masdatos": {
+            "i_facturascli_codagente": "checkCodAgente"
+        }
+    }
+}
+

@@ -1,0 +1,45 @@
+{
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "o_1": "-fechadesde",
+        "f_filtroagente": null
+    },
+    "schema": {},
+    "layout": {
+        "masterGrid": {
+            "componente": "YBList",
+            "class": "claseGrid",
+            "label": "Vengas por Artículo",
+            "prefix": "i_sh_ventasarticulo",
+            "filter": "buscador",
+            "columns": [
+                {"tipo": "field", "listpos": "body", "key": "descripcion", "avatar": true},
+                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "width": 200},
+                {
+                    "tipo": "act",
+                    "key": "gotoventas",
+                    "label": "editar",
+                    "success": []
+                }
+            ],
+            "rowclick": "dameInforme"
+        },
+        "newRecord": {
+            "componente": "YBNewRecord",
+            "class": "info",
+            "icon": "add"
+        }
+    },
+    "acciones": {
+        "dameInforme": {
+            "action": "goto",
+            "serverAction": "dameInformeVentasarticulo"
+        },
+        "gotoventas": {
+            "action": "goto",
+            "icon": "edit",
+            "template": "form"
+        }
+    }
+}

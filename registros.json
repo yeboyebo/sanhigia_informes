@@ -1,3 +1,61 @@
 {
-    "modifications": []
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/root",
+            "value": {
+                "flfactinfo": {
+                    "i_sh_ventasfamilia": null,
+                    "i_sh_ventasarticulo": null,
+                    "i_sh_ventaspoblacion": null,
+                    "i_sh_productividad": null,
+                    "i_sh_consumocliente": null,
+                    "i_clientesventaart": null,
+                    "i_pedidoscli": null
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactinfo",
+            "value": {
+                "flfactppal": {
+                    "clientes": null,
+                    "dirclientes": null,
+                    "usuarios": null,
+                    "secuencias": null,
+                    "impuestos": null,
+                    "ejercicios": null,
+                    "historicos": null,
+                    "secuenciasejercicios": null
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactppal",
+            "value": {
+                "flfactalma": {
+                    "familias": null,
+                    "subfamilias": null,
+                    "articulos": null
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactalma",
+            "value": {
+                "flfacturac": {
+                    "sh_pedidosclipda": null,
+                    "sh_lineaspedidosclipda": null,
+                    "pedidoscli": null,
+                    "lineaspedidoscli": null,
+                    "lineasalbaranescli": null,
+                    "presupuestoscli": null,
+                    "lineaspresupuestoscli": null
+                }
+            }
+        }
+    ]
 }

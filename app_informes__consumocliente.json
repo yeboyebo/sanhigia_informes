@@ -1,0 +1,11 @@
+{
+    "querystring": {},
+    "schema": {
+        "consumocliente": {
+            "reportTable": "i_sh_consumocliente",
+            "querystring": {}
+        }
+    },
+    "layout": {},
+    "acciones": {}
+}

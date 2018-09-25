@@ -1,0 +1,43 @@
+{
+    "querystring": {},
+    "schema": {},
+    "layout": {
+        "articuosTarifaForm": {
+            "prefix": "i_sh_ventasarticulo",
+            "componente": "YBForm",
+            "class": "claseGrid",
+            "submit": "create",
+            "return": true,
+            "success": [{"slot": "return"}],
+            "groupbox": "acordeon",
+            "fields": {
+                "gb__principal": {
+                    "title": "",
+                    "fields": {
+                        "descripcion": {}
+                    }
+                },
+                "gb__masdatos": {
+                    "title": "Más datos",
+                    "fields": {
+                        "codintervalo": {},
+                        "fechadesde": {},
+                        "fechahasta": {},
+                        "codagente": {},
+                        "codserie": {},
+                        "codfamilia": {},
+                        "codsubfamilia": {}
+                    }
+                }
+            },
+            "exclude": {}
+        }
+    },
+    "acciones": {},
+    "drawIf": {
+        "gb__masdatos": {
+            "codagente": "checkCodAgente"
+        }
+    }
+}
+
