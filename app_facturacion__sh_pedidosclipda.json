@@ -16,27 +16,6 @@
         }
     },
     "layout": {
-        "datoscabeceraForm": {
-            "prefix": "sh_pedidosclipda",
-            "componente": "YBForm",
-            "class": "claseGrid",
-            "submit": "update",
-            "send": false,
-            "success": [{"slot": "refrescar"}],
-            "groupbox": "",
-            "fields": {
-                "gb__": {
-                    "title": "",
-                    "fields": {
-                        "codigo": {"disabled": true},
-                        "codejercicio": {"disabled": true},
-                        "codserie": {"disabled": true},
-                        "numero": {"disabled": true}
-                    }
-                }
-            },
-            "exclude": {}
-        },
         "groupBoxPestanas": {
             "componente": "YBGroupBoxContainer",
             "className": "",
@@ -62,7 +41,6 @@
                                     "title": "",
                                     "fields": {
                                         "codcliente": {"disabled": true},
-                                        "nombrecliente": {"disabled": true},
                                         "cifnif": {"disabled": true}
                                     }
                                 },
@@ -104,7 +82,7 @@
                                     "fields": {
                                         "fecha": {},
                                         "fechasalida": {},
-                                        "codagente": {},
+                                        "codagente": {"disabled": true},
                                         "recfinanciero": {},
                                         "codalmacen": {},
                                         "codpago": {},

@@ -14,20 +14,15 @@
                 "gb__datosGenerales": {
                     "title": "Datos generales",
                     "fields": {
-                        "codigo": {"disabled": true},
-                        "codejercicio": {"disabled": true},
-                        "codserie": {"disabled": true},
-                        "numero": {"disabled": true},
                         "codcliente": {
                         	"rel": "clientes",
                             "key": "codcliente",
                             "desc": "nombre",
                             "function":"getCliente",
                             "showpk": false
-                        },
-                        "nombrecliente": {},
+                        },                        
                         "cifnif": {},
-                        "codagente": {},
+                        "codagente": {"disabled": true},
                         "gb__Direccion": {
                             "title": "",
                             "fields": {
