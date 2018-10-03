@@ -5,6 +5,10 @@
         {
             "key": "baseparche",
             "version": "v1.0"
+        },
+        {
+            "key": "alta_clientes",
+            "version": "v1.0"
         }
     ]
 }
