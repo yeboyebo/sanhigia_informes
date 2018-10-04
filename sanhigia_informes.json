@@ -92,15 +92,7 @@
             {
                 "name": "model_flfactppal__series_def.py",
                 "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__clientes.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__clientes_def.py",
-                "path": "models/flfactppal/"
-            },
+            },           
             {
                 "name": "model_flfactppal__usuarios.py",
                 "path": "models/flfactppal/"
@@ -296,11 +288,7 @@
             {
                 "name": "app_facturacion__newrecordsh_pedidosclipda.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__masterclientes.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
+            },            
             {
                 "name": "app_portal__views_portal.py",
                 "path": "apps/portal/viewset/"
@@ -424,10 +412,6 @@
         ],
         "patchJson": [
             {
-                "name": "app_portal__menu_portal.json",
-                "path": "apps/portal/templates/portal/"
-            },
-            {
                 "name": "urls.json",
                 "path": "config/"
             },
@@ -436,14 +420,31 @@
                 "path": "config/"
             },
             {
+                "name": "app_portal__menu_portal.json",
+                "path": "apps/portal/templates/portal/"
+            },
+            {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__clientes.json"
             },
             {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__newrecordclientes.json"
+            },
+            {
+                "path": "apps/principal/templates/principal/plantillas/",
+                "name": "app_principal__masterclientes.json"
             }
         ],
-        "patchScript": []
+        "patchScript": [
+        	{
+                "name": "model_flfactppal__clientes.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__clientes_def.py",
+                "path": "models/flfactppal/"
+            }
+        ]
     }
 }

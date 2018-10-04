@@ -1,14 +1,5 @@
-# @class_declaration interna #
-from YBLEGACY import qsatype
 
-
-class interna(qsatype.objetoBase):
-
-    ctx = qsatype.Object()
-
-    def __init__(self, context=None):
-        self.ctx = context
-
+/** @delete_class alta_clientes */
 
 # @class_declaration sanhigia_informes #
 from YBLEGACY.constantes import *
@@ -30,6 +21,16 @@ class sanhigia_informes(interna):
 
     def sanhigia_informes_getFilters(self, model, name, template=None):
         filters = []
+        if name == 'clientesUsuario':
+            usuario = qsatype.FLUtil.nameUser()
+            codGrupo = qsatype.FLUtil.sqlSelect(u"flusers", u"idgroup", ustr(u"iduser = '", usuario, u"' AND idgroup = 'Administracion'"))
+            if codGrupo:
+                return filters
+            else:
+                codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
+                if not codagente:
+                    codagente = '-1'
+                return [{'criterio': 'codagente__exact', 'valor': codagente}]
         return filters
 
     def sanhigia_informes_getForeignFields(self, model, template=None):
@@ -91,22 +92,3 @@ class sanhigia_informes(interna):
     def getCliente(self, model, oParam):
         return self.ctx.sanhigia_informes_getCliente(model, oParam)
 
-
-# @class_declaration head #
-class head(sanhigia_informes):
-
-    def __init__(self, context=None):
-        super(head, self).__init__(context)
-
-
-# @class_declaration ifaceCtx #
-class ifaceCtx(head):
-
-    def __init__(self, context=None):
-        super(ifaceCtx, self).__init__(context)
-
-
-# @class_declaration FormInternalObj #
-class FormInternalObj(qsatype.FormDBWidget):
-    def _class_init(self):
-        self.iface = ifaceCtx(self)
