@@ -302,10 +302,6 @@
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
-                "name": "app_portal__menu_portal.json",
-                "path": "apps/portal/templates/portal/"
-            },
-            {
                 "name": "app_portal__views_portal.py",
                 "path": "apps/portal/viewset/"
             },
@@ -428,12 +424,24 @@
         ],
         "patchJson": [
             {
+                "name": "app_portal__menu_portal.json",
+                "path": "apps/portal/templates/portal/"
+            },
+            {
                 "name": "urls.json",
                 "path": "config/"
             },
             {
                 "name": "registros.json",
                 "path": "config/"
+            },
+            {
+                "path": "apps/principal/templates/principal/plantillas/",
+                "name": "app_principal__clientes.json"
+            },
+            {
+                "path": "apps/principal/templates/principal/plantillas/",
+                "name": "app_principal__newrecordclientes.json"
             }
         ],
         "patchScript": []
