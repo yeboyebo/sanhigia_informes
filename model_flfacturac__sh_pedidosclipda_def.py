@@ -82,13 +82,13 @@ class sanhigia_informes(interna):
             pvpunitario = None
             pvptotal = None
             asunto = "Pedido " + model.codigo
+            direccion = " "
             # cuerpo = "<b>El</b> <i>cliente</i> '" + nombreCliente + "'' hizo un pedido por un total de " + total + " euros.<br><br>"
             if model.observaciones:
                 cuerpo += "<br><h2>Observaciones: " + ustr(u"", model.observaciones) + "</h2><br>"
             cuerpo += "<table width='700' cellspacing='1' cellpadding='3' border='1'><tr></th><th>Codigo cliente</th><th>Nombre cliente</th><th>Codigo</th><th>Fecha</th><th>Dirección</th></tr><tr align ='center'>"
             for eCampo in camposCab:
                 eValor = eCampo.valor
-                direccion = " "
                 if type(eCampo.valor) == str:
                     eValor = str(eCampo.valor)
                 xCampo = ET.SubElement(xCabecera, ustr(u"", eCampo.nombre))
