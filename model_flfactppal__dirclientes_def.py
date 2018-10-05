@@ -1,11 +1,9 @@
 
-/** @delete_class alta_clientes */
-
 # @class_declaration sanhigia_informes #
 from YBLEGACY.constantes import *
 
 
-class sanhigia_informes(interna):
+class sanhigia_informes(alta_clientes):
 
     def sanhigia_informes_initValidation(self, name, data=None):
         response = True
@@ -56,6 +54,7 @@ class sanhigia_informes(interna):
         return data
 
     def sanhigia_informes_iniciaValoresCursor(self, cursor=None):
+        print("¿¿¿¿¿")
         cursor.setValueBuffer(u"domfacturacion", True)
         cursor.setValueBuffer(u"domenvio", True)
         qsatype.FactoriaModulos.get('formRecorddirclientes').iface.iniciaValoresCursor(cursor)

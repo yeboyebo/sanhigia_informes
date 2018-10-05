@@ -2,6 +2,13 @@
     "modifications": [
         {
             "type": "insertAfterNode",
+            "path": "/schema/dirclientes/querystring",
+            "value": {
+                "create": true
+            }
+        },
+        {
+            "type": "insertAfterNode",
             "path": "/layout/multiNewRecordClientes/forms/formClientes/fields/gb__datosGenerales/fields/root",
             "value": {
                 "codcliente": {}

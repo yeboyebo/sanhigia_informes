@@ -1,18 +1,6 @@
-# @class_declaration interna_dirclientes #
-from YBUTILS.viewREST import helpers
-from models.flfactppal import models as modelos
-import importlib
-
-
-class interna_dirclientes(modelos.mtd_dirclientes, helpers.MixinConAcciones):
-    pass
-
-    class Meta:
-        proxy = True
-
 
 # @class_declaration sanhigia_informes_dirclientes #
-class sanhigia_informes_dirclientes(interna_dirclientes, helpers.MixinConAcciones):
+class sanhigia_informes_dirclientes(alta_clientes_dirclientes, helpers.MixinConAcciones):
     pass
 
     class Meta:
@@ -40,17 +28,6 @@ class sanhigia_informes_dirclientes(interna_dirclientes, helpers.MixinConAccione
     def getDireccion(self, oParam):
         return form.iface.getDireccion(self, oParam)
 
+    def iniciaValoresCursor(cursor=None):
+        return form.iface.iniciaValoresCursor(cursor)
 
-# @class_declaration dirclientes #
-class dirclientes(sanhigia_informes_dirclientes, helpers.MixinConAcciones):
-    pass
-
-    class Meta:
-        proxy = True
-
-
-definitions = importlib.import_module("models.flfactppal.dirclientes_def")
-form = definitions.FormInternalObj()
-form._class_init()
-form.iface.ctx = form.iface
-form.iface.iface = form.iface
