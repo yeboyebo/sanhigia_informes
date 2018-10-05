@@ -17,18 +17,30 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/flfactinfo",
+            "path": "/flfactppal/ejercicios",
             "value": {
-                "flfactppal": {
-                    "clientes": null,
-                    "dirclientes": null,
-                    "usuarios": null,
-                    "secuencias": null,
-                    "impuestos": null,
-                    "ejercicios": null,
-                    "historicos": null,
-                    "secuenciasejercicios": null
-                }
+                "historicos": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactppal/dirclientes",
+            "value": {
+                "usuarios": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactppal/usuarios",
+            "value": {
+                "secuencias": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactppal/secuencias",
+            "value": {
+                "impuestos": null
             }
         },
         {

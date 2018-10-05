@@ -1,11 +1,9 @@
 
-/** @delete_class alta_clientes */
-
 # @class_declaration sanhigia_informes #
 from YBLEGACY.constantes import *
 
 
-class sanhigia_informes(interna):
+class sanhigia_informes(alta_clientes):
 
     def sanhigia_informes_initValidation(self, name, data=None):
         response = True
@@ -68,6 +66,21 @@ class sanhigia_informes(interna):
 
         return data
 
+    def sanhigia_informes_iniciaValoresCursor(self, cursor=None):
+        usuario = qsatype.FLUtil.nameUser()
+        codGrupo = qsatype.FLUtil.sqlSelect(u"flusers", u"idgroup", ustr(u"iduser = '", usuario, u"' AND idgroup = 'Administracion'"))
+        if codGrupo:
+            codagente = ''
+        else:
+            codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
+            if not codagente:
+                codagente = ''
+        cursor.setValueBuffer(u"domfacturacion", True)
+        cursor.setValueBuffer(u"domenvio", True)
+        cursor.setValueBuffer(u"codagente", codagente)
+        qsatype.FactoriaModulos.get('formRecordclientes').iface.iniciaValoresCursor(cursor)
+        return True
+
     def __init__(self, context=None):
         super(sanhigia_informes, self).__init__(context)
 
@@ -91,4 +104,7 @@ class sanhigia_informes(interna):
 
     def getCliente(self, model, oParam):
         return self.ctx.sanhigia_informes_getCliente(model, oParam)
+
+    def iniciaValoresCursor(self, cursor=None):
+        return self.ctx.sanhigia_informes_iniciaValoresCursor(cursor)
 

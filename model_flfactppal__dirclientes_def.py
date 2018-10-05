@@ -1,14 +1,5 @@
-# @class_declaration interna #
-from YBLEGACY import qsatype
 
-
-class interna(qsatype.objetoBase):
-
-    ctx = qsatype.Object()
-
-    def __init__(self, context=None):
-        self.ctx = context
-
+/** @delete_class alta_clientes */
 
 # @class_declaration sanhigia_informes #
 from YBLEGACY.constantes import *
@@ -64,6 +55,12 @@ class sanhigia_informes(interna):
 
         return data
 
+    def sanhigia_informes_iniciaValoresCursor(self, cursor=None):
+        cursor.setValueBuffer(u"domfacturacion", True)
+        cursor.setValueBuffer(u"domenvio", True)
+        qsatype.FactoriaModulos.get('formRecorddirclientes').iface.iniciaValoresCursor(cursor)
+        return True
+
     def __init__(self, context=None):
         super(sanhigia_informes, self).__init__(context)
 
@@ -88,22 +85,6 @@ class sanhigia_informes(interna):
     def getDireccion(self, model, oParam):
         return self.ctx.sanhigia_informes_getDireccion(model, oParam)
 
+    def iniciaValoresCursor(self, cursor=None):
+        return self.ctx.sanhigia_informes_iniciaValoresCursor(cursor)
 
-# @class_declaration head #
-class head(sanhigia_informes):
-
-    def __init__(self, context=None):
-        super(head, self).__init__(context)
-
-
-# @class_declaration ifaceCtx #
-class ifaceCtx(head):
-
-    def __init__(self, context=None):
-        super(ifaceCtx, self).__init__(context)
-
-
-# @class_declaration FormInternalObj #
-class FormInternalObj(qsatype.FormDBWidget):
-    def _class_init(self):
-        self.iface = ifaceCtx(self)

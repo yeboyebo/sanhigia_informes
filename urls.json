@@ -62,20 +62,30 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/models/flfactinfo",
+            "path": "/models/flfactppal/secuenciasejercicios",
             "value": {
-                "flfactppal": {
-                    "agentes": null,
-                    "intervalos": null,
-                    "series": null,
-                    "clientes": null,
-                    "usuarios": null,
-                    "ejercicios": null,
-                    "dirclientes": null,
-                    "impuestos": null,
-                    "secuenciasejercicios": null,
-                    "secuencias": null
-                }
+                "secuencias": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactppal/dirclientes",
+            "value": {
+                "impuestos": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactppal/agentes",
+            "value": {
+                "intervalos": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactppal/intervalos",
+            "value": {
+                "series": null
             }
         },
         {
