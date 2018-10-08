@@ -18,7 +18,23 @@
             "type": "insertAfterNode",
             "path": "/layout/multiNewRecordClientes/forms/formClientes/fields/gb__datosGenerales/fields/email",
             "value": {
-                "codagente": {}
+                "codagente": {
+                    "disabled": true
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/multiNewRecordClientes/forms/formDireccion/fields/gb__Direccion/fields/domfacturacion/root",
+            "value": {
+                "disabled": true
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/multiNewRecordClientes/forms/formDireccion/fields/gb__Direccion/fields/domenvio/root",
+            "value": {
+                "disabled": true
             }
         }
     ]

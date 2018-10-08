@@ -28,6 +28,3 @@ class sanhigia_informes_dirclientes(alta_clientes_dirclientes, helpers.MixinConA
     def getDireccion(self, oParam):
         return form.iface.getDireccion(self, oParam)
 
-    def iniciaValoresCursor(cursor=None):
-        return form.iface.iniciaValoresCursor(cursor)
-

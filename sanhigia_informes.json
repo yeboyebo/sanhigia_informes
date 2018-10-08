@@ -418,11 +418,7 @@
             {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__masterclientes.json"
-            },
-            {
-                "path": "apps/principal/templates/principal/plantillas/",
-                "name": "app_principal__clientes.json"
-            },
+            },            
             {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__newrecordclientes.json"

@@ -53,13 +53,6 @@ class sanhigia_informes(alta_clientes):
 
         return data
 
-    def sanhigia_informes_iniciaValoresCursor(self, cursor=None):
-        print("¿¿¿¿¿")
-        cursor.setValueBuffer(u"domfacturacion", True)
-        cursor.setValueBuffer(u"domenvio", True)
-        qsatype.FactoriaModulos.get('formRecorddirclientes').iface.iniciaValoresCursor(cursor)
-        return True
-
     def __init__(self, context=None):
         super(sanhigia_informes, self).__init__(context)
 
@@ -83,7 +76,4 @@ class sanhigia_informes(alta_clientes):
 
     def getDireccion(self, model, oParam):
         return self.ctx.sanhigia_informes_getDireccion(model, oParam)
-
-    def iniciaValoresCursor(self, cursor=None):
-        return self.ctx.sanhigia_informes_iniciaValoresCursor(cursor)
 

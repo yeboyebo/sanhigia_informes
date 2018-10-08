@@ -75,8 +75,6 @@ class sanhigia_informes(alta_clientes):
             codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
             if not codagente:
                 codagente = ''
-        cursor.setValueBuffer(u"domfacturacion", True)
-        cursor.setValueBuffer(u"domenvio", True)
         cursor.setValueBuffer(u"codagente", codagente)
         qsatype.FactoriaModulos.get('formRecordclientes').iface.iniciaValoresCursor(cursor)
         return True
