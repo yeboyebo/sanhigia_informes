@@ -102,27 +102,11 @@
                 "path": "models/flfactppal/"
             },
             {
-                "name": "model_flfactppal__ejercicios.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__ejercicios_def.py",
-                "path": "models/flfactppal/"
-            },
-            {
                 "name": "model_flfactppal__impuestos.py",
                 "path": "models/flfactppal/"
             },
             {
                 "name": "model_flfactppal__impuestos_def.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__secuenciasejercicios.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__secuenciasejercicios_def.py",
                 "path": "models/flfactppal/"
             },
             {
@@ -418,7 +402,7 @@
             {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__masterclientes.json"
-            },            
+            },
             {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__newrecordclientes.json"
@@ -440,6 +424,10 @@
             {
                 "name": "model_flfactppal__dirclientes_def.py",
                 "path": "models/flfactppal/"
+            },
+            {
+                "path": "apps/principal/viewset/",
+                "name": "app_principal__views_principal.py"
             }
         ]
     }

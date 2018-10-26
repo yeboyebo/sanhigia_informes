@@ -82,7 +82,8 @@ class sanhigia_informes(interna):
             if cantidad > disponible:
                 if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
                     print("sale por aqui")
-                    return False
+                    _i.insertarLinea(cursor, oParam)
+                    return response
                 refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", ustr(u"referencia = '", referencia, u"'"))
                 if not refSust or refSust == u"":
                     return _i.insertarLinea(cursor, oParam)

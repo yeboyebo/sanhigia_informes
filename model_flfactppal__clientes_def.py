@@ -76,6 +76,13 @@ class sanhigia_informes(alta_clientes):
             if not codagente:
                 codagente = ''
         cursor.setValueBuffer(u"codagente", codagente)
+        '''
+        codCliente = qsatype.FLUtil.sqlSelect(u"clientes", u"codcliente", ustr(u"codcliente = '", cursor.valueBuffer("codcliente"), u"'"))
+        if codCliente:
+            response = {}
+            response['status'] = 1
+            response['msg'] = "Error: El codigo es valor unico. Hay otro registro con codigo " + cursor.valueBuffer("codcliente") + "."
+        '''
         qsatype.FactoriaModulos.get('formRecordclientes').iface.iniciaValoresCursor(cursor)
         return True
 

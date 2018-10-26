@@ -92,17 +92,27 @@ class sanhigia_informes(interna):
 
     def sanhigia_informes_validateCursor(self, cursor):
         referencia = cursor.valueBuffer("referencia")
-        if cursor.valueBuffer("pvptotal") > 10:
-            cursor.setValueBuffer("pvptotal", 9)
-            resul = {}
-            resul["resul"] = {}
-            resul["resul"]['status'] = 2
-            resul["resul"]['confirm'] = "¿Seguro que deseas cerrar?<br/> Aún faltan artículos por preparar"
-            resul["resul"]['onconfirm'] = "changedata"
-            return resul
         if referencia is None:
             qsatype.FLUtil.ponMsgError("Error: La referencia no existe o no está selecionada")
             return False
+        codAlmacen = "ALM"
+        # qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codalmacen", ustr(u"idpedido = ", idpedido))
+        cantidad = cursor.valueBuffer("cantidad")
+        disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
+        if cantidad > disponible:
+            if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
+                return True
+            refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", ustr(u"referencia = '", referencia, u"'"))
+            if not refSust or refSust == u"":
+                return True
+            else:
+                cursor.setValueBuffer("referencia", refSust)
+                resul = {}
+                resul["resul"] = {}
+                resul["resul"]['status'] = 2
+                resul["resul"]['confirm'] = "No hay suficiente stock para el artículo ", referencia, " en el almacén ¿desea utilizar su artículo sustitutivo?"
+                resul["resul"]['onconfirm'] = "changedata"
+                return resul
         return True
 
     def __init__(self, context=None):
