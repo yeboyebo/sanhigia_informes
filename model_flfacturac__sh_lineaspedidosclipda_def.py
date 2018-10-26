@@ -92,6 +92,14 @@ class sanhigia_informes(interna):
 
     def sanhigia_informes_validateCursor(self, cursor):
         referencia = cursor.valueBuffer("referencia")
+        if cursor.valueBuffer("pvptotal") > 10:
+            cursor.setValueBuffer("pvptotal", 9)
+            resul = {}
+            resul["resul"] = {}
+            resul["resul"]['status'] = 2
+            resul["resul"]['confirm'] = "¿Seguro que deseas cerrar?<br/> Aún faltan artículos por preparar"
+            resul["resul"]['onconfirm'] = "changedata"
+            return resul
         if referencia is None:
             qsatype.FLUtil.ponMsgError("Error: La referencia no existe o no está selecionada")
             return False
