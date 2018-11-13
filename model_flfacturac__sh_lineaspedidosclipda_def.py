@@ -87,6 +87,28 @@ class sanhigia_informes(interna):
         '''
         if not curLP.commitBuffer():
             return False
+        referencia = curLP.valueBuffer("referencia")
+        cantNueva = curLP.valueBuffer("cantidad")
+        codAlmacen = "ALM"
+        disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
+        print("cantNueva: ", cantNueva)
+        print("disponible: ", disponible)
+        if cantNueva > disponible:
+            print("11111111111111")
+            if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
+                return True
+            refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", ustr(u"referencia = '", referencia, u"'"))
+            if not refSust or refSust == u"":
+                return True
+            else:
+                curLP.setValueBuffer("referencia", refSust)
+                resul = {}
+                resul["resul"] = {}
+                resul["resul"]['status'] = 2
+                resul["resul"]['confirm'] = "No hay suficiente stock para el artículo " + referencia + " en el almacén " + codAlmacen + ". ¿Desea utilizar su artículo sustitutivo?"
+                resul["resul"]['onconfirm'] = "changedata"
+                print("333333333333333333333333333")
+                return resul
         # qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.bChCursor("cantidad", curLP)
         return True
 
@@ -110,7 +132,7 @@ class sanhigia_informes(interna):
                 resul = {}
                 resul["resul"] = {}
                 resul["resul"]['status'] = 2
-                resul["resul"]['confirm'] = "No hay suficiente stock para el artículo ", referencia, " en el almacén ¿desea utilizar su artículo sustitutivo?"
+                resul["resul"]['confirm'] = "No hay suficiente stock para el artículo " + referencia + " en el almacén " + codAlmacen + ". ¿Desea utilizar su artículo sustitutivo?"
                 resul["resul"]['onconfirm'] = "changedata"
                 return resul
         return True

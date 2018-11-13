@@ -98,7 +98,7 @@ class sanhigia_informes(interna):
                 else:
                     response = {}
                     response["status"] = 2
-                    response["confirm"] = "No hay suficiente stock para el artículo", model.descripcion, "en el almacén ¿desea utilizar su artículo sustitutivo?"
+                    response["confirm"] = "No hay suficiente stock para el artículo " + referencia + " en el almacén " + codAlmacen + ". ¿Desea utilizar su artículo sustitutivo?"
                     return response
             # if not qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
             #     refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", ustr(u"referencia = '", referencia, u"'"))
@@ -181,7 +181,7 @@ class sanhigia_informes(interna):
                 else:
                     response = {}
                     response["status"] = 2
-                    response["confirm"] = "No hay suficiente stock para el artículo", model.descripcion, "en el almacén ¿desea utilizar su artículo sustitutivo?"
+                    response["confirm"] = "No hay suficiente stock para el artículo " + referencia + " en el almacén " + codAlmacen + ". ¿Desea utilizar su artículo sustitutivo?"
                     return response
             # if not qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
             #     refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", ustr(u"referencia = '", referencia, u"'"))
