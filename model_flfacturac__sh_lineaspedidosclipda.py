@@ -36,13 +36,13 @@ class sanhigia_informes_sh_lineaspedidosclipda(interna_sh_lineaspedidosclipda, h
     def getDesc():
         return form.iface.getDesc()
 
-    @helpers.decoradores.accion()
-    def masUno(self):
-        return form.iface.masUno(self)
+    @helpers.decoradores.accion(aqparam=["oParam"])
+    def masUno(self, oParam):
+        return form.iface.masUno(self, oParam)
 
-    @helpers.decoradores.accion()
-    def menosUno(self):
-        return form.iface.menosUno(self)
+    @helpers.decoradores.accion(aqparam=["oParam"])
+    def menosUno(self, oParam):
+        return form.iface.menosUno(self, oParam)
 
     @helpers.decoradores.accion(aqparam=["oParam"])
     def modificarCantidad(self, oParam):

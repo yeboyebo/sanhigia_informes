@@ -252,14 +252,16 @@
             "action": "legacy",
             "serverAction": "masUno",
             "prefix": "sh_lineaspedidosclipda",
-            "icon": "add_circle"
+            "icon": "add_circle",
+            "params": []
         },
         "menosUno": {
  			"label": "Restar",
             "action": "legacy",
             "serverAction": "menosUno",
             "prefix": "sh_lineaspedidosclipda",
-            "icon": "remove_circle"
+            "icon": "remove_circle",
+            "params": []
         },
         "nuevaLinea": {
             "action": "newRow",

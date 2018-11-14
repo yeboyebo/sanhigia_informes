@@ -40,16 +40,14 @@ class sanhigia_informes(interna):
         desc = None
         return desc
 
-    def sanhigia_informes_masUno(self, model):
+    def sanhigia_informes_masUno(self, model, oParam):
         _i = self.iface
         idLinea = model.pk
         cantidad = model.cantidad
         cantidad += 1
-        if not _i.cambiarCantidad(idLinea, cantidad):
-            return False
-        return True
+        return _i.cambiarCantidad(idLinea, cantidad, oParam)
 
-    def sanhigia_informes_menosUno(self, model):
+    def sanhigia_informes_menosUno(self, model, oParam):
         _i = self.iface
         idLinea = model.pk
         cantidad = model.cantidad
@@ -57,19 +55,16 @@ class sanhigia_informes(interna):
             cantidad -= 1
         else:
             cantidad = 1
-        if not _i.cambiarCantidad(idLinea, cantidad):
-            return False
-        return True
+        return _i.cambiarCantidad(idLinea, cantidad, oParam)
 
     def sanhigia_informes_modificarCantidad(self, model, oParam):
         _i = self.iface
         idLinea = model.pk
         cantidad = oParam['cantidad']
-        if not _i.cambiarCantidad(idLinea, cantidad):
-            return False
-        return True
+        return _i.cambiarCantidad(idLinea, cantidad, oParam)
 
-    def sanhigia_informes_cambiarCantidad(self, idLinea, cantidad):
+    def sanhigia_informes_cambiarCantidad(self, idLinea, cantidad, oParam):
+        print("____________", oParam)
         curLP = qsatype.FLSqlCursor(u"sh_lineaspedidosclipda")
         curLP.select("idlinea = " + str(idLinea))
         if not curLP.first():
@@ -79,15 +74,13 @@ class sanhigia_informes(interna):
         curLP.refreshBuffer()
         curLP.setActivatedBufferCommited(True)
         curLP.setValueBuffer("cantidad", str(cantidad))
-        qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.bChCursor("cantidad", curLP)
+        # curLP.setValueBuffer("referencia", "02314005")
         '''
         curLP.setValueBuffer(u"pvpunitario", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"pvpunitario", curLP))
         curLP.setValueBuffer(u"pvpsindto", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"pvpsindto", curLP))
         curLP.setValueBuffer(u"pvptotal", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"pvptotal", curLP))
         '''
-        if not curLP.commitBuffer():
-            return False
-        '''
+
         # Esta comentado para que se instale. Cuando se arregla que salga el mensaje se actualizará. Fecha 14-11-2018
         referencia = curLP.valueBuffer("referencia")
         cantNueva = curLP.valueBuffer("cantidad")
@@ -100,19 +93,23 @@ class sanhigia_informes(interna):
             if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
                 return True
             refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", ustr(u"referencia = '", referencia, u"'"))
-            if not refSust or refSust == u"":
-                return True
-            else:
-                curLP.setValueBuffer("referencia", refSust)
-                resul = {}
-                resul["resul"] = {}
-                resul["resul"]['status'] = 2
-                resul["resul"]['confirm'] = "No hay suficiente stock para el artículo " + referencia + " en el almacén " + codAlmacen + ". ¿Desea utilizar su artículo sustitutivo?"
-                resul["resul"]['onconfirm'] = "changedata"
-                print("333333333333333333333333333")
-                return resul
-        '''
-        # qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.bChCursor("cantidad", curLP)
+            # if not refSust or refSust == u"":
+            #     return True
+            if refSust and refSust != u"":
+                if "confirmacion" in oParam and oParam["confirmacion"]:
+                    curLP.setValueBuffer("referencia", refSust)
+                    qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.bChCursor("referencia", curLP)
+                else:
+                    resul = {}
+                    resul['status'] = 2
+                    resul['confirm'] = "No hay suficiente stock para el artículo " + referencia + " en el almacén " + codAlmacen + ". ¿Desea utilizar su artículo sustitutivo?"
+                    print("333333333333333333333333333")
+                    return resul
+
+        qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.bChCursor("cantidad", curLP)
+        if not curLP.commitBuffer():
+            return False
+
         return True
 
     def sanhigia_informes_validateCursor(self, cursor):
@@ -161,17 +158,17 @@ class sanhigia_informes(interna):
     def getDesc(self):
         return self.ctx.sanhigia_informes_getDesc()
 
-    def masUno(self, model):
-        return self.ctx.sanhigia_informes_masUno(model)
+    def masUno(self, model, oParam):
+        return self.ctx.sanhigia_informes_masUno(model, oParam)
 
-    def menosUno(self, model):
-        return self.ctx.sanhigia_informes_menosUno(model)
+    def menosUno(self, model, oParam):
+        return self.ctx.sanhigia_informes_menosUno(model, oParam)
 
     def modificarCantidad(self, model, oParam):
         return self.ctx.sanhigia_informes_modificarCantidad(model, oParam)
 
-    def cambiarCantidad(self, idLinea, cantidad):
-        return self.ctx.sanhigia_informes_cambiarCantidad(idLinea, cantidad)
+    def cambiarCantidad(self, idLinea, cantidad, oParam):
+        return self.ctx.sanhigia_informes_cambiarCantidad(idLinea, cantidad, oParam)
 
     def validateCursor(self, cursor):
         return self.ctx.sanhigia_informes_validateCursor(cursor)
