@@ -406,6 +406,10 @@
             {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__newrecordclientes.json"
+            },
+            {
+                "name": "app_principal__menu_principal.json",
+                "path": "apps/principal/templates/principal/"
             }
         ],
         "patchScript": [
