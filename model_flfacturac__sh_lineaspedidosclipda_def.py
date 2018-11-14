@@ -64,7 +64,7 @@ class sanhigia_informes(interna):
         return _i.cambiarCantidad(idLinea, cantidad, oParam)
 
     def sanhigia_informes_cambiarCantidad(self, idLinea, cantidad, oParam):
-        print("____________", oParam)
+        # print("____________", oParam)
         curLP = qsatype.FLSqlCursor(u"sh_lineaspedidosclipda")
         curLP.select("idlinea = " + str(idLinea))
         if not curLP.first():
@@ -86,10 +86,9 @@ class sanhigia_informes(interna):
         cantNueva = curLP.valueBuffer("cantidad")
         codAlmacen = "ALM"
         disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
-        print("cantNueva: ", cantNueva)
-        print("disponible: ", disponible)
+        # print("cantNueva: ", cantNueva)
+        # print("disponible: ", disponible)
         if cantNueva > disponible:
-            print("11111111111111")
             if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
                 return True
             refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", ustr(u"referencia = '", referencia, u"'"))
@@ -99,11 +98,13 @@ class sanhigia_informes(interna):
                 if "confirmacion" in oParam and oParam["confirmacion"]:
                     curLP.setValueBuffer("referencia", refSust)
                     qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.bChCursor("referencia", curLP)
+                elif "confirmacion" in oParam and not oParam["confirmacion"]:
+                    print("hemos cancelado")
                 else:
                     resul = {}
                     resul['status'] = 2
                     resul['confirm'] = "No hay suficiente stock para el artículo " + referencia + " en el almacén " + codAlmacen + ". ¿Desea utilizar su artículo sustitutivo?"
-                    print("333333333333333333333333333")
+                    resul['oncancel'] = "lanzaraccion"
                     return resul
 
         qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.bChCursor("cantidad", curLP)
