@@ -87,6 +87,8 @@ class sanhigia_informes(interna):
         '''
         if not curLP.commitBuffer():
             return False
+        '''
+        # Esta comentado para que se instale. Cuando se arregla que salga el mensaje se actualizará. Fecha 14-11-2018
         referencia = curLP.valueBuffer("referencia")
         cantNueva = curLP.valueBuffer("cantidad")
         codAlmacen = "ALM"
@@ -109,6 +111,7 @@ class sanhigia_informes(interna):
                 resul["resul"]['onconfirm'] = "changedata"
                 print("333333333333333333333333333")
                 return resul
+        '''
         # qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.bChCursor("cantidad", curLP)
         return True
 
