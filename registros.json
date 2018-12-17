@@ -17,27 +17,6 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/flfactppal/dirclientes",
-            "value": {
-                "usuarios": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/flfactppal/usuarios",
-            "value": {
-                "secuencias": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/flfactppal/secuencias",
-            "value": {
-                "impuestos": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
             "path": "/flfactppal/ejercicios",
             "value": {
                 "historicos": null
@@ -45,29 +24,190 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/flfactppal",
+            "path": "/flfactalma/familias",
             "value": {
-                "flfactalma": {
-                    "familias": null,
-                    "subfamilias": null,
-                    "articulos": null,
-                    "novedades": null,
-                    "ofertasproductos": null
-                }
+                "subfamilias": null
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/flfactalma",
+            "path": "/flfactalma/articulos",
             "value": {
-                "flfacturac": {
-                    "sh_pedidosclipda": null,
-                    "sh_lineaspedidosclipda": null,
-                    "pedidoscli": null,
-                    "lineaspedidoscli": null,
-                    "lineasalbaranescli": null,
-                    "presupuestoscli": null,
-                    "lineaspresupuestoscli": null
+                "novedades": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactalma/novedades",
+            "value": {
+                "ofertasproductos": null
+            }
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/transstock",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/articuloscli",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/tarifas",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/marcas",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/inventarios",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/factalma_general",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/lineastransstock",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/articulosagen",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/almacenes",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/articulosprov",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/lineasregstocks",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfactalma/regstocks",
+            "value": null
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfacturac/root",
+            "value": {
+                "sh_pedidosclipda": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfacturac/sh_pedidosclipda",
+            "value": {
+                "sh_lineaspedidosclipda": null
+            }
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/lineasfacturascli",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/albaranescli",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/facturasprov",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/lineaspedidosprov",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/fechaejercicio",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/albaranesprov",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/lineasfacturasprov",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/agruparpedidosprov",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/agruparalbaranescli",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/agruparpedidoscli",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/facturascli",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/plantillasemail",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/datosadicionales",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/trazadoc",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/lineasalbaranesprov",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/pedidosprov",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/flfacturac/agruparalbaranesprov",
+            "value": null
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfacturac",
+            "value": {
+                "flcolagedo": {
+                    "gd_config": null
                 }
             }
         }

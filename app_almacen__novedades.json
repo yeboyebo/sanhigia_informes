@@ -1,0 +1,28 @@
+{
+    "initValidation": {},
+    "querystring": {},
+    "schema": {},
+    "layout": {
+        "cargaDocSEPA": {
+            "componente": "YBButton",
+            "prefix": "novedades",
+            "label": "Descargar",
+            "className": "floatRight",
+            "buttonType": "raised",
+            "action": {
+                "key": "descargar",
+                "label": "Descargar"
+            }
+        }
+    },
+    "focus": {},
+    "acciones": {
+        "descargar": {
+            "action": "getFiles",
+            "prefix": "novedades",
+            "icon": "link"
+        }
+    },
+    "drawIf": {}
+}
+
