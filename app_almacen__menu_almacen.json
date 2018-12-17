@@ -1,0 +1,28 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterItem",
+            "path": "/items[root]",
+            "value": {
+                "NAME": "Novedades",
+                "TEXT": "Novedades",
+                "URL": "almacen/novedades/master",
+                "ICON": "dashboard",
+                "VISIBLE": true,
+                "COLOR": "rgb(30, 170, 30)"
+            }
+        },
+        {
+            "type": "insertAfterItem",
+            "path": "/items[Novedades]",
+            "value": {
+                "NAME": "Ofertas",
+                "TEXT": "Ofertas",
+                "URL": "almacen/ofertasproductos/master",
+                "ICON": "dashboard",
+                "VISIBLE": true,
+                "COLOR": "rgb(30, 170, 30)"
+            }
+        }
+    ]
+}

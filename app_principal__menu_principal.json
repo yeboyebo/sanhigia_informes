@@ -1,9 +1,3 @@
 {
-    "modifications": [
-        {
-            "type": "updateNode",
-            "path": "/items[empresa]/VISIBLE",
-            "value": false
-        }
-    ]
+    "modifications": []
 }

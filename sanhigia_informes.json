@@ -384,6 +384,42 @@
             {
                 "name": "app_portal__index.html",
                 "path": "apps/portal/templates/portal/"
+            },
+            {
+                "name": "app_principal__masterclientesinactivos.json",
+                "path": "apps/principal/templates/principal/plantillas/"
+            },
+            {
+                "name": "model_flfactppal__clientesinactivos.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__clientesinactivos_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactalma__novedades.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__novedades_def.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__ofertas.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__ofertas_def.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__ofertasproductos.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__ofertasproductos_def.py",
+                "path": "models/flfactalma/"
             }
         ],
         "patchJson": [
@@ -410,6 +446,10 @@
             {
                 "name": "app_principal__menu_principal.json",
                 "path": "apps/principal/templates/principal/"
+            },
+            {
+                "name": "app_almacen__menu_almacen.json",
+                "path": "apps/almacen/templates/almacen/"
             }
         ],
         "patchScript": [

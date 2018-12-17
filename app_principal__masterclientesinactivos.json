@@ -1,0 +1,11 @@
+{
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "f_clientesUsuario": null
+    },
+    "schema": {},
+    "layout": {
+    },
+    "acciones": {}
+}

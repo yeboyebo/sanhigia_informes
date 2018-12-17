@@ -4,6 +4,17 @@
             "type": "insertAfterItem",
             "path": "/items[principal]",
             "value": {
+                "NAME": "almacen",
+                "TEXT": "ALMACEN",
+                "ICON": "dashboard",
+                "VISIBLE": true,
+                "COLOR": "rgb(170, 30, 30)"
+            }
+        },
+        {
+            "type": "insertAfterItem",
+            "path": "/items[almacen]",
+            "value": {
                 "NAME": "informes",
                 "TEXT": "Informes",
                 "ICON": "dashboard",

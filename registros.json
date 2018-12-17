@@ -17,13 +17,6 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/flfactppal/ejercicios",
-            "value": {
-                "historicos": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
             "path": "/flfactppal/dirclientes",
             "value": {
                 "usuarios": null
@@ -45,12 +38,21 @@
         },
         {
             "type": "insertAfterNode",
+            "path": "/flfactppal/ejercicios",
+            "value": {
+                "historicos": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
             "path": "/flfactppal",
             "value": {
                 "flfactalma": {
                     "familias": null,
                     "subfamilias": null,
-                    "articulos": null
+                    "articulos": null,
+                    "novedades": null,
+                    "ofertasproductos": null
                 }
             }
         },

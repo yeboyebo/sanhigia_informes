@@ -62,13 +62,6 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/models/flfactppal/secuenciasejercicios",
-            "value": {
-                "secuencias": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
             "path": "/models/flfactppal/dirclientes",
             "value": {
                 "impuestos": null
@@ -83,9 +76,9 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/models/flfactppal/intervalos",
+            "path": "/models/flfactppal/secuenciasejercicios",
             "value": {
-                "series": null
+                "secuencias": null
             }
         },
         {
@@ -95,7 +88,9 @@
                 "flfactalma": {
                     "familias": null,
                     "subfamilias": null,
-                    "articulos": null
+                    "articulos": null,
+                    "novedades": null,
+                    "ofertasproductos": null
                 }
             }
         },
