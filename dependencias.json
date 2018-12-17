@@ -13,6 +13,10 @@
         {
             "key": "alta_clientes",
             "version": "v1.0"
+        },
+        {
+            "key": "clientes_inactivos",
+            "version": "v1.0"
         }
     ]
 }
