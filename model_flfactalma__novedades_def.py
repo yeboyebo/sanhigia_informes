@@ -1,6 +1,6 @@
 # @class_declaration interna #
 from YBLEGACY import qsatype
-
+from YBUTILS import gesDoc
 
 class interna(qsatype.objetoBase):
 
