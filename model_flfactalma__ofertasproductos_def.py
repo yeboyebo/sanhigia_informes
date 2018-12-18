@@ -19,11 +19,29 @@ class sanhigia_informes(interna):
     def sanhigia_informes_getDesc(self):
         return None
 
+    def sanhigia_informes_getForeignFields(self, model, template=None):
+        fields = []
+        fields = [{'verbose_name': 'adjunto', 'func': 'field_adjunto'}]
+        return fields
+
+    def sanhigia_informes_field_adjunto(self, model):
+        nombre = None
+        file = gesDoc.getFiles("ofertasproductos", model.pk)
+        if file:
+            return file["nombre"]
+        return nombre
+
     def __init__(self, context=None):
         super().__init__(context)
 
     def getDesc(self):
         return self.ctx.sanhigia_informes_getDesc()
+
+    def getForeignFields(self, model, template=None):
+        return self.ctx.sanhigia_informes_getForeignFields(model, template)
+
+    def field_adjunto(self, model):
+        return self.ctx.sanhigia_informes_field_adjunto(model)
 
 
 # @class_declaration head #

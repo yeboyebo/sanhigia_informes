@@ -20,6 +20,12 @@ class sanhigia_informes_ofertasproductos(interna_ofertasproductos, helpers.Mixin
     class Meta:
         proxy = True
 
+    def getForeignFields(self, template=None):
+        return form.iface.getForeignFields(self, template)
+
+    def field_adjunto(self):
+        return form.iface.field_adjunto(self)
+
 
 # @class_declaration ofertasproductos #
 class ofertasproductos(sanhigia_informes_ofertasproductos, helpers.MixinConAcciones):

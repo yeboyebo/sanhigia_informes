@@ -20,6 +20,12 @@ class sanhigia_informes_novedades(interna_novedades, helpers.MixinConAcciones):
     class Meta:
         proxy = True
 
+    def getForeignFields(self, template=None):
+        return form.iface.getForeignFields(self, template)
+
+    def field_adjunto(self):
+        return form.iface.field_adjunto(self)
+
 
 # @class_declaration novedades #
 class novedades(sanhigia_informes_novedades, helpers.MixinConAcciones):
