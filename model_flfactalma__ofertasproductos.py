@@ -26,6 +26,9 @@ class sanhigia_informes_ofertasproductos(interna_ofertasproductos, helpers.Mixin
     def field_adjunto(self):
         return form.iface.field_adjunto(self)
 
+    def checkButtonDescarga(cursor):
+        return form.iface.checkButtonDescarga(cursor)
+
 
 # @class_declaration ofertasproductos #
 class ofertasproductos(sanhigia_informes_ofertasproductos, helpers.MixinConAcciones):

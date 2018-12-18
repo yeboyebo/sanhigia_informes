@@ -54,6 +54,10 @@
             "icon": "link"
         }
     },
-    "drawIf": {}
+    "drawIf": {
+        "parentGroupBox": {
+            "cargaDocSEPA": "checkButtonDescarga"
+        }
+    }
 }
 

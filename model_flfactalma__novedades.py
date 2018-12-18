@@ -26,6 +26,9 @@ class sanhigia_informes_novedades(interna_novedades, helpers.MixinConAcciones):
     def field_adjunto(self):
         return form.iface.field_adjunto(self)
 
+    def checkButtonDescarga(cursor):
+        return form.iface.checkButtonDescarga(cursor)
+
 
 # @class_declaration novedades #
 class novedades(sanhigia_informes_novedades, helpers.MixinConAcciones):

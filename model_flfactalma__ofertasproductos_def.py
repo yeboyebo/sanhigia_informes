@@ -32,6 +32,12 @@ class sanhigia_informes(interna):
             return file["nombre"]
         return nombre
 
+    def sanhigia_checkButtonDescarga(self, cursor):
+        file = gesDoc.getFiles("ofertasproductos", cursor.valueBuffer("idoferta"))
+        if file:
+            return None
+        return "disabled"
+
     def __init__(self, context=None):
         super().__init__(context)
 
@@ -43,6 +49,9 @@ class sanhigia_informes(interna):
 
     def field_adjunto(self, model):
         return self.ctx.sanhigia_informes_field_adjunto(model)
+
+    def checkButtonDescarga(self, cursor):
+        return self.ctx.sanhigia_checkButtonDescarga(cursor)
 
 
 # @class_declaration head #
