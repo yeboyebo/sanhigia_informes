@@ -1,0 +1,41 @@
+{
+    "querystring": {
+        "p_l": 50,
+        "p_c": true,
+        "s_activa__exact": "Sí"
+    },
+    "schema": {},
+    "layout": {
+        "masterOfertas": {
+            "componente": "YBGrid",
+            "label": "Ofertas",
+            "prefix": "ofertasproductos",
+            "filter": "buscador",
+            "columns": [
+                {
+                    "tipo": "field",
+                    "listpos": "title",
+                    "key": "descripcion",
+                    "width": 300
+                },
+                {
+                    "tipo": "field",
+                    "listpos": "subtitle",
+                    "key": "activa"
+                },
+                {
+                    "tipo": "field",
+                    "listpos": "body",
+                    "key": "fechadesde"
+                },
+                {
+                    "tipo": "field",
+                    "listpos": "body",
+                    "key": "fechahasta"
+                }
+            ],
+            "rowclick": "link"
+        }
+    },
+    "acciones": {}
+}

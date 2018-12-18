@@ -31,3 +31,7 @@ class sanhigia_informes_clientes(alta_clientes_clientes, helpers.MixinConAccione
     def iniciaValoresCursor(cursor=None):
         return form.iface.iniciaValoresCursor(cursor)
 
+    @helpers.decoradores.accion(aqparam=["oParam"])
+    def queryGrid_clientesInactivos(model, filters):
+        return form.iface.queryGrid_clientesInactivos(model, filters)
+

@@ -420,6 +420,18 @@
             {
                 "path": "apps/almacen/templates/almacen/plantillas/",
                 "name": "app_almacen__novedades.json"
+            },
+            {
+                "name": "app_almacen__ofertasproductos.json",
+                "path": "apps/almacen/templates/almacen/plantillas/"
+            },
+            {
+                "name": "app_almacen__masterofertasproductos.json",
+                "path": "apps/almacen/templates/almacen/plantillas/"
+            },
+            {
+                "name": "app_almacen__masternovedades.json",
+                "path": "apps/almacen/templates/almacen/plantillas/"
             }
         ],
         "patchJson": [

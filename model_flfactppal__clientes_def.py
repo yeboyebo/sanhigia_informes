@@ -86,6 +86,28 @@ class sanhigia_informes(alta_clientes):
         qsatype.FactoriaModulos.get('formRecordclientes').iface.iniciaValoresCursor(cursor)
         return True
 
+    def sanhigia_informes_queryGrid_clientesInactivos(self, model, filters):
+        fecha = ''
+        masWhere = ''
+        if(filters):
+            print(filters['[d_fecha]'])
+            fecha = "'" + filters['[d_fecha]'] + "'"
+        if not fecha or fecha == "''":
+            fecha = 'CURRENT_DATE'
+        usuario = qsatype.FLUtil.nameUser()
+        codGrupo = qsatype.FLUtil.sqlSelect(u"flusers", u"idgroup", ustr(u"iduser = '", usuario, u"' AND idgroup = 'Administracion'"))
+        if not codGrupo:
+            codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
+            masWhere = u" AND antes.codagente = '" + str(codagente) + "'"
+        query = {}
+        query["tablesList"] = ("clientes,pedidoscli")
+        query["select"] = ("c.codcliente, c.nombre, c.email, c.telefono1, MAX(antes.fecha) as fecha, d.direccion")
+        query["from"] = ("clientes AS c INNER JOIN pedidoscli AS antes ON c.codcliente = antes.codcliente AND antes.fecha < " + fecha + " LEFT OUTER JOIN pedidoscli AS despues ON c.codcliente = despues.codcliente AND despues.fecha >= " + fecha + " INNER JOIN dirclientes d ON c.codcliente = d.codcliente and d.domfacturacion is true")
+        query["where"] = "antes.codcliente IS NOT NULL and despues.codcliente IS NULL" + masWhere
+        query["groupby"] = " c.codcliente, c.nombre, c.email, c.telefono1, d.direccion"
+        query["orderby"] = "c.nombre DESC"
+        return query
+
     def __init__(self, context=None):
         super(sanhigia_informes, self).__init__(context)
 
@@ -112,4 +134,7 @@ class sanhigia_informes(alta_clientes):
 
     def iniciaValoresCursor(self, cursor=None):
         return self.ctx.sanhigia_informes_iniciaValoresCursor(cursor)
+
+    def queryGrid_clientesInactivos(self, model, filters):
+        return self.ctx.sanhigia_informes_queryGrid_clientesInactivos(model, filters)
 

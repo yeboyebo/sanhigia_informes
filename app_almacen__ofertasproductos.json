@@ -3,8 +3,8 @@
     "querystring": {},
     "schema": {},
     "layout": {
-    	"novedadesForm": {
-            "prefix": "novedades",
+    	"ofertasForm": {
+            "prefix": "ofertasproductos",
             "componente": "YBForm",
             "class": "claseGrid",
             "submit": "update",
@@ -19,24 +19,27 @@
                 "gb__titulo": {
                     "title": "",
                     "fields": {
-                        "codnovedad": {"disabled": true},
                         "descripcion": {"disabled": true}
                     }
                 },
                 "gb__body": {
                     "title": "",
                     "fields": {
-                        "fecha": {"disabled": true},
+                    	"codgrupo": {"disabled": true},
                         "fechadesde": {"disabled": true},
                         "fechahasta": {"disabled": true},
-                        "activa": {"disabled": true}
+                        "activa": {"disabled": true},
+                        "pvpespecial": {"disabled": true},
+                        "bonificacion": {"disabled": true},
+                        "refaregalar": {"disabled": true},
+                        "cantaregalar": {"disabled": true}
                     }
                 }
             }
         },
         "cargaDocSEPA": {
             "componente": "YBButton",
-            "prefix": "novedades",
+            "prefix": "ofertasproductos",
             "label": "Descargar",
             "className": "floatRight",
             "buttonType": "raised",
@@ -50,7 +53,7 @@
     "acciones": {
         "descargar": {
             "action": "getFiles",
-            "prefix": "novedades",
+            "prefix": "ofertasproductos",
             "icon": "link"
         }
     },
