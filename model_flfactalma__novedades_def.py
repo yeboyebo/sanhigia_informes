@@ -21,7 +21,10 @@ class sanhigia_informes(interna):
 
     def sanhigia_informes_getForeignFields(self, model, template=None):
         fields = []
-        fields = [{'verbose_name': 'adjunto', 'func': 'field_adjunto'}]
+        if template == "master":
+            fields = [{'verbose_name': 'rowColor', 'func': 'field_colorRow'}]
+        else:
+            fields = [{'verbose_name': 'adjunto', 'func': 'field_adjunto'}]
         return fields
 
     def sanhigia_informes_field_adjunto(self, model):
@@ -37,6 +40,18 @@ class sanhigia_informes(interna):
             return None
         return "disabled"
 
+    def sanhigia_informes_field_colorRow(self, model):
+        if model.tipo == "Novedad":
+            #return "cSuccess"
+            return "cInfo"
+            #return "cWarning"
+        if model.tipo == "Oferta":
+            #return "cPrimary"
+            return "cWarning"
+            #return "cLink"
+        else:
+            return None
+
     def __init__(self, context=None):
         super().__init__(context)
 
@@ -51,6 +66,9 @@ class sanhigia_informes(interna):
 
     def checkButtonDescarga(self, cursor):
         return self.ctx.sanhigia_checkButtonDescarga(cursor)
+
+    def field_colorRow(self, model):
+        return self.ctx.sanhigia_informes_field_colorRow(model)
 
 
 # @class_declaration head #

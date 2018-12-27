@@ -5,7 +5,7 @@
             "path": "/items[root]",
             "value": {
                 "NAME": "Novedades",
-                "TEXT": "Novedades",
+                "TEXT": "Novedades y promociones",
                 "URL": "almacen/novedades/master",
                 "ICON": "dashboard",
                 "VISIBLE": true,
@@ -20,7 +20,7 @@
                 "TEXT": "Ofertas",
                 "URL": "almacen/ofertasproductos/master",
                 "ICON": "dashboard",
-                "VISIBLE": true,
+                "VISIBLE": false,
                 "COLOR": "rgb(30, 170, 30)"
             }
         }

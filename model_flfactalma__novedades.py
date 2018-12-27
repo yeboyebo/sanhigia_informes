@@ -29,6 +29,9 @@ class sanhigia_informes_novedades(interna_novedades, helpers.MixinConAcciones):
     def checkButtonDescarga(cursor):
         return form.iface.checkButtonDescarga(cursor)
 
+    def field_colorRow(self):
+        return form.iface.field_colorRow(self)
+
 
 # @class_declaration novedades #
 class novedades(sanhigia_informes_novedades, helpers.MixinConAcciones):

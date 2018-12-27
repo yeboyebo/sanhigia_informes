@@ -1,3 +1,93 @@
 {
-    "modifications": []
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/schema/clientesInactivos/query/p_l",
+            "value": {
+                "p_c": true
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/queryGrid_clientesInactivos/filter/fecha",
+            "value": {
+                "referencia_1": {
+                    "filterType": "custom",
+                    "tipo": 55,
+                    "tofield": "referencia",
+                    "desc": "descripcion",
+                    "rel": "articulos",
+                    "label": "Ref. 1"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/queryGrid_clientesInactivos/filter/referencia_1",
+            "value": {
+                "referencia_2": {
+                    "filterType": "custom",
+                    "tipo": 55,
+                    "tofield": "referencia",
+                    "desc": "descripcion",
+                    "rel": "articulos",
+                    "label": "Ref. 2"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/queryGrid_clientesInactivos/filter/referencia_2",
+            "value": {
+                "referencia_3": {
+                    "filterType": "custom",
+                    "tipo": 55,
+                    "tofield": "referencia",
+                    "desc": "descripcion",
+                    "rel": "articulos",
+                    "label": "Ref. 3"
+                }
+            }
+        },
+        {
+            "type": "updateNode",
+            "path": "/layout/queryGrid_clientesInactivos/columns[c.codcliente]/width",
+            "value": 50
+        },
+        {
+            "type": "updateNode",
+            "path": "/layout/queryGrid_clientesInactivos/columns[c.nombre]/width",
+            "value": 270
+        },
+        {
+            "type": "insertAfterItem",
+            "path": "/layout/queryGrid_clientesInactivos/columns[c.nombre]",
+            "value": {
+                "tipo": "field",
+                "key": "direc",
+                "label": "Dirección",
+                "width": 400
+            }
+        },
+        {
+            "type": "updateNode",
+            "path": "/layout/queryGrid_clientesInactivos/columns[c.telefono1]/width",
+            "value": 50
+        },
+        {
+            "type": "updateNode",
+            "path": "/layout/queryGrid_clientesInactivos/columns[c.email]/width",
+            "value": 190
+        },
+        {
+            "type": "updateNode",
+            "path": "/layout/queryGrid_clientesInactivos/columns[fecha]/width",
+            "value": 50
+        },
+        {
+            "type": "deleteItem",
+            "path": "/layout/queryGrid_clientesInactivos/columns[d.direccion]",
+            "value": null
+        }
+    ]
 }

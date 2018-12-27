@@ -466,6 +466,10 @@
             {
                 "name": "app_principal__masterclientesinactivos.json",
                 "path": "apps/principal/templates/principal/plantillas/"
+            },
+            {
+                "path": "apps/principal/templates/principal/plantillas/",
+                "name": "app_principal__ventasclientes.json"
             }
         ],
         "patchScript": [

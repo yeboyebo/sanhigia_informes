@@ -8,15 +8,21 @@
     "layout": {
         "masterNovedades": {
             "componente": "YBGrid",
-            "label": "Novedades",
+            "label": "Novedades y promociones",
             "prefix": "novedades",
             "filter": "buscador",
+            "colorRowField": "rowColor",
             "columns": [
                 {
                     "tipo": "field",
                     "listpos": "title",
                     "key": "descripcion",
                     "width": 300
+                },
+                {
+                    "tipo": "field",
+                    "listpos": "body",
+                    "key": "tipo"
                 },
                 {
                     "tipo": "field",

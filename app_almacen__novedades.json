@@ -29,7 +29,8 @@
                         "fecha": {"disabled": true},
                         "fechadesde": {"disabled": true},
                         "fechahasta": {"disabled": true},
-                        "activa": {"disabled": true}
+                        "activa": {"disabled": true},
+                        "tipo": {"disabled": true}
                     }
                 }
             }

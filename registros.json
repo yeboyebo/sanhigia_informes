@@ -99,11 +99,6 @@
             "value": null
         },
         {
-            "type": "deleteNode",
-            "path": "/flfactalma/regstocks",
-            "value": null
-        },
-        {
             "type": "insertAfterNode",
             "path": "/flfacturac/root",
             "value": {
