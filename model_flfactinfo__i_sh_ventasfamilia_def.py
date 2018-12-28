@@ -16,18 +16,6 @@ from models.flfactppal.agentes import agentes
 
 class sanhigia_informes(interna):
 
-    def sanhigia_informes_initValidation(self, name, data=None):
-        response = True
-        return response
-
-    def sanhigia_informes_iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        labels = {}
-        return labels
-
-    def sanhigia_informes_bChLabel(self, fN=None, cursor=None):
-        labels = {}
-        return labels
-
     def sanhigia_informes_getFilters(self, model, name, template=None):
         filters = []
         if name == 'filtroagente':
@@ -145,15 +133,6 @@ class sanhigia_informes(interna):
 
     def field_nombreagente(self, model):
         return self.ctx.sanhigia_field_nombreagente(model)
-
-    def initValidation(self, name, data=None):
-        return self.ctx.sanhigia_informes_initValidation(name, data=None)
-
-    def iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        return self.ctx.sanhigia_informes_iniciaValoresLabel(model, template, cursor)
-
-    def bChLabel(self, fN=None, cursor=None):
-        return self.ctx.sanhigia_informes_bChLabel(fN, cursor)
 
     def getFilters(self, model, name, template=None):
         return self.ctx.sanhigia_informes_getFilters(model, name, template)

@@ -298,14 +298,6 @@
                 "path": "models/flfactalma/"
             },
             {
-                "path": "models/flcolagedo/",
-                "name": "model_flcolagedo__gd_config.py"
-            },
-            {
-                "path": "models/flcolagedo/",
-                "name": "model_flcolagedo__gd_config_def.py"
-            },
-            {
                 "path": "apps/almacen/templates/almacen/plantillas/",
                 "name": "app_almacen__novedades.json"
             },

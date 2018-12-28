@@ -18,11 +18,6 @@ class sanhigia_informes_i_sh_productividad(interna_i_sh_productividad, helpers.M
     class Meta:
         proxy = True
 
-    def field_nombreagente(cursor):
-        return form.iface.field_nombreagente(cursor)
-
-    def checkCodAgente(cursor):
-        return form.iface.checkCodAgente(cursor)
 
 # @class_declaration i_sh_productividad #
 class i_sh_productividad(sanhigia_informes_i_sh_productividad, helpers.MixinConAcciones):
