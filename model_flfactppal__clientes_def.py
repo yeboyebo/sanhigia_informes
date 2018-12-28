@@ -6,18 +6,6 @@ from YBUTILS.viewREST import cacheController
 
 class sanhigia_informes(alta_clientes):
 
-    def sanhigia_informes_initValidation(self, name, data=None):
-        response = True
-        return response
-
-    def sanhigia_informes_iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        labels = {}
-        return labels
-
-    def sanhigia_informes_bChLabel(self, fN=None, cursor=None):
-        labels = {}
-        return labels
-
     def sanhigia_informes_getFilters(self, model, name, template=None):
         filters = []
         if name == 'clientesUsuario':
@@ -31,14 +19,6 @@ class sanhigia_informes(alta_clientes):
                     codagente = '-1'
                 return [{'criterio': 'codagente__exact', 'valor': codagente}]
         return filters
-
-    def sanhigia_informes_getForeignFields(self, model, template=None):
-        fields = []
-        return fields
-
-    def sanhigia_informes_getDesc(self):
-        desc = "nombre"
-        return desc
 
     def sanhigia_informes_getCliente(self, model, oParam):
         data = []
@@ -181,25 +161,10 @@ class sanhigia_informes(alta_clientes):
         return query
 
     def __init__(self, context=None):
-        super(sanhigia_informes, self).__init__(context)
-
-    def initValidation(self, name, data=None):
-        return self.ctx.sanhigia_informes_initValidation(name, data=None)
-
-    def iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        return self.ctx.sanhigia_informes_iniciaValoresLabel(model, template, cursor)
-
-    def bChLabel(self, fN=None, cursor=None):
-        return self.ctx.sanhigia_informes_bChLabel(fN, cursor)
+        super().__init__(context)
 
     def getFilters(self, model, name, template=None):
         return self.ctx.sanhigia_informes_getFilters(model, name, template)
-
-    def getForeignFields(self, model, template=None):
-        return self.ctx.sanhigia_informes_getForeignFields(model, template)
-
-    def getDesc(self):
-        return self.ctx.sanhigia_informes_getDesc()
 
     def getCliente(self, model, oParam):
         return self.ctx.sanhigia_informes_getCliente(model, oParam)

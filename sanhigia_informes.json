@@ -5,10 +5,6 @@
             {
                 "name": "dependencias.json",
                 "path": "config/"
-            },
-            {
-                "name": "settings.py",
-                "path": "AQNEXT/"
             }
         ],
         "deleteFile": [],
@@ -70,62 +66,6 @@
                 "path": "models/flfactinfo/"
             },
             {
-                "name": "model_flfactppal__agentes.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__agentes_def.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__intervalos.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__intervalos_def.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__series.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__series_def.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__usuarios.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__usuarios_def.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__impuestos.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__impuestos_def.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__secuencias.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactppal__secuencias_def.py",
-                "path": "models/flfactppal/"
-            },
-            {
-                "name": "model_flfactalma__familias.py",
-                "path": "models/flfactalma/"
-            },
-            {
-                "name": "model_flfactalma__familias_def.py",
-                "path": "models/flfactalma/"
-            },
-            {
                 "name": "model_flfactalma__subfamilias.py",
                 "path": "models/flfactalma/"
             },
@@ -155,30 +95,6 @@
             },
             {
                 "name": "model_flfacturac__sh_lineaspedidosclipda_def.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__pedidoscli.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__pedidoscli_def.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__lineaspedidoscli.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__lineaspedidoscli_def.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__lineasalbaranescli.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__lineasalbaranescli_def.py",
                 "path": "models/flfacturac/"
             },
             {

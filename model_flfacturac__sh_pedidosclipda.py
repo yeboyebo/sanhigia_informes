@@ -18,24 +18,6 @@ class sanhigia_informes_sh_pedidosclipda(interna_sh_pedidosclipda, helpers.Mixin
     class Meta:
         proxy = True
 
-    def initValidation(name, data=None):
-        return form.iface.initValidation(name, data)
-
-    def iniciaValoresLabel(self, template=None, cursor=None, data=None):
-        return form.iface.iniciaValoresLabel(self, template, cursor)
-
-    def bChLabel(fN=None, cursor=None):
-        return form.iface.bChLabel(fN, cursor)
-
-    def getFilters(self, name, template=None):
-        return form.iface.getFilters(self, name, template)
-
-    def getForeignFields(self, template=None):
-        return form.iface.getForeignFields(self, template)
-
-    def getDesc():
-        return form.iface.getDesc()
-
     @helpers.decoradores.accion(aqparam=["oParam"])
     def enviarPedidoPDA(self, oParam):
         return form.iface.enviarPedidoPDA(self, oParam)
@@ -68,6 +50,9 @@ class sh_pedidosclipda(sanhigia_informes_sh_pedidosclipda, helpers.MixinConAccio
 
     class Meta:
         proxy = True
+
+    def getIface(self=None):
+        return form.iface
 
 
 definitions = importlib.import_module("models.flfacturac.sh_pedidosclipda_def")
