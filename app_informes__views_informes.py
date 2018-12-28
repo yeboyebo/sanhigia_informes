@@ -14,14 +14,14 @@ class interna(qsatype.objetoBase):
 class head(interna):
 
     def __init__(self, context=None):
-        super(head, self).__init__(context)
+        super().__init__(context)
 
 
 # @class_declaration ifaceCtx #
 class ifaceCtx(head):
 
     def __init__(self, context=None):
-        super(ifaceCtx, self).__init__(context)
+        super().__init__(context)
 
 
 # @class_declaration FormInternalObj #

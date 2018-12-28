@@ -10,7 +10,7 @@ class interna(qsatype.objetoBase):
         self.ctx = context
 
 
-# @class_declaration sanhigia #
+# @class_declaration sanhigia_informes #
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from YBUTILS.viewREST import cacheController, accessControl
@@ -23,15 +23,15 @@ from models.flfactppal.usuarios import usuarios
 from models.flfactppal.agentes import agentes
 
 
-class sanhigia(interna):
+class sanhigia_informes(interna):
 
-    def sanhigia_login(self, request, error=None):
+    def sanhigia_informes_login(self, request, error=None):
         """ Peticion defecto"""
         if not error:
             error = ''
         return render(request, 'portal/login.html', {'error': error})
 
-    def sanhigia_auth_login(self, request):
+    def sanhigia_informes_auth_login(self, request):
 
         _i = self.iface
 
@@ -78,34 +78,34 @@ class sanhigia(interna):
                 return HttpResponseRedirect("/")
         return _i.login(request)
 
-    def sanhigia_account_request(self, request):
+    def sanhigia_informes_account_request(self, request):
         return HttpResponseRedirect("/")
 
     def __init__(self, context=None):
-        super(sanhigia, self).__init__(context)
+        super().__init__(context)
 
     def auth_login(self, request):
-        return self.ctx.sanhigia_auth_login(request)
+        return self.ctx.sanhigia_informes_auth_login(request)
 
     def account_request(self, request):
-        return self.ctx.sanhigia_account_request(request)
+        return self.ctx.sanhigia_informes_account_request(request)
 
     def login(self, request, error=None):
-        return self.ctx.sanhigia_login(request, error)
+        return self.ctx.sanhigia_informes_login(request, error)
 
 
 # @class_declaration head #
-class head(sanhigia):
+class head(sanhigia_informes):
 
     def __init__(self, context=None):
-        super(head, self).__init__(context)
+        super().__init__(context)
 
 
 # @class_declaration ifaceCtx #
 class ifaceCtx(head):
 
     def __init__(self, context=None):
-        super(ifaceCtx, self).__init__(context)
+        super().__init__(context)
 
 
 # @class_declaration FormInternalObj #

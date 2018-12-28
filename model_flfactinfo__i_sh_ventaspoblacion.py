@@ -18,24 +18,6 @@ class sanhigia_informes_i_sh_ventaspoblacion(interna_i_sh_ventaspoblacion, helpe
     class Meta:
         proxy = True
 
-    def initValidation(name, data=None):
-        return form.iface.initValidation(name, data)
-
-    def iniciaValoresLabel(self, template=None, cursor=None, data=None):
-        return form.iface.iniciaValoresLabel(self, template, cursor)
-
-    def bChLabel(fN=None, cursor=None):
-        return form.iface.bChLabel(fN, cursor)
-
-    def getFilters(self, name, template=None):
-        return form.iface.getFilters(self, name, template)
-
-    def getForeignFields(self, template=None):
-        return form.iface.getForeignFields(self, template)
-
-    def getDesc():
-        return form.iface.getDesc()
-
     def field_nombreagente(cursor):
         return form.iface.field_nombreagente(cursor)
 
@@ -56,6 +38,9 @@ class i_sh_ventaspoblacion(sanhigia_informes_i_sh_ventaspoblacion, helpers.Mixin
 
     class Meta:
         proxy = True
+
+    def getIface(self=None):
+        return form.iface
 
 
 definitions = importlib.import_module("models.flfactinfo.i_sh_ventaspoblacion_def")

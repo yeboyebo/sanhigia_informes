@@ -131,7 +131,7 @@ class sanhigia_informes(interna):
         return url
 
     def __init__(self, context=None):
-        super(sanhigia_informes, self).__init__(context)
+        super().__init__(context)
 
     def field_nombreagente(self, model):
         return self.ctx.sanhigia_field_nombreagente(model)
@@ -165,14 +165,14 @@ class sanhigia_informes(interna):
 class head(sanhigia_informes):
 
     def __init__(self, context=None):
-        super(head, self).__init__(context)
+        super().__init__(context)
 
 
 # @class_declaration ifaceCtx #
 class ifaceCtx(head):
 
     def __init__(self, context=None):
-        super(ifaceCtx, self).__init__(context)
+        super().__init__(context)
 
 
 # @class_declaration FormInternalObj #
