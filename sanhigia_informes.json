@@ -74,14 +74,6 @@
                 "path": "models/flfactalma/"
             },
             {
-                "name": "model_flfactalma__articulos.py",
-                "path": "models/flfactalma/"
-            },
-            {
-                "name": "model_flfactalma__articulos_def.py",
-                "path": "models/flfactalma/"
-            },
-            {
                 "name": "model_flfacturac__sh_pedidosclipda.py",
                 "path": "models/flfacturac/"
             },
@@ -95,26 +87,6 @@
             },
             {
                 "name": "model_flfacturac__sh_lineaspedidosclipda_def.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__presupuestoscli.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__presupuestoscli_def.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__lineaspresupuestoscli.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__lineaspresupuestoscli_def.py",
-                "path": "models/flfacturac/"
-            },
-            {
-                "name": "model_flfacturac__flfacturac_def.py",
                 "path": "models/flfacturac/"
             },
             {
@@ -389,6 +361,34 @@
             }
         ],
         "patchScript": [
+            {
+                "name": "model_flfacturac__lineaspresupuestoscli.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__lineaspresupuestoscli_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__presupuestoscli.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__presupuestoscli_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__flfacturac_def.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfactalma__articulos.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__articulos_def.py",
+                "path": "models/flfactalma/"
+            },
             {
                 "name": "model_flfactppal__clientes.py",
                 "path": "models/flfactppal/"

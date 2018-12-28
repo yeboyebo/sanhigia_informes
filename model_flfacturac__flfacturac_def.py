@@ -1,23 +1,12 @@
-# @class_declaration interna #
-from YBLEGACY import qsatype
 
-
-class interna(qsatype.objetoBase):
-
-    ctx = qsatype.Object()
-
-    def __init__(self, context=None):
-        self.ctx = context
-
-
-# @class_declaration oficial #
+# @class_declaration sanhigia_informes #
 from YBLEGACY.constantes import *
 from YBUTILS.viewREST import cacheController
 
 
-class oficial(interna):
+class sanhigia_informes(flfacturac):
 
-    def oficial_bufferCommited_lineaspresupuestoscli(self, curLinea=None):
+    def sanhigia_informes_bufferCommited_lineaspresupuestoscli(self, curLinea=None):
         # _i = self.iface
         curPresupuesto = qsatype.FLSqlCursor(u"presupuestoscli")
         curPresupuesto.select(ustr(u"idpresupuesto = ", curLinea.valueBuffer(u"idpresupuesto")))
@@ -31,7 +20,7 @@ class oficial(interna):
             return False
         return True
 
-    def oficial_bufferCommited_lineaspedidoscli(self, curLinea=None):
+    def sanhigia_informes_bufferCommited_lineaspedidoscli(self, curLinea=None):
         # _i = self.iface
         curPedido = qsatype.FLSqlCursor(u"pedidoscli")
         curPedido.select(ustr(u"idpedido = ", curLinea.valueBuffer(u"idpedido")))
@@ -45,7 +34,7 @@ class oficial(interna):
             return False
         return True
 
-    def oficial_bufferCommited_lineasfacturascli(self, curLinea=None):
+    def sanhigia_informes_bufferCommited_lineasfacturascli(self, curLinea=None):
         # _i = self.iface
         curFactura = qsatype.FLSqlCursor(u"facturascli")
         curFactura.select(ustr(u"idfactura = ", curLinea.valueBuffer(u"idfactura")))
@@ -59,7 +48,7 @@ class oficial(interna):
             return False
         return True
 
-    def oficial_bufferCommited_lineasalbaranescli(self, curLinea=None):
+    def sanhigia_informes_bufferCommited_lineasalbaranescli(self, curLinea=None):
         # _i = self.iface
         curAlbaran = qsatype.FLSqlCursor(u"albaranescli")
         curAlbaran.select(ustr(u"idalbaran = ", curLinea.valueBuffer(u"idalbaran")))
@@ -73,7 +62,7 @@ class oficial(interna):
             return False
         return True
 
-    def oficial_bufferCommited_sh_lineaspedidosclipda(self, curLinea=None):
+    def sanhigia_informes_bufferCommited_sh_lineaspedidosclipda(self, curLinea=None):
         # _i = self.iface
         curPedido = qsatype.FLSqlCursor(u"sh_pedidosclipda")
         curPedido.select(ustr(u"idpedido = ", curLinea.valueBuffer(u"idpedido")))
@@ -87,53 +76,27 @@ class oficial(interna):
             return False
         return True
 
-    def oficial_bufferCommited_presupuestoscli(self, curPresupuesto=None):
+    def sanhigia_informes_bufferCommited_presupuestoscli(self, curPresupuesto=None):
         return True
 
     def __init__(self, context=None):
-        super(oficial, self).__init__(context)
+        super().__init__(context)
 
     def bufferCommited_lineaspresupuestoscli(self, curLinea=None):
-        return self.ctx.oficial_bufferCommited_lineaspresupuestoscli(curLinea)
+        return self.ctx.sanhigia_informes_bufferCommited_lineaspresupuestoscli(curLinea)
 
     def bufferCommited_lineaspedidoscli(self, curLinea=None):
-        return self.ctx.oficial_bufferCommited_lineaspedidoscli(curLinea)
+        return self.ctx.sanhigia_informes_bufferCommited_lineaspedidoscli(curLinea)
 
     def bufferCommited_lineasfacturascli(self, curLinea=None):
-        return self.ctx.oficial_bufferCommited_lineasfacturascli(curLinea)
+        return self.ctx.sanhigia_informes_bufferCommited_lineasfacturascli(curLinea)
 
     def bufferCommited_lineasalbaranescli(self, curLinea=None):
-        return self.ctx.oficial_bufferCommited_lineasalbaranescli(curLinea)
+        return self.ctx.sanhigia_informes_bufferCommited_lineasalbaranescli(curLinea)
 
     def bufferCommited_sh_lineaspedidosclipda(self, curLinea=None):
-        return self.ctx.oficial_bufferCommited_sh_lineaspedidosclipda(curLinea)
+        return self.ctx.sanhigia_informes_bufferCommited_sh_lineaspedidosclipda(curLinea)
 
     def bufferCommited_presupuestoscli(self, curPresupuesto=None):
-        return self.ctx.oficial_bufferCommited_presupuestoscli(curPresupuesto)
+        return self.ctx.sanhigia_informes_bufferCommited_presupuestoscli(curPresupuesto)
 
-
-# @class_declaration head #
-class head(oficial):
-
-    def __init__(self, context=None):
-        super(head, self).__init__(context)
-
-
-# @class_declaration ifaceCtx #
-class ifaceCtx(head):
-
-    def __init__(self, context=None):
-        super(ifaceCtx, self).__init__(context)
-
-
-# @class_declaration FormInternalObj #
-class FormInternalObj(qsatype.FormDBWidget):
-    def _class_init(self):
-        self.iface = ifaceCtx(self)
-
-
-form = FormInternalObj()
-form._class_init()
-form.iface.ctx = form.iface
-form.iface.iface = form.iface
-iface = form.iface

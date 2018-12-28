@@ -1,45 +1,9 @@
-# @class_declaration interna #
-from YBLEGACY import qsatype
-
-
-class interna(qsatype.objetoBase):
-
-    ctx = qsatype.Object()
-
-    def __init__(self, context=None):
-        self.ctx = context
-
 
 # @class_declaration sanhigia_informes #
-from YBLEGACY.constantes import *
 from YBUTILS.viewREST import cacheController
 
 
-class sanhigia_informes(interna):
-
-    def sanhigia_informes_initValidation(self, name, data=None):
-        response = True
-        return response
-
-    def sanhigia_informes_iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        labels = {}
-        return labels
-
-    def sanhigia_informes_bChLabel(self, fN=None, cursor=None):
-        labels = {}
-        return labels
-
-    def sanhigia_informes_getFilters(self, model, name, template=None):
-        filters = []
-        return filters
-
-    def sanhigia_informes_getForeignFields(self, model, template=None):
-        fields = []
-        return fields
-
-    def sanhigia_informes_getDesc(self):
-        desc = "descripcion"
-        return desc
+class sanhigia_informes(flfactalma):
 
     def sanhigia_informes_getReferenciaDesc(self, model, oParam):
         data = []
@@ -146,7 +110,7 @@ class sanhigia_informes(interna):
         idpresupuesto = cacheController.getSessionVariable(ustr(u"presupuestoscli_", qsatype.FLUtil.nameUser()))
         print(idpresupuesto)
         referencia = qsatype.FLUtil.sqlSelect(u"lineaspresupuestoscli", u"referencia", ustr(u"referencia = '", model.referencia, u"' AND idpresupuesto = '", idpresupuesto, u"'"))
-        cantidad = qsatype.FLUtil.sqlSelect(u"lineaspresupuestoscli", u"cantidad", ustr(u"referencia = '", model.referencia, u"' AND idpresupuesto = '", idpresupuesto, u"'"))        
+        cantidad = qsatype.FLUtil.sqlSelect(u"lineaspresupuestoscli", u"cantidad", ustr(u"referencia = '", model.referencia, u"' AND idpresupuesto = '", idpresupuesto, u"'"))
         if referencia:
             resul = {}
             resul['status'] = -1
@@ -157,7 +121,7 @@ class sanhigia_informes(interna):
             referencia = cursor.valueBuffer("referencia")
             # codAlmacen = qsatype.FLUtil.sqlSelect(u"presupuestoscli", u"codalmacen", ustr(u"idpresupuesto = '", idpresupuesto, u"'"))
             codAlmacen = "ALM"
-            print("codAlmacen: ", codAlmacen)            
+            print("codAlmacen: ", codAlmacen)
             cantidad = 1
             disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
             print("subirLineaPres____disponible", disponible)
@@ -223,25 +187,7 @@ class sanhigia_informes(interna):
         return True
 
     def __init__(self, context=None):
-        super(sanhigia_informes, self).__init__(context)
-
-    def initValidation(self, name, data=None):
-        return self.ctx.sanhigia_informes_initValidation(name, data=None)
-
-    def iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        return self.ctx.sanhigia_informes_iniciaValoresLabel(model, template, cursor)
-
-    def bChLabel(self, fN=None, cursor=None):
-        return self.ctx.sanhigia_informes_bChLabel(fN, cursor)
-
-    def getFilters(self, model, name, template=None):
-        return self.ctx.sanhigia_informes_getFilters(model, name, template)
-
-    def getForeignFields(self, model, template=None):
-        return self.ctx.sanhigia_informes_getForeignFields(model, template)
-
-    def getDesc(self):
-        return self.ctx.sanhigia_informes_getDesc()
+        super().__init__(context)
 
     def getReferenciaDesc(self, model, oParam):
         return self.ctx.sanhigia_informes_getReferenciaDesc(model, oParam)
@@ -258,21 +204,3 @@ class sanhigia_informes(interna):
     def insertarLineaPres(self, cursor, oParam):
         return self.ctx.sanhigia_informes_insertarLineaPres(cursor, oParam)
 
-# @class_declaration head #
-class head(sanhigia_informes):
-
-    def __init__(self, context=None):
-        super(head, self).__init__(context)
-
-
-# @class_declaration ifaceCtx #
-class ifaceCtx(head):
-
-    def __init__(self, context=None):
-        super(ifaceCtx, self).__init__(context)
-
-
-# @class_declaration FormInternalObj #
-class FormInternalObj(qsatype.FormDBWidget):
-    def _class_init(self):
-        self.iface = ifaceCtx(self)

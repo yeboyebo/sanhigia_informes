@@ -1,17 +1,3 @@
-# @class_declaration interna #
-from YBLEGACY import qsatype
-import os
-import datetime
-# import babel.numbers
-# import decimal
-
-class interna(qsatype.objetoBase):
-
-    ctx = qsatype.Object()
-
-    def __init__(self, context=None):
-        self.ctx = context
-
 
 # @class_declaration sanhigia_informes #
 from YBLEGACY.constantes import *
@@ -19,20 +5,12 @@ from YBUTILS.viewREST import cacheController
 from YBUTILS import notifications
 
 
-class sanhigia_informes(interna):
+class sanhigia_informes(flfacturac):
 
     def sanhigia_informes_initValidation(self, name, data=None):
         response = True
         cacheController.setSessionVariable(ustr(u"presupuestoscli_", qsatype.FLUtil.nameUser()), data["DATA"]["idpresupuesto"])
         return response
-
-    def sanhigia_informes_iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        labels = {}
-        return labels
-
-    def sanhigia_informes_bChLabel(self, fN=None, cursor=None):
-        labels = {}
-        return labels
 
     def sanhigia_informes_getFilters(self, model, name, template=None):
         filters = []
@@ -96,16 +74,10 @@ class sanhigia_informes(interna):
         return True
 
     def __init__(self, context=None):
-        super(sanhigia_informes, self).__init__(context)
+        super().__init__(context)
 
     def initValidation(self, name, data=None):
         return self.ctx.sanhigia_informes_initValidation(name, data)
-
-    def iniciaValoresLabel(self, model=None, template=None, cursor=None):
-        return self.ctx.sanhigia_informes_iniciaValoresLabel(model, template, cursor)
-
-    def bChLabel(self, fN=None, cursor=None):
-        return self.ctx.sanhigia_informes_bChLabel(fN, cursor)
 
     def getFilters(self, model, name, template=None):
         return self.ctx.sanhigia_informes_getFilters(model, name, template)
@@ -128,22 +100,3 @@ class sanhigia_informes(interna):
     def checkCondiciones(self, cursor):
         return self.ctx.sanhigia_informes_checkCondiciones(cursor)
 
-
-# @class_declaration head #
-class head(sanhigia_informes):
-
-    def __init__(self, context=None):
-        super(head, self).__init__(context)
-
-
-# @class_declaration ifaceCtx #
-class ifaceCtx(head):
-
-    def __init__(self, context=None):
-        super(ifaceCtx, self).__init__(context)
-
-
-# @class_declaration FormInternalObj #
-class FormInternalObj(qsatype.FormDBWidget):
-    def _class_init(self):
-        self.iface = ifaceCtx(self)
