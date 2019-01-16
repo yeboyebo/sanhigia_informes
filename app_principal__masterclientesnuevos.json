@@ -2,14 +2,7 @@
     "modifications": [
         {
             "type": "insertAfterNode",
-            "path": "/schema/clientesInactivos/query/p_l",
-            "value": {
-                "p_c": true
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/layout/queryGrid_clientesInactivos/filter/fecha",
+            "path": "/layout/queryGrid_clientesNuevos/filter/fecha",
             "value": {
                 "referencia_1": {
                     "filterType": "custom",
@@ -24,7 +17,7 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/layout/queryGrid_clientesInactivos/filter/referencia_1",
+            "path": "/layout/queryGrid_clientesNuevos/filter/referencia_1",
             "value": {
                 "referencia_2": {
                     "filterType": "custom",
@@ -39,7 +32,7 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/layout/queryGrid_clientesInactivos/filter/referencia_2",
+            "path": "/layout/queryGrid_clientesNuevos/filter/referencia_2",
             "value": {
                 "referencia_3": {
                     "filterType": "custom",
@@ -53,18 +46,8 @@
             }
         },
         {
-            "type": "updateNode",
-            "path": "/layout/queryGrid_clientesInactivos/columns[c.codcliente]/width",
-            "value": 50
-        },
-        {
-            "type": "updateNode",
-            "path": "/layout/queryGrid_clientesInactivos/columns[c.nombre]/width",
-            "value": 270
-        },
-        {
             "type": "insertAfterItem",
-            "path": "/layout/queryGrid_clientesInactivos/columns[c.nombre]",
+            "path": "/layout/queryGrid_clientesNuevos/columns[c.nombre]",
             "value": {
                 "tipo": "field",
                 "key": "direc",
@@ -73,23 +56,8 @@
             }
         },
         {
-            "type": "updateNode",
-            "path": "/layout/queryGrid_clientesInactivos/columns[c.telefono1]/width",
-            "value": 50
-        },
-        {
-            "type": "updateNode",
-            "path": "/layout/queryGrid_clientesInactivos/columns[c.email]/width",
-            "value": 190
-        },
-        {
-            "type": "updateNode",
-            "path": "/layout/queryGrid_clientesInactivos/columns[fecha]/width",
-            "value": 50
-        },
-        {
             "type": "deleteItem",
-            "path": "/layout/queryGrid_clientesInactivos/columns[d.direccion]",
+            "path": "/layout/queryGrid_clientesNuevos/columns[d.direccion]",
             "value": null
         }
     ]

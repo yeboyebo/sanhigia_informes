@@ -58,14 +58,6 @@
                 "path": "models/flfactinfo/"
             },
             {
-                "name": "model_flfactinfo__i_pedidoscli.py",
-                "path": "models/flfactinfo/"
-            },
-            {
-                "name": "model_flfactinfo__i_pedidoscli_def.py",
-                "path": "models/flfactinfo/"
-            },
-            {
                 "name": "model_flfactalma__subfamilias.py",
                 "path": "models/flfactalma/"
             },
@@ -350,6 +342,14 @@
             {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__ventasclientes.json"
+            },
+            {
+                "name": "app_principal__masterclientesnuevos.json",
+                "path": "apps/principal/templates/principal/plantillas/"
+            },
+            {
+                "path": "apps/principal/templates/principal/plantillas/",
+                "name": "app_principal__clientes.json"
             }
         ],
         "patchScript": [
@@ -400,6 +400,14 @@
             {
                 "path": "apps/principal/viewset/",
                 "name": "app_principal__views_principal.py"
+            },
+            {
+                "name": "model_flfactinfo__i_pedidoscli.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_pedidoscli_def.py",
+                "path": "models/flfactinfo/"
             }
         ]
     }
