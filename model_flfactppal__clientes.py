@@ -29,3 +29,7 @@ class sanhigia_informes_clientes(alta_clientes_clientes, helpers.MixinConAccione
     def queryGrid_clientesNuevos(model, filters):
         return form.iface.queryGrid_clientesNuevos(model, filters)
 
+    @helpers.decoradores.accion(aqparam=["oParam"])
+    def queryGrid_comparativas(model, filters):
+        return form.iface.queryGrid_comparativas(model, filters)
+
