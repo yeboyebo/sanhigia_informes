@@ -235,14 +235,15 @@ class sanhigia_informes(interna):
             aLineas.append(aCamposLinea)
         return aLineas
 
-    def sanhigia_informes_queryGrid_histArticulosCli(self, model):
+    def sanhigia_informes_queryGrid_histArticulosCli(self, model, filters):
         idpedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         print("IDPedido: ", idpedido)
+        print("IDPedido 2: ", model.idpedido)
         query = {}
         query["tablesList"] = ("articulos,lineaspedidoscli,pedidoscli")
         query["select"] = ("articulos.referencia, articulos.descripcion, MAX(pedidoscli.fecha) as fecha")
         query["from"] = ("articulos INNER JOIN lineaspedidoscli ON articulos.referencia = lineaspedidoscli.referencia INNER JOIN pedidoscli ON lineaspedidoscli.idpedido = pedidoscli.idpedido")
-        query["where"] = ("pedidoscli.codcliente = '" + model.codcliente.codcliente + "' AND lineaspedidoscli.idpedido <> '" + ustr(idpedido) + "'")
+        query["where"] = ("pedidoscli.codcliente = '" + model.codcliente.codcliente + "' AND lineaspedidoscli.idpedido <> '" + ustr(model.idpedido) + "'")
         query["groupby"] = " articulos.referencia, articulos.descripcion"
         query["orderby"] = "fecha DESC"
         return query
@@ -303,8 +304,8 @@ class sanhigia_informes(interna):
     def dameSelectLineaXML(self):
         return self.ctx.sanhigia_informes_dameSelectLineaXML()
 
-    def queryGrid_histArticulosCli(self, model):
-        return self.ctx.sanhigia_informes_queryGrid_histArticulosCli(model)
+    def queryGrid_histArticulosCli(self, model, filters):
+        return self.ctx.sanhigia_informes_queryGrid_histArticulosCli(model, filters)
 
     def field_colorRow(self, model):
         return self.ctx.sanhigia_informes_field_colorRow(model)
