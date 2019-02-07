@@ -1,5 +1,9 @@
 {
-    "initValidation": {},
+    "initValidation": {
+    	"error": {           
+            "msg": "Pedido incorrecto"
+        }
+    },
     "querystring": {},
     "schema": {
         "sh_lineaspedidosclipda": {
