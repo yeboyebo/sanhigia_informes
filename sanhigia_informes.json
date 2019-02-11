@@ -90,10 +90,6 @@
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
-                "name": "app_facturacion__presupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
                 "name": "app_facturacion__newrecordsh_lineaspedidosclipda.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
@@ -350,6 +346,10 @@
             {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__clientes.json"
+            },
+            {
+                "name": "app_facturacion__presupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
             }
         ],
         "patchScript": [
