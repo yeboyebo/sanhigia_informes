@@ -276,6 +276,16 @@
                             "width": 120
                         },
                         {
+                            "tipo": "act",
+                            "key": "menosUno",
+                            "label": "Restar",
+                            "success": [
+                                {
+                                    "slot": "refrescar"
+                                }
+                            ]
+                        },
+                        {
                             "tipo": "field",
                             "key": "cantidad",
                             "editable": true,
@@ -288,6 +298,16 @@
                                     }
                                 ]
                             }
+                        },
+                        {
+                            "tipo": "act",
+                            "key": "masUno",
+                            "label": "Añadir",
+                            "success": [
+                                {
+                                    "slot": "refrescar"
+                                }
+                            ]
                         },
                         {
                             "tipo": "field",
@@ -310,26 +330,6 @@
                             "tipo": "act",
                             "key": "delete",
                             "label": "Borrar Linea",
-                            "success": [
-                                {
-                                    "slot": "refrescar"
-                                }
-                            ]
-                        },
-                        {
-                            "tipo": "act",
-                            "key": "masUno",
-                            "label": "Añadir",
-                            "success": [
-                                {
-                                    "slot": "refrescar"
-                                }
-                            ]
-                        },
-                        {
-                            "tipo": "act",
-                            "key": "menosUno",
-                            "label": "Restar",
                             "success": [
                                 {
                                     "slot": "refrescar"
@@ -360,6 +360,16 @@
                     "type": "query",
                     "columns": [
                         {
+                            "tipo": "act",
+                            "key": "subirLineaPres",
+                            "label": "SubirLineaPres",
+                            "success": [
+                                {
+                                    "slot": "refrescar"
+                                }
+                            ]
+                        },
+                        {
                             "tipo": "field",
                             "key": "articulos.referencia",
                             "label": "Referencia",
@@ -376,16 +386,6 @@
                             "key": "fecha",
                             "label": "Fecha",
                             "width": 50
-                        },
-                        {
-                            "tipo": "act",
-                            "key": "subirLineaPres",
-                            "label": "SubirLineaPres",
-                            "success": [
-                                {
-                                    "slot": "refrescar"
-                                }
-                            ]
                         }
                     ],
                     "rowclick": "",

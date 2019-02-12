@@ -94,27 +94,11 @@
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
-                "name": "app_facturacion__masterpresupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
                 "name": "app_facturacion__sh_pedidosclipda.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
                 "name": "app_facturacion__mastersh_pedidosclipda.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__newrecordpresupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__newrecordlineaspresupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__lineaspresupuestoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
@@ -348,7 +332,23 @@
                 "name": "app_principal__clientes.json"
             },
             {
+                "name": "app_facturacion__newrecordpresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
                 "name": "app_facturacion__presupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__masterpresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordlineaspresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__lineaspresupuestoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             }
         ],

@@ -1,52 +1,80 @@
 {
-    "querystring": {},
-    "schema": {},
-    "layout": {
-        "newRecordPresupuestoscli": {
-            "prefix": "presupuestoscli",
-            "componente": "YBForm",
-            "class": "claseGrid",
-            "submit": "create",
-            "success": [{"slot": "redirect"}],
-            "groupbox": "acordeon",
-            "return": true,
-            "fields": {
-                "gb__datosGenerales": {
-                    "title": "Datos generales",
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/root",
+            "value": {
+                "newRecordPresupuestoscli": {
+                    "prefix": "presupuestoscli",
+                    "componente": "YBForm",
+                    "class": "claseGrid",
+                    "submit": "create",
+                    "success": [
+                        {
+                            "slot": "redirect"
+                        }
+                    ],
+                    "groupbox": "acordeon",
+                    "return": true,
                     "fields": {
-                        "codcliente": {
-                        	"rel": "clientes",
-                            "key": "codcliente",
-                            "desc": "nombre",
-                            "function":"getCliente",
-                            "showpk": false
-                        },                        
-                        "cifnif": {},
-                        "codagente": {"disabled": true},
-                        "gb__Direccion": {
-                            "title": "",
+                        "gb__datosGenerales": {
+                            "title": "Datos generales",
                             "fields": {
-                                "coddir": {
-		                            "rel": "dirclientes",
-		                            "key": "id",
-		                            "desc": "descripcion",
-		                            "function":"getDireccion",
-		                            "params": ["codcliente"]
-		                        },
-                                "direccion":{},
-                                "dirnum":{},
-                                "dirotros": {},
-                                "codpostal": {},
-                                "ciudad": {},
-                                "provincia":{},
-                                "codpais":{}
+                                "codcliente": {
+                                    "rel": "clientes",
+                                    "key": "codcliente",
+                                    "desc": "nombre",
+                                    "function": "getCliente",
+                                    "showpk": false
+                                },
+                                "cifnif": {
+                                    "disabled": true
+                                },
+                                "codagente": {
+                                    "disabled": true
+                                },
+                                "gb__Direccion": {
+                                    "title": "",
+                                    "fields": {
+                                        "coddir": {
+                                            "rel": "dirclientes",
+                                            "key": "id",
+                                            "desc": "descripcion",
+                                            "function": "getDireccion",
+                                            "params": [
+                                                "codcliente"
+                                            ]
+                                        },
+                                        "direccion": {},
+                                        "dirnum": {},
+                                        "dirotros": {},
+                                        "codpostal": {},
+                                        "ciudad": {},
+                                        "provincia": {},
+                                        "codpais": {}
+                                    }
+                                }
                             }
                         }
-                    }
+                    },
+                    "exclude": {}
                 }
-            },
-            "exclude": {}
+            }
+        },
+        {
+            "type": "deleteNode",
+            "path": "/initValidation",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/focus",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/drawIf",
+            "value": null
         }
-    },
-    "acciones": {}
+    ]
 }
