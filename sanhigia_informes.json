@@ -284,6 +284,18 @@
             {
                 "name": "app_almacen__masternovedades.json",
                 "path": "apps/almacen/templates/almacen/plantillas/"
+            },
+            {
+                "name": "app_facturacion__masterpresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordlineaspresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__lineaspresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
             }
         ],
         "patchJson": [
@@ -341,18 +353,6 @@
             },
             {
                 "name": "app_facturacion__presupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__masterpresupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__newrecordlineaspresupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__lineaspresupuestoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             }
         ],
