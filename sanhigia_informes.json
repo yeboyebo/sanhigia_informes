@@ -90,15 +90,7 @@
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
-                "name": "app_facturacion__presupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
                 "name": "app_facturacion__newrecordsh_lineaspedidosclipda.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__masterpresupuestoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
@@ -107,18 +99,6 @@
             },
             {
                 "name": "app_facturacion__mastersh_pedidosclipda.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__newrecordpresupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__newrecordlineaspresupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__lineaspresupuestoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
@@ -354,6 +334,26 @@
             {
                 "name": "app_principal__mastercomparativas.json",
                 "path": "apps/principal/templates/principal/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordpresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__presupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__masterpresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordlineaspresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__lineaspresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
             }
         ],
         "patchScript": [

@@ -1,5 +1,9 @@
 {
-    "initValidation": {},
+    "initValidation": {
+    	"error": {           
+            "msg": "Pedido incorrecto"
+        }
+    },
     "querystring": {},
     "schema": {
         "sh_lineaspedidosclipda": {
@@ -165,7 +169,15 @@
             "filter": "buscador",
             "columns": [
                 {"tipo": "field", "listpos": "title", "key": "referencia", "width": 120},
-                 {
+                {
+                    "tipo": "act",
+                    "key": "menosUno",
+                    "label": "Restar",
+                    "success": [
+                     	{"slot": "refrescar"}
+                 	]
+                },
+                {
                     "tipo": "field",
                     "key": "cantidad",
                     "editable": true,
@@ -177,6 +189,14 @@
                         ]
                     }
                 },
+                {
+                    "tipo": "act",
+                    "key": "masUno",
+                    "label": "Añadir",
+                    "success": [
+                     	{"slot": "refrescar"}
+                 	]
+                },
                 {"tipo": "field", "listpos": "body", "key": "descripcion", "width": 400, "flex": 3},
                 {"tipo": "field", "listpos": "secondaryitem", "key": "pvpunitario"},
                 {"tipo": "field", "listpos": "secondaryitem", "key": "pvptotal"},
@@ -187,22 +207,6 @@
                     "success": [
                         {"slot": "refrescar"}
                     ]
-                },
-                {
-                    "tipo": "act",
-                    "key": "masUno",
-                    "label": "Añadir",
-                    "success": [
-                     	{"slot": "refrescar"}
-                 	]
-                },
-                {
-                    "tipo": "act",
-                    "key": "menosUno",
-                    "label": "Restar",
-                    "success": [
-                     	{"slot": "refrescar"}
-                 	]
                 }
             ],
             "rowclick": "link",
@@ -219,17 +223,18 @@
             "filter": "",
             "type": "query",
             "columns": [
-                {"tipo": "field", "key": "articulos.referencia", "label": "Referencia", "width": 150},
-                {"tipo": "field", "key": "articulos.descripcion", "label": "Descripcion", "width": 450},
-                {"tipo": "field", "key": "fecha", "label": "Fecha", "width": 50},
-                {
+            	 {
                     "tipo": "act",
                     "key": "subirLinea",
                     "label": "SubirLinea",
                     "success": [
                         {"slot": "refrescar"}
                     ]
-                }
+                },
+                {"tipo": "field", "key": "articulos.referencia", "label": "Referencia", "width": 150},
+                {"tipo": "field", "key": "articulos.descripcion", "label": "Descripcion", "width": 450},
+                {"tipo": "field", "key": "fecha", "label": "Fecha", "width": 50}
+               
             ],
             "rowclick": "",
             "accionesGrid": []

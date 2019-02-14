@@ -54,7 +54,7 @@ class sanhigia_informes(flfacturac):
         report['params']['WHERE'] = "presupuestoscli.codigo = '" + model.codigo + "'"
         return report
 
-    def sanhigia_informes_queryGrid_histArticulosCli(self, model):
+    def sanhigia_informes_queryGrid_histArticulosCli(self, model, filters):
         idpresupuesto = cacheController.getSessionVariable(ustr(u"presupuestoscli_", qsatype.FLUtil.nameUser()))
         query = {}
         query["tablesList"] = ("articulos,lineaspresupuestoscli,presupuestoscli")
@@ -91,8 +91,8 @@ class sanhigia_informes(flfacturac):
     def imprimirPresupuestoPDA(self, model):
         return self.ctx.sanhigia_informes_imprimirPresupuestoPDA(model)
 
-    def queryGrid_histArticulosCli(self, model):
-        return self.ctx.sanhigia_informes_queryGrid_histArticulosCli(model)
+    def queryGrid_histArticulosCli(self, model, filters):
+        return self.ctx.sanhigia_informes_queryGrid_histArticulosCli(model, filters)
 
     def field_colorRow(self, model):
         return self.ctx.sanhigia_informes_field_colorRow(model)
