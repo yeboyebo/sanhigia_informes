@@ -337,9 +337,9 @@ class sanhigia_informes(alta_clientes):
         query["tablesList"] = ("clientes,dirclientes")
         query["select"] = ("clientes.codcliente, clientes.nombre, clientes.email, clientes.telefono1, dirclientes.direccion, (SELECT COALESCE(SUM(pedidoscli.total),0) from pedidoscli  where pedidoscli.codcliente = clientes.codcliente and pedidoscli.fecha BETWEEN " + anio1 + " AND " + anio1f + ") AS total1, (SELECT COALESCE(SUM(pedidoscli.total),0) from pedidoscli  where pedidoscli.codcliente = clientes.codcliente and pedidoscli.fecha BETWEEN " + anio2 + " AND " + anio2f + ") AS total2, CASE WHEN (SELECT COALESCE(SUM(pedidoscli.total),0) from pedidoscli  where pedidoscli.codcliente = clientes.codcliente and pedidoscli.fecha BETWEEN " + anio1 + " AND " + anio1f + ") = 0 THEN (CASE WHEN (SELECT COALESCE(SUM(pedidoscli.total),0) from pedidoscli  where pedidoscli.codcliente = clientes.codcliente and pedidoscli.fecha BETWEEN " + anio2 + " AND " + anio2f + ") = 0 THEN 0 ELSE 100 END) ELSE round((((((SELECT COALESCE(SUM(pedidoscli.total),0) from pedidoscli  where pedidoscli.codcliente = clientes.codcliente and pedidoscli.fecha BETWEEN " + anio2 + " AND " + anio2f + ") - (SELECT COALESCE(SUM(pedidoscli.total),0) from pedidoscli  where pedidoscli.codcliente = clientes.codcliente and pedidoscli.fecha BETWEEN " + anio1 + " AND " + anio1f + ")) * 100)) / (SELECT COALESCE(SUM(pedidoscli.total),0) from pedidoscli  where pedidoscli.codcliente = clientes.codcliente and pedidoscli.fecha BETWEEN " + anio1 + " AND " + anio1f + "))::numeric,2) END AS variacion")
         query["from"] = ("clientes INNER JOIN dirclientes ON clientes.codcliente = dirclientes.codcliente and dirclientes.domfacturacion is true INNER JOIN pedidoscli ON clientes.codcliente = pedidoscli.codcliente")
-        query["where"] = where + masWhere + " AND ((pedidoscli.fecha BETWEEN " + anio1 + " AND " + anio1f + ") OR (pedidoscli.fecha BETWEEN " + anio2 + " AND " + anio2f + "))"
-        query["groupby"] = " clientes.codcliente, clientes.nombre, clientes.email, clientes.telefono1, dirclientes.direccion"
-        query["orderby"] = "clientes.nombre DESC"
+        query["where"] = (where + masWhere + " AND ((pedidoscli.fecha BETWEEN " + anio1 + " AND " + anio1f + ") OR (pedidoscli.fecha BETWEEN " + anio2 + " AND " + anio2f + "))")
+        query["groupby"] = ("clientes.codcliente, clientes.nombre, clientes.email, clientes.telefono1, dirclientes.direccion")
+        query["orderby"] = ("clientes.nombre DESC")
         return query
 
     def __init__(self, context=None):

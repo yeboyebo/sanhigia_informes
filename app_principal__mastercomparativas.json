@@ -1,0 +1,9 @@
+{
+    "modifications": [
+        {
+            "type": "updateNode",
+            "path": "/layout/queryGrid_comparativas/componente",
+            "value": "YBGrid"
+        }
+    ]
+}

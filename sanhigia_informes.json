@@ -350,6 +350,10 @@
             {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__clientes.json"
+            },
+            {
+                "name": "app_principal__mastercomparativas.json",
+                "path": "apps/principal/templates/principal/plantillas/"
             }
         ],
         "patchScript": [
