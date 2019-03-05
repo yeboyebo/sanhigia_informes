@@ -7,9 +7,10 @@
             "componente": "YBForm",
             "class": "claseGrid",
             "submit": "create",
-            "return": true,
+            "saveReturn": true,
+            "return":true,
             "success": [{"slot": "return"}],
-            "groupbox": "acordeon",
+            "groupbox": "",
             "fields": {
                 "gb__": {
                     "title": "",
@@ -20,7 +21,6 @@
                 "gb__masdatos": {
                     "title": "Más datos",
                     "fields": {
-                        "codintervalo": {},
                         "fechadesde": {},
                         "fechahasta": {},
                         "codagente": {},
@@ -33,7 +33,7 @@
     },
     "acciones": {},
     "drawIf": {
-        "gb__masdatos": {
+    	"gb__masdatos": {
             "codagente": "checkCodAgente"
         }
     }

@@ -296,6 +296,18 @@
             {
                 "name": "app_facturacion__lineaspresupuestoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "model_flfactppal__productosagtrans.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__productosagtrans_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "path": "models/flfactinfo/",
+                "name": "model_flfactinfo__flfactinfo_def.py"
             }
         ],
         "patchJson": [

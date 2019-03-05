@@ -326,7 +326,7 @@ class sanhigia_informes(alta_clientes):
             codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
             masWhere = u" AND clientes.codagente = '" + str(codagente) + "'"
         query = {}
-        # Ya está, a AQNext no le había gustado que pusieses dos "as" en el mismo campo, porque no podía sacar bien el alias y eso. He hecho el cast con "::numeric" y he cambiado el nombre del campo en los json (estaba con c.codcliente) y ya va. Comprueba que no me haya cargado nada.
+        # Ya est? a AQNext no le hab? gustado que pusieses dos "as" en el mismo campo, porque no pod? sacar bien el alias y eso. He hecho el cast con "::numeric" y he cambiado el nombre del campo en los json (estaba con c.codcliente) y ya va. Comprueba que no me haya cargado nada.
         # query["tablesList"] = ("clientes,pedidoscli")
         # query["select"] = ("clientes.codcliente, clientes.nombre, clientes.email, clientes.telefono1, COALESCE(SUM(f.total),0) as total1, dirclientes.direccion, COALESCE(SUM(f2.total),0) as total2, CASE WHEN COALESCE(SUM(f.total),0) = 0 THEN (CASE WHEN COALESCE(SUM(f2.total),0) = 0 THEN 0 ELSE 100 END) ELSE round(((((COALESCE(SUM(f2.total),0) - COALESCE(SUM(f.total),0)) * 100)) / COALESCE(SUM(f.total),0))::numeric,2) END as variacion")
         # query["from"] = ("clientes LEFT OUTER JOIN pedidoscli f ON clientes.codcliente = f.codcliente AND f.fecha BETWEEN " + anio1 + " AND " + anio1f + " LEFT OUTER JOIN pedidoscli f2 ON clientes.codcliente = f2.codcliente AND f2.fecha BETWEEN " + anio2 + " AND " + anio2f + " INNER JOIN dirclientes ON clientes.codcliente = dirclientes.codcliente and dirclientes.domfacturacion is true")

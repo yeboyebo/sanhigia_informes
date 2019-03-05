@@ -2,44 +2,57 @@
     "querystring": {
         "p_l": 50,
         "p_c": true,
-        "o_1": "descripcion",
+        "o_1": "-fechadesde",
         "f_filtroagente": null
     },
     "schema": {},
     "layout": {
-        "masterGrid": {
-            "componente": "YBList",
-            "class": "claseGrid",
+        "masterClientesArticilo": {
+            "componente": "YBGrid",
             "label": "Clientes por Artículo",
             "prefix": "i_clientesventaart",
             "filter": "buscador",
+            "multiselectable": false,
             "columns": [
-                {"tipo": "field", "listpos": "body", "key": "descripcion", "avatar": true},
-                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "width": 200},
+                {"tipo": "field", "listpos": "title", "key": "descripcion"},
+                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "label": "Nombre agente", "width": 150},
+                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombrearticulo", "label": "Nombre articulo", "width": 250},
+                {"tipo": "field", "listpos": "body", "key": "fechadesde","label": "Desde"}, 
+                {"tipo": "field", "listpos": "body", "key": "fechahasta","label": "Hasta"}, 
                 {
                     "tipo": "act",
-                    "key": "gotoventaart",
-                    "label": "editar",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar"}
+                    ]
+                },
+                {
+                	"tipo": "act",
+                    "key": "generar",
+                    "label": "Ver Informe",
                     "success": []
                 }
             ],
-            "rowclick": "dameInforme"
+            "rowclick": "link"
         },
-        "newRecord": {
+        "newRecordTelest": {
             "componente": "YBNewRecord",
             "class": "info",
             "icon": "add"
         }
     },
     "acciones": {
-        "dameInforme": {
-            "action": "goto",
-            "serverAction": "dameInformeClientesporarticulo"
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
         },
-        "gotoventaart": {
-            "action": "goto",
-            "icon": "edit",
-            "template": "form"
+         "generar": {
+            "action": "getReport",
+            "serverAction": "generarReport",           
+            "icon": "cloud_download"
         }
     }
 }
+
+

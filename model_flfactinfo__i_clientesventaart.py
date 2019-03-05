@@ -21,15 +21,17 @@ class sanhigia_informes_i_clientesventaart(interna_i_clientesventaart, helpers.M
     def field_nombreagente(cursor):
         return form.iface.field_nombreagente(cursor)
 
+    def field_nombrearticulo(cursor):
+        return form.iface.field_nombrearticulo(cursor)
+
+    def iniciaValoresCursor(cursor=None):
+        return form.iface.iniciaValoresCursor(cursor)
+
     def checkCodAgente(cursor):
         return form.iface.checkCodAgente(cursor)
 
-    def report_clientesporarticulo(self):
-        return form.iface.report_clientesporarticulo(self)
-
-    @helpers.decoradores.accion()
-    def dameInformeClientesporarticulo(self):
-        return form.iface.dameInformeClientesporarticulo(self)
+    def generarReport(self):
+        return form.iface.generarReport(self)
 
 
 # @class_declaration i_clientesventaart #

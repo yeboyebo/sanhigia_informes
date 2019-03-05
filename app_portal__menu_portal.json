@@ -18,7 +18,7 @@
                 "NAME": "informes",
                 "TEXT": "Informes",
                 "ICON": "dashboard",
-                "VISIBLE": false,
+                "VISIBLE": true,
                 "COLOR": "rgb(30, 170, 30)"
             }
         },

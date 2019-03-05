@@ -34,7 +34,7 @@ class sanhigia_informes(flfacturac):
 
     def sanhigia_informes_field_colorRow(self, model):
         return None
-        if model.impreso == True:
+        if model.impreso is True:
             return "cSuccess"
         else:
             return None

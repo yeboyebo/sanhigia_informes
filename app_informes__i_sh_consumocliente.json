@@ -7,9 +7,10 @@
             "componente": "YBForm",
             "class": "claseGrid",
             "submit": "update",
-            "return": true,
+            "saveReturn": true,
+            "return":true,
             "success": [{"slot": "return"}],
-            "groupbox": "acordeon",
+            "groupbox": "",
             "fields": {
                 "gb__": {
                     "title": "",
@@ -21,10 +22,9 @@
                 "gb__masdatos": {
                     "title": "Más datos",
                     "fields": {
-                        "codintervalo": {},
                         "d_facturascli_fecha": {},
                         "h_facturascli_fecha": {},
-                        "i_facturascli_codagente": {}
+                        "i_facturascli_codagente": {"disabled": true}
                     }
                 }
             },
@@ -33,9 +33,7 @@
     },
     "acciones": {},
     "drawIf": {
-        "gb__masdatos": {
-            "i_facturascli_codagente": "checkCodAgente"
-        }
+        "gb__masdatos": {}
     }
 }
 

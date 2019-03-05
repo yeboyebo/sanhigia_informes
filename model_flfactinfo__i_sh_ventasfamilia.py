@@ -18,18 +18,17 @@ class sanhigia_informes_i_sh_ventasfamilia(interna_i_sh_ventasfamilia, helpers.M
     class Meta:
         proxy = True
 
-    def field_nombreagente(cursor):
-        return form.iface.field_nombreagente(cursor)
+    def field_nombreagente(model):
+        return form.iface.field_nombreagente(model)
+
+    def iniciaValoresCursor(cursor=None):
+        return form.iface.iniciaValoresCursor(cursor)
 
     def checkCodAgente(cursor):
         return form.iface.checkCodAgente(cursor)
 
-    def report_ventasfamilia(self, cursor):
-        return form.iface.report_ventasfamilia(self, cursor)
-
-    @helpers.decoradores.accion()
-    def dameInformeVentasfamilia(self):
-        return form.iface.dameInformeVentasfamilia(self)
+    def generarReport(self):
+        return form.iface.generarReport(self)
 
 
 # @class_declaration i_sh_ventasfamilia #

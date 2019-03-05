@@ -21,15 +21,14 @@ class sanhigia_informes_i_sh_ventaspoblacion(interna_i_sh_ventaspoblacion, helpe
     def field_nombreagente(cursor):
         return form.iface.field_nombreagente(cursor)
 
+    def iniciaValoresCursor(cursor=None):
+        return form.iface.iniciaValoresCursor(cursor)
+
     def checkCodAgente(cursor):
         return form.iface.checkCodAgente(cursor)
 
-    def report_ventaspoblacion(self):
-        return form.iface.report_ventaspoblacion(self)
-
-    @helpers.decoradores.accion()
-    def dameInformeVentaspoblacion(self):
-        return form.iface.dameInformeVentaspoblacion(self)
+    def generarReport(self):
+        return form.iface.generarReport(self)
 
 
 # @class_declaration i_sh_ventaspoblacion #
