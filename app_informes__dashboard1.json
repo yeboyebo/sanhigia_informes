@@ -1,0 +1,24 @@
+{
+    "querystring": {},
+    "schema": {
+        "grafico": {
+            "custom": "funcion"
+        }
+    },
+    "layout": {
+        "pruebagrafico": {
+            "label": "Esto es el label",
+            "componente": "YBChart",
+            "d3": "progressBar",
+            "prefix": "grafico"
+        },
+        "separator": {
+            "componente": "YBSeparator"
+        },
+        "prueba": {
+            "label": "Menu",
+            "componente": "YBDashBoard"
+        }
+    },
+    "acciones": {}
+}

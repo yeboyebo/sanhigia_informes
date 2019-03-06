@@ -308,6 +308,10 @@
             {
                 "path": "models/flfactinfo/",
                 "name": "model_flfactinfo__flfactinfo_def.py"
+            },
+            {
+                "name": "app_informes__dashboard1.json",
+                "path": "apps/informes/templates/informes/plantillas/"
             }
         ],
         "patchJson": [
