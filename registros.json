@@ -2,51 +2,16 @@
     "modifications": [
         {
             "type": "insertAfterNode",
-            "path": "/flfactinfo/root",
+            "path": "/flfacturac/root",
             "value": {
-                "i_sh_ventasfamilia": null
+                "sh_pedidosclipda": null
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/flfactinfo/root",
+            "path": "/flfacturac/sh_pedidosclipda",
             "value": {
-                "i_sh_ventasarticulo": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/flfactinfo/root",
-            "value": {
-                "i_sh_ventaspoblacion": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/flfactinfo/root",
-            "value": {
-                "i_sh_productividad": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/flfactinfo/root",
-            "value": {
-                "i_sh_consumocliente": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/flfactinfo/root",
-            "value": {
-                "i_clientesventaart": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/flfactppal/ejercicios",
-            "value": {
-                "historicos": null
+                "sh_lineaspedidosclipda": null
             }
         },
         {
@@ -72,16 +37,58 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/flfacturac/root",
+            "path": "/flfactppal/ejercicios",
             "value": {
-                "sh_pedidosclipda": null
+                "historicos": null
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/flfacturac/sh_pedidosclipda",
+            "path": "/flfactppal/usuarios",
             "value": {
-                "sh_lineaspedidosclipda": null
+                "sh_previsiones": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactinfo/root",
+            "value": {
+                "i_clientesventaart": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactinfo/i_clientesventaart",
+            "value": {
+                "i_sh_consumocliente": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactinfo/i_sh_consumocliente",
+            "value": {
+                "i_sh_productividad": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactinfo/i_sh_productividad",
+            "value": {
+                "i_sh_ventaspoblacion": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactinfo/i_sh_ventaspoblacion",
+            "value": {
+                "i_sh_ventasarticulo": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/flfactinfo/i_sh_ventasarticulo",
+            "value": {
+                "i_sh_ventasfamilia": null
             }
         }
     ]

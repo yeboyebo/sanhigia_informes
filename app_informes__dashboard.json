@@ -7,7 +7,7 @@
     },
     "layout": {
         "pruebagrafico": {
-            "label": "Esto es el label",
+            "label": "Seguimiento de objetivos",
             "componente": "YBChart",
             "d3": "progressBar",
             "prefix": "grafico"

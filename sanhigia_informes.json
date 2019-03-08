@@ -230,10 +230,6 @@
                 "path": "apps/informes/templates/informes/plantillas/"
             },
             {
-                "name": "app_informes__views_informes.py",
-                "path": "apps/informes/viewset/"
-            },
-            {
                 "name": "app_facturacion__views_facturacion.py",
                 "path": "apps/facturacion/viewset/"
             },
@@ -310,8 +306,16 @@
                 "name": "model_flfactinfo__flfactinfo_def.py"
             },
             {
-                "name": "app_informes__dashboard1.json",
+                "name": "app_informes__dashboard.json",
                 "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__sh_previsiones.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__sh_previsiones_def.py"
             }
         ],
         "patchJson": [
@@ -428,6 +432,10 @@
             {
                 "name": "model_flfactinfo__i_pedidoscli_def.py",
                 "path": "models/flfactinfo/"
+            },
+            {
+                "name": "app_informes__views_informes.py",
+                "path": "apps/informes/viewset/"
             }
         ]
     }

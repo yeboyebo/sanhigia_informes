@@ -22,13 +22,6 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/portal",
-            "value": {
-                "informes": {}
-            }
-        },
-        {
-            "type": "insertAfterNode",
             "path": "/models/flfacturac/root",
             "value": {
                 "sh_pedidosclipda": null
@@ -67,6 +60,13 @@
             "path": "/models/flfactppal/zonasgeo",
             "value": {
                 "productosagtrans": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactppal/productosagtrans",
+            "value": {
+                "sh_previsiones": null
             }
         },
         {
