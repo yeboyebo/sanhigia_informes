@@ -60,7 +60,8 @@ class sanhigia_informes(flfacturac):
         query["tablesList"] = ("articulos,lineaspresupuestoscli,presupuestoscli")
         query["select"] = ("articulos.referencia, articulos.descripcion, MAX(presupuestoscli.fecha) as fecha")
         query["from"] = ("articulos INNER JOIN lineaspresupuestoscli ON articulos.referencia = lineaspresupuestoscli.referencia INNER JOIN presupuestoscli ON lineaspresupuestoscli.idpresupuesto = presupuestoscli.idpresupuesto")
-        query["where"] = ("presupuestoscli.codcliente = '" + model.codcliente.codcliente + "' AND lineaspresupuestoscli.idpresupuesto <> '" + ustr(idpresupuesto) + "'")
+        # query["where"] = ("presupuestoscli.codcliente = '" + model.codcliente.codcliente + "' AND lineaspresupuestoscli.idpresupuesto <> '" + ustr(idpresupuesto) + "'")
+        query["where"] = "presupuestoscli.codcliente = '{0}' AND lineaspresupuestoscli.idpresupuesto <> '{1}' AND articulos.sevende".format(model.codcliente.codcliente, idpresupuesto)
         query["groupby"] = " articulos.referencia, articulos.descripcion"
         query["orderby"] = "fecha DESC"
         return query

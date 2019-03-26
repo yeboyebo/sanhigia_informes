@@ -243,7 +243,8 @@ class sanhigia_informes(interna):
         query["tablesList"] = ("articulos,lineaspedidoscli,pedidoscli")
         query["select"] = ("articulos.referencia, articulos.descripcion, MAX(pedidoscli.fecha) as fecha")
         query["from"] = ("articulos INNER JOIN lineaspedidoscli ON articulos.referencia = lineaspedidoscli.referencia INNER JOIN pedidoscli ON lineaspedidoscli.idpedido = pedidoscli.idpedido")
-        query["where"] = ("pedidoscli.codcliente = '" + model.codcliente.codcliente + "' AND lineaspedidoscli.idpedido <> '" + ustr(model.idpedido) + "'")
+        # query["where"] = ("pedidoscli.codcliente = '" + model.codcliente.codcliente + "' AND lineaspedidoscli.idpedido <> '" + ustr(model.idpedido) + "'")
+        query["where"] = "pedidoscli.codcliente = '{0}' AND lineaspedidoscli.idpedido <> '{1}' AND articulos.sevende".format(model.codcliente.codcliente, model.idpedido)
         query["groupby"] = " articulos.referencia, articulos.descripcion"
         query["orderby"] = "fecha DESC"
         return query

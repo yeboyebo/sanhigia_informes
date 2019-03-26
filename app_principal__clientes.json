@@ -1,9 +1,0 @@
-{
-    "modifications": [
-        {
-            "type": "deleteNode",
-            "path": "/layout/groupBoxDirecciones/label",
-            "value": null
-        }
-    ]
-}

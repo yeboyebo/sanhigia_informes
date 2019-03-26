@@ -98,6 +98,9 @@ class sanhigia_informes(interna):
         if referencia is None:
             qsatype.FLUtil.ponMsgError("Error: La referencia no existe o no está selecionada")
             return False
+        if qsatype.FLUtil.sqlSelect(u"articulos", u"sevende", ustr(u"referencia = '", referencia, u"'")) is False:
+            qsatype.FLUtil.ponMsgError("Error: El artículo {0} ya no se vende. Selecciona otro.".format(referencia))
+            return False
         codAlmacen = "ALM"
         # qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codalmacen", ustr(u"idpedido = ", idpedido))
         cantidad = cursor.valueBuffer("cantidad")
