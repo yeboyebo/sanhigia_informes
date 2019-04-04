@@ -126,10 +126,6 @@
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
-                "name": "app_portal__views_portal.py",
-                "path": "apps/portal/viewset/"
-            },
-            {
                 "name": "app_informes__menu_informes.json",
                 "path": "apps/informes/templates/informes/"
             },
@@ -424,6 +420,10 @@
             {
                 "name": "app_informes__views_informes.py",
                 "path": "apps/informes/viewset/"
+            },
+            {
+                "name": "app_portal__views_portal.py",
+                "path": "apps/portal/viewset/"
             }
         ]
     }

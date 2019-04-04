@@ -1,14 +1,3 @@
-# @class_declaration interna #
-from YBLEGACY import qsatype
-
-
-class interna(qsatype.objetoBase):
-
-    ctx = qsatype.Object()
-
-    def __init__(self, context=None):
-        self.ctx = context
-
 
 # @class_declaration sanhigia_informes #
 from django.shortcuts import render
@@ -23,7 +12,7 @@ from models.flfactppal.usuarios import usuarios
 from models.flfactppal.agentes import agentes
 
 
-class sanhigia_informes(interna):
+class sanhigia_informes(yblogin):
 
     def sanhigia_informes_login(self, request, error=None):
         """ Peticion defecto"""
@@ -92,23 +81,3 @@ class sanhigia_informes(interna):
 
     def login(self, request, error=None):
         return self.ctx.sanhigia_informes_login(request, error)
-
-
-# @class_declaration head #
-class head(sanhigia_informes):
-
-    def __init__(self, context=None):
-        super().__init__(context)
-
-
-# @class_declaration ifaceCtx #
-class ifaceCtx(head):
-
-    def __init__(self, context=None):
-        super().__init__(context)
-
-
-# @class_declaration FormInternalObj #
-class FormInternalObj(qsatype.FormDBWidget):
-    def _class_init(self):
-        self.iface = ifaceCtx(self)
