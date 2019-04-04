@@ -110,13 +110,6 @@
             "value": {
                 "i_sh_ventasfamilia": null
             }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/models/flsisppal/auth_user",
-            "value": {
-                "sis_acl": null
-            }
         }
     ]
 }
