@@ -34,8 +34,8 @@ class sanhigia_informes_sh_pedidosclipda(interna_sh_pedidosclipda, helpers.Mixin
     def dameSelectLineaXML(self):
         return self.ctx.sanhigia_informes_dameSelectLineaXML(self)
 
-    def queryGrid_histArticulosCli(model):
-        return form.iface.queryGrid_histArticulosCli(model)
+    def queryGrid_histArticulosCli(model, filters):
+        return form.iface.queryGrid_histArticulosCli(model, filters)
 
     def field_colorRow(self):
         return form.iface.field_colorRow(self)

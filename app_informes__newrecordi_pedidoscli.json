@@ -7,9 +7,10 @@
             "componente": "YBForm",
             "class": "claseGrid",
             "submit": "create",
-            "return": true,
+            "saveReturn": true,
+            "return":true,
             "success": [{"slot": "return"}],
-            "groupbox": "acordeon",
+            "groupbox": "",
             "fields": {
                 "gb__datosprincipales": {
                     "title": "Datos principales",
@@ -28,23 +29,18 @@
                 "gb__masdatos": {
                     "title": "Más datos",
                     "fields": {
-                        "d_pedidoscli_codigo": {
-                            "rel": "pedidoscli",
-                            "aplic": "informes",
-                            "key": "idpedido",
-                            "desc": "codigo"
-                        },
-                        "h_pedidoscli_codigo": {
-                            "rel": "pedidoscli",
-                            "aplic": "informes",
-                            "key": "idpedido",
-                            "desc": "codigo"
-                        },
+                        "d_pedidoscli_codigo": {},
+                        "h_pedidoscli_codigo": {},
                         "i_pedidoscli_codejercicio": {},
-                        "codintervalo": {},
                         "d_pedidoscli_fecha": {},
                         "h_pedidoscli_fecha": {},
-                        "i_pedidoscli_codcliente": {},
+                        "i_pedidoscli_codcliente": {
+                        	"rel": "clientes",
+                            "key": "codcliente",
+                            "desc": "nombre",
+                            "function":"getCliente",
+                            "showpk": false
+                        },
                         "i_pedidoscli_codagente": {},
                         "i_pedidoscli_servido": {},
                         "orden1": {},
@@ -60,7 +56,7 @@
     },
     "acciones": {},
     "drawIf": {
-        "gb__masdatos": {
+    	"gb__masdatos": {
             "i_pedidoscli_codagente": "checkCodAgente"
         }
     }

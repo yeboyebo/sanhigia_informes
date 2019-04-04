@@ -7,9 +7,10 @@
             "componente": "YBForm",
             "class": "claseGrid",
             "submit": "update",
-            "return": true,
+            "saveReturn": true,
+            "return":true,
             "success": [{"slot": "return"}],
-            "groupbox": "acordeon",
+            "groupbox": "",
             "fields": {
                 "gb__datosprincipales": {
                     "title": "Datos principales",
@@ -41,7 +42,6 @@
                             "desc": "codigo"
                         },
                         "i_pedidoscli_codejercicio": {},
-                        "codintervalo": {},
                         "d_pedidoscli_fecha": {},
                         "h_pedidoscli_fecha": {},
                         "i_pedidoscli_codcliente": {},
@@ -60,7 +60,7 @@
     },
     "acciones": {},
     "drawIf": {
-        "gb__masdatos": {
+    	"gb__masdatos": {
             "i_pedidoscli_codagente": "checkCodAgente"
         }
     }

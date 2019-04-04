@@ -7,39 +7,52 @@
     },
     "schema": {},
     "layout": {
-        "masterGrid": {
-            "componente": "YBList",
-            "class": "claseGrid",
+        "masterPedidos": {
+            "componente": "YBGrid",
             "label": "Pedidos",
             "prefix": "i_pedidoscli",
             "filter": "buscador",
+            "multiselectable": false,
             "columns": [
-                {"tipo": "field", "listpos": "body", "key": "descripcion", "avatar": true},
-                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "width": 200},
+                {"tipo": "field", "listpos": "title", "key": "descripcion"},
+                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "label": "Nombre agente", "width": 150},
+                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombrecliente", "label": "Nombre cliente", "width": 250},
+                {"tipo": "field", "listpos": "body", "key": "d_pedidoscli_fecha", "label": "Desde"}, 
+                {"tipo": "field", "listpos": "body", "key": "h_pedidoscli_fecha", "label": "Hasta"},                 
+                {"tipo": "field", "listpos": "body", "key": "lineas"},
                 {
                     "tipo": "act",
-                    "key": "gotopedidos",
-                    "label": "editar",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar"}
+                    ]
+                },
+                {
+                	"tipo": "act",
+                    "key": "generar",
+                    "label": "Ver Informe",
                     "success": []
                 }
             ],
-            "rowclick": "dameInforme"
+            "rowclick": "link"
         },
-        "newRecord": {
+        "newRecordTelest": {
             "componente": "YBNewRecord",
             "class": "info",
             "icon": "add"
         }
     },
     "acciones": {
-        "dameInforme": {
-            "action": "goto",
-            "serverAction": "dameInformePedidoscli"
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
         },
-        "gotopedidos": {
-            "action": "goto",
-            "icon": "edit",
-            "template": "form"
+         "generar": {
+            "action": "getReport",
+            "serverAction": "generarReport",           
+            "icon": "cloud_download"
         }
     }
 }
+

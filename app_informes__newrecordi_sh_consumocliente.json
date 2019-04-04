@@ -7,21 +7,27 @@
             "componente": "YBForm",
             "class": "claseGrid",
             "submit": "create",
-            "return": true,
+            "saveReturn": true,
+            "return":true,
             "success": [{"slot": "return"}],
-            "groupbox": "acordeon",
+            "groupbox": "",
             "fields": {
                 "gb__": {
                     "title": "",
                     "fields": {
                         "descripcion": {},
-                        "i_facturascli_codcliente": {}
+                        "i_facturascli_codcliente": {
+                        	"rel": "clientes",
+                            "key": "codcliente",
+                            "desc": "nombre",
+                            "function":"getCliente",
+                            "showpk": false
+                        }  
                     }
                 },
                 "gb__masdatos": {
                     "title": "Más datos",
                     "fields": {
-                        "codintervalo": {},
                         "d_facturascli_fecha": {},
                         "h_facturascli_fecha": {},
                         "i_facturascli_codagente": {}
@@ -33,7 +39,7 @@
     },
     "acciones": {},
     "drawIf": {
-        "gb__masdatos": {
+    	"gb__masdatos": {
             "i_facturascli_codagente": "checkCodAgente"
         }
     }

@@ -58,14 +58,6 @@
                 "path": "models/flfactinfo/"
             },
             {
-                "name": "model_flfactinfo__i_pedidoscli.py",
-                "path": "models/flfactinfo/"
-            },
-            {
-                "name": "model_flfactinfo__i_pedidoscli_def.py",
-                "path": "models/flfactinfo/"
-            },
-            {
                 "name": "model_flfactalma__subfamilias.py",
                 "path": "models/flfactalma/"
             },
@@ -98,15 +90,7 @@
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
-                "name": "app_facturacion__presupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
                 "name": "app_facturacion__newrecordsh_lineaspedidosclipda.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__masterpresupuestoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
@@ -115,18 +99,6 @@
             },
             {
                 "name": "app_facturacion__mastersh_pedidosclipda.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__newrecordpresupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__newrecordlineaspresupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__lineaspresupuestoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
@@ -258,10 +230,6 @@
                 "path": "apps/informes/templates/informes/plantillas/"
             },
             {
-                "name": "app_informes__views_informes.py",
-                "path": "apps/informes/viewset/"
-            },
-            {
                 "name": "app_facturacion__views_facturacion.py",
                 "path": "apps/facturacion/viewset/"
             },
@@ -304,6 +272,42 @@
             {
                 "name": "app_almacen__masternovedades.json",
                 "path": "apps/almacen/templates/almacen/plantillas/"
+            },
+            {
+                "name": "app_facturacion__masterpresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordlineaspresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__lineaspresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "model_flfactppal__productosagtrans.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__productosagtrans_def.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "path": "models/flfactinfo/",
+                "name": "model_flfactinfo__flfactinfo_def.py"
+            },
+            {
+                "name": "app_informes__dashboard.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__sh_previsiones.py"
+            },
+            {
+                "path": "models/flfactppal/",
+                "name": "model_flfactppal__sh_previsiones_def.py"
             }
         ],
         "patchJson": [
@@ -342,6 +346,22 @@
             {
                 "path": "apps/principal/templates/principal/plantillas/",
                 "name": "app_principal__ventasclientes.json"
+            },
+            {
+                "name": "app_principal__masterclientesnuevos.json",
+                "path": "apps/principal/templates/principal/plantillas/"
+            },
+            {
+                "name": "app_principal__mastercomparativas.json",
+                "path": "apps/principal/templates/principal/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordpresupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__presupuestoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
             }
         ],
         "patchScript": [
@@ -392,6 +412,18 @@
             {
                 "path": "apps/principal/viewset/",
                 "name": "app_principal__views_principal.py"
+            },
+            {
+                "name": "model_flfactinfo__i_pedidoscli.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "model_flfactinfo__i_pedidoscli_def.py",
+                "path": "models/flfactinfo/"
+            },
+            {
+                "name": "app_informes__views_informes.py",
+                "path": "apps/informes/viewset/"
             }
         ]
     }

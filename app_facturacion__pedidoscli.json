@@ -67,7 +67,7 @@
                                         "dirotros": {},
                                         "codpostal": {},
                                         "ciudad": {},
-                                        "idprovincia":{"auto_name":"Provincia"},
+                                        "idprovincia":{"label":"Provincia"},
                                         "codpais":{}
                                     }
                                 }

@@ -34,7 +34,7 @@ class sanhigia_informes(flfacturac):
 
     def sanhigia_informes_field_colorRow(self, model):
         return None
-        if model.impreso == True:
+        if model.impreso is True:
             return "cSuccess"
         else:
             return None
@@ -54,13 +54,14 @@ class sanhigia_informes(flfacturac):
         report['params']['WHERE'] = "presupuestoscli.codigo = '" + model.codigo + "'"
         return report
 
-    def sanhigia_informes_queryGrid_histArticulosCli(self, model):
+    def sanhigia_informes_queryGrid_histArticulosCli(self, model, filters):
         idpresupuesto = cacheController.getSessionVariable(ustr(u"presupuestoscli_", qsatype.FLUtil.nameUser()))
         query = {}
         query["tablesList"] = ("articulos,lineaspresupuestoscli,presupuestoscli")
         query["select"] = ("articulos.referencia, articulos.descripcion, MAX(presupuestoscli.fecha) as fecha")
         query["from"] = ("articulos INNER JOIN lineaspresupuestoscli ON articulos.referencia = lineaspresupuestoscli.referencia INNER JOIN presupuestoscli ON lineaspresupuestoscli.idpresupuesto = presupuestoscli.idpresupuesto")
-        query["where"] = ("presupuestoscli.codcliente = '" + model.codcliente.codcliente + "' AND lineaspresupuestoscli.idpresupuesto <> '" + ustr(idpresupuesto) + "'")
+        # query["where"] = ("presupuestoscli.codcliente = '" + model.codcliente.codcliente + "' AND lineaspresupuestoscli.idpresupuesto <> '" + ustr(idpresupuesto) + "'")
+        query["where"] = "presupuestoscli.codcliente = '{0}' AND lineaspresupuestoscli.idpresupuesto <> '{1}' AND articulos.sevende".format(model.codcliente.codcliente, idpresupuesto)
         query["groupby"] = " articulos.referencia, articulos.descripcion"
         query["orderby"] = "fecha DESC"
         return query
@@ -91,8 +92,8 @@ class sanhigia_informes(flfacturac):
     def imprimirPresupuestoPDA(self, model):
         return self.ctx.sanhigia_informes_imprimirPresupuestoPDA(model)
 
-    def queryGrid_histArticulosCli(self, model):
-        return self.ctx.sanhigia_informes_queryGrid_histArticulosCli(model)
+    def queryGrid_histArticulosCli(self, model, filters):
+        return self.ctx.sanhigia_informes_queryGrid_histArticulosCli(model, filters)
 
     def field_colorRow(self, model):
         return self.ctx.sanhigia_informes_field_colorRow(model)

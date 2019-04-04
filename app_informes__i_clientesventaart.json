@@ -7,23 +7,24 @@
             "componente": "YBForm",
             "class": "claseGrid",
             "submit": "update",
-            "return": true,
+            "saveReturn": true,
+            "return":true,
             "success": [{"slot": "return"}],
-            "groupbox": "acordeon",
+            "groupbox": "",
             "fields": {
                 "gb__": {
                     "title": "",
                     "fields": {
-                        "descripcion": {},
-                        "referencias": {},
-                        "fechadesde": {},
-                        "fechahasta": {}
+                        "descripcion": {}
                     }
                 },
                 "gb__masdatos": {
                     "title": "Más datos",
                     "fields": {
-                        "i_clientes_codagente": {}
+                        "fechadesde": {},
+                        "fechahasta": {},
+                        "referencias": {},
+                        "i_clientes_codagente": {"disabled": true}
                     }
                 }
             },
@@ -32,9 +33,7 @@
     },
     "acciones": {},
     "drawIf": {
-        "gb__masdatos": {
-            "i_clientes_codagente": "checkCodAgente"
-        }
+        "gb__masdatos": {}
     }
 }
 

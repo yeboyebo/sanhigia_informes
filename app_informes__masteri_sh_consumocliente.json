@@ -2,44 +2,56 @@
     "querystring": {
         "p_l": 50,
         "p_c": true,
-        "o_1": "descripcion",
+        "o_1": "-d_facturascli_fecha",
         "f_filtroagente": null
     },
     "schema": {},
     "layout": {
-        "masterGrid": {
-            "componente": "YBList",
-            "class": "claseGrid",
+        "masterConsumoCliente": {
+            "componente": "YBGrid",
             "label": "Consumo Cliente",
             "prefix": "i_sh_consumocliente",
             "filter": "buscador",
+            "multiselectable": false,
             "columns": [
-                {"tipo": "field", "listpos": "body", "key": "descripcion", "avatar": true},
-                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "width": 200},
+                {"tipo": "field", "listpos": "title", "key": "descripcion"},
+                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "label": "Nombre agente", "width": 150},
+                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombrecliente", "label": "Nombre cliente", "width": 200},
+                {"tipo": "field", "listpos": "body", "key": "d_facturascli_fecha", "label": "Desde"}, 
+                {"tipo": "field", "listpos": "body", "key": "h_facturascli_fecha", "label": "Hasta"}, 
                 {
                     "tipo": "act",
-                    "key": "gotoconsumocliente",
-                    "label": "editar",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar"}
+                    ]
+                },
+                {
+                	"tipo": "act",
+                    "key": "generar",
+                    "label": "Ver Informe",
                     "success": []
                 }
             ],
-            "rowclick": "dameInforme"
+            "rowclick": "link"
         },
-        "newRecord": {
+        "newRecordTelest": {
             "componente": "YBNewRecord",
             "class": "info",
             "icon": "add"
         }
     },
     "acciones": {
-        "dameInforme": {
-            "action": "goto",
-            "serverAction": "dameInformeConsumocliente"
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
         },
-        "gotoconsumocliente": {
-            "action": "goto",
-            "icon": "edit",
-            "template": "form"
+         "generar": {
+            "action": "getReport",
+            "serverAction": "generarReport",           
+            "icon": "cloud_download"
         }
     }
 }
+

@@ -2,14 +2,15 @@
     "querystring": {},
     "schema": {},
     "layout": {
-        "articuosTarifaForm": {
+        "ventasForm": {
             "prefix": "i_sh_ventasarticulo",
             "componente": "YBForm",
             "class": "claseGrid",
             "submit": "update",
-            "return": true,
+            "saveReturn": true,
+            "return":true,
             "success": [{"slot": "return"}],
-            "groupbox": "acordeon",
+            "groupbox": "",
             "fields": {
                 "gb__principal": {
                     "title": "",
@@ -20,10 +21,9 @@
                 "gb__masdatos": {
                     "title": "Más datos",
                     "fields": {
-                        "codintervalo": {},
                         "fechadesde": {},
                         "fechahasta": {},
-                        "codagente": {},
+                        "codagente": {"disabled": true},
                         "codserie": {},
                         "codfamilia": {},
                         "codsubfamilia": {}

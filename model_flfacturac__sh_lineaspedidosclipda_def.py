@@ -53,7 +53,7 @@ class sanhigia_informes(interna):
         curLP.setModeAccess(curLP.Edit)
         curLP.refreshBuffer()
         curLP.setActivatedBufferCommited(True)
-        curLP.setValueBuffer("cantidad", str(cantidad))
+        curLP.setValueBuffer("cantidad", cantidad)
         # curLP.setValueBuffer("referencia", "02314005")
         '''
         curLP.setValueBuffer(u"pvpunitario", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"pvpunitario", curLP))
@@ -63,12 +63,12 @@ class sanhigia_informes(interna):
 
         # Esta comentado para que se instale. Cuando se arregla que salga el mensaje se actualizará. Fecha 14-11-2018
         referencia = curLP.valueBuffer("referencia")
-        cantNueva = curLP.valueBuffer("cantidad")
+        cantNueva = parseFloat(curLP.valueBuffer("cantidad"))
         codAlmacen = "ALM"
         disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
-        # print("cantNueva: ", cantNueva)
-        # print("disponible: ", disponible)
-        if cantNueva > disponible:
+        if not disponible:
+            disponible = 0
+        if cantNueva > parseFloat(disponible):
             if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
                 return True
             refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", ustr(u"referencia = '", referencia, u"'"))
@@ -98,11 +98,18 @@ class sanhigia_informes(interna):
         if referencia is None:
             qsatype.FLUtil.ponMsgError("Error: La referencia no existe o no está selecionada")
             return False
+        if qsatype.FLUtil.sqlSelect(u"articulos", u"sevende", ustr(u"referencia = '", referencia, u"'")) is False:
+            qsatype.FLUtil.ponMsgError("Error: El artículo {0} ya no se vende. Selecciona otro.".format(referencia))
+            return False
         codAlmacen = "ALM"
         # qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codalmacen", ustr(u"idpedido = ", idpedido))
-        cantidad = cursor.valueBuffer("cantidad")
+        cantidad = parseFloat(cursor.valueBuffer("cantidad"))
         disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
-        if cantidad > disponible:
+        if not disponible:
+            disponible = 0
+        print("cantidad______validateCursor: ", cantidad)
+        print("disponible__________validateCursor: ", disponible)
+        if cantidad > parseFloat(disponible):
             if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
                 return True
             refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", ustr(u"referencia = '", referencia, u"'"))

@@ -11,7 +11,8 @@ class sanhigia_informes(flfactalma):
         q.setTablesList(u"articulos")
         q.setSelect(u"referencia,descripcion")
         q.setFrom(u"articulos")
-        q.setWhere(u"UPPER(referencia) LIKE '%" + oParam['val'].upper() + "%' OR UPPER(descripcion) LIKE '%" + oParam['val'].upper() + "%' AND sevende = true")
+        # q.setWhere(u"(UPPER(referencia) LIKE '%" + oParam['val'].upper() + "%' OR UPPER(descripcion) LIKE '%" + oParam['val'].upper() + "%') AND sevende = true")
+        q.setWhere(u"(UPPER(referencia) LIKE '%" + oParam['val'].upper() + "%' OR UPPER(descripcion) LIKE '%" + oParam['val'].upper() + "%')")
         if not q.exec_():
             print("Error inesperado")
             return []

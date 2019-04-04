@@ -6,6 +6,7 @@
             "value": {
                 "NAME": "almacen",
                 "TEXT": "ALMACEN",
+                "URL": "almacen",
                 "ICON": "dashboard",
                 "VISIBLE": true,
                 "COLOR": "rgb(170, 30, 30)"
@@ -17,8 +18,9 @@
             "value": {
                 "NAME": "informes",
                 "TEXT": "Informes",
+                "URL": "informes",
                 "ICON": "dashboard",
-                "VISIBLE": false,
+                "VISIBLE": true,
                 "COLOR": "rgb(30, 170, 30)"
             }
         },
@@ -29,6 +31,18 @@
                 "NAME": "facturacion",
                 "TEXT": "FACTURACIÓN",
                 "URL": "facturacion",
+                "ICON": "dashboard",
+                "VISIBLE": true,
+                "COLOR": "rgb(170, 30, 30)"
+            }
+        },
+        {
+            "type": "insertAfterItem",
+            "path": "/items[facturacion]",
+            "value": {
+                "NAME": "principal",
+                "TEXT": "PRINCIPAL",
+                "URL": "principal",
                 "ICON": "dashboard",
                 "VISIBLE": true,
                 "COLOR": "rgb(170, 30, 30)"

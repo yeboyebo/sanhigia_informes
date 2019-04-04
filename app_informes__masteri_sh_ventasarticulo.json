@@ -7,39 +7,53 @@
     },
     "schema": {},
     "layout": {
-        "masterGrid": {
-            "componente": "YBList",
-            "class": "claseGrid",
-            "label": "Vengas por Artículo",
+        "masterVentasArticilo": {
+            "componente": "YBGrid",
+            "label": "Ventas por Artículo",
             "prefix": "i_sh_ventasarticulo",
             "filter": "buscador",
+            "multiselectable": false,
             "columns": [
-                {"tipo": "field", "listpos": "body", "key": "descripcion", "avatar": true},
-                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "width": 200},
+                {"tipo": "field", "listpos": "title", "key": "descripcion"},
+                {"tipo": "foreignfield", "listpos": "subtitle", "key": "nombreagente", "label": "Nombre agente", "width": 150},
+                {"tipo": "field", "listpos": "body", "key": "fechadesde", "label": "Desde"}, 
+                {"tipo": "field", "listpos": "body", "key": "fechahasta", "label": "Hasta"},                 
+                {"tipo": "field", "listpos": "body", "key": "codserie"},
+                {"tipo": "field", "listpos": "subtitle", "key": "codfamilia"},
+                {"tipo": "field", "listpos": "secondaryitem", "key": "codsubfamilia"},
                 {
                     "tipo": "act",
-                    "key": "gotoventas",
-                    "label": "editar",
+                    "key": "delete",
+                    "label": "Borrar Linea",
+                    "success": [
+                        {"slot": "refrescar"}
+                    ]
+                },
+                {
+                	"tipo": "act",
+                    "key": "generar",
+                    "label": "Ver Informe",
                     "success": []
                 }
             ],
-            "rowclick": "dameInforme"
+            "rowclick": "link"
         },
-        "newRecord": {
+        "newRecordTelest": {
             "componente": "YBNewRecord",
             "class": "info",
             "icon": "add"
         }
     },
     "acciones": {
-        "dameInforme": {
-            "action": "goto",
-            "serverAction": "dameInformeVentasarticulo"
+        "delete": {
+            "action": "deleteRow",
+            "icon": "delete"
         },
-        "gotoventas": {
-            "action": "goto",
-            "icon": "edit",
-            "template": "form"
+         "generar": {
+            "action": "getReport",
+            "serverAction": "generarReport",           
+            "icon": "cloud_download"
         }
     }
 }
+

@@ -13,92 +13,166 @@ class interna(qsatype.objetoBase):
 # @class_declaration sanhigia_informes #
 from YBLEGACY.constantes import *
 from models.flfactppal.agentes import agentes
+from models.flfactinfo import flfactinfo_def
+
 
 class sanhigia_informes(interna):
+
+    def sanhigia_informes_bChCursor(self, fN, cursor):
+        # if not qsatype.FactoriaModulos.get('formRecordi_pedidoscli').iface.bChCursor(cursor):
+        #     return False
+        if fN == u"i_facturascli_codcliente":
+            codagente = qsatype.FLUtil.sqlSelect(u"clientes", u"codagente", ustr(u"codcliente = '", cursor.valueBuffer(u"i_facturascli_codcliente"), u"'"))
+            print("Codagente: ", codagente)
+            cursor.setValueBuffer("i_facturascli_codagente", codagente)
 
     def sanhigia_informes_getFilters(self, model, name, template=None):
         filters = []
         if name == 'filtroagente':
-            usr = qsatype.FLUtil.nameUser()
-            if usr != "infosial" and usr != "jesus":
-                agente = agentes.objects.filter(idusuario__exact=usr)
-                return [{'criterio': 'i_facturascli_codagente__in', 'valor': [agente[0].codagente]}]
+            usuario = qsatype.FLUtil.nameUser()
+            if flfactinfo_def.iface.esadmin(usuario):
+                return filters
+            else:
+                codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
+                print("codagente: ", codagente)
+                if not codagente:
+                    codagente = '-1'
+                return [{'criterio': 'i_facturascli_codagente__exact', 'valor': codagente}]
         return filters
 
     def sanhigia_informes_getForeignFields(self, model, template=None):
         fields = []
         if template == 'master':
             return [
-                {'verbose_name': 'nombreagente', 'func': 'field_nombreagente'}
+                {'verbose_name': 'nombreagente', 'func': 'field_nombreagente'},
+                {'verbose_name': 'nombrecliente', 'func': 'field_nombrecliente'}
             ]
         return fields
 
-    def field_nombreagente(self, model):
-        return self.ctx.sanhigia_field_nombreagente(model)
+    def sanhigia_informes_field_nombreagente(self, model):
+        try:
+            return model.i_facturascli_codagente.nombreap
+        except Exception:
+            return ""
+
+    def sanhigia_informes_field_nombrecliente(self, model):
+        try:
+            return model.i_facturascli_codcliente.nombre
+        except Exception:
+            return ""
 
     def sanhigia_informes_getDesc(self):
         desc = None
         return desc
 
-    def sanhigia_report_consumocliente(self, model):
-        qry = {}
-        qry['select'] = " empresa.nombre, empresa.cifnif, empresa.direccion, empresa.codpostal, empresa.ciudad, empresa.provincia, facturascli.codcliente, facturascli.nombrecliente, facturascli.cifnif, facturascli.codigo, facturascli.fecha, facturascli.direccion, facturascli.codpostal, facturascli.ciudad, facturascli.provincia,"
-        qry['select'] += " lineasfacturascli.referencia, lineasfacturascli.descripcion, lineasfacturascli.cantidad, lineasfacturascli.pvptotal, lineasfacturascli.pvpunitario, i_sh_consumocliente.d_facturascli_fecha, i_sh_consumocliente.h_facturascli_fecha, i_sh_consumocliente.i_facturascli_codagente, agentes.nombreap"
+    def sanhigia_informes_iniciaValoresCursor(self, cursor=None):
+        usuario = qsatype.FLUtil.nameUser()
+        print("usuario: ", usuario)
+        if flfactinfo_def.iface.esadmin(usuario):
+            codagente = ''
+        else:
+            codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
+            if not codagente:
+                codagente = ''
+        print("codagente: ", codagente)
+        cursor.setValueBuffer(u"i_facturascli_codagente", codagente)
+        return True
 
-        qry['from'] = " empresa, i_sh_consumocliente LEFT JOIN agentes ON i_sh_consumocliente.i_facturascli_codagente = agentes.codagente, lineasfacturascli INNER JOIN facturascli ON lineasfacturascli.idfactura = facturascli.idfactura INNER JOIN clientes ON facturascli.codcliente = clientes.codcliente"
-        qry['where'] = ""
-        qry['where'] += " i_sh_consumocliente.id = " + str(model.id) if qry['where'] == "" else " AND i_sh_consumocliente.id = " + str(model.id) if model.id else ""
-        qry['where'] += " facturascli.codcliente = '" + str(model.i_facturascli_codcliente) + "'" if qry['where'] == "" else " AND facturascli.codcliente = '" + str(model.i_facturascli_codcliente) + "'" if model.i_facturascli_codcliente else ""
-        qry['where'] += " facturascli.codagente = '" + str(model.i_facturascli_codagente) + "'" if qry['where'] == "" else " AND facturascli.codagente = '" + str(model.i_facturascli_codagente) + "'" if model.i_facturascli_codagente else ""
-        qry['where'] += " facturascli.fecha >= '" + str(model.d_facturascli_fecha) + "'" if qry['where'] == "" else " AND facturascli.fecha >= '" + str(model.d_facturascli_fecha) + "'" if model.d_facturascli_fecha else ""
-        qry['where'] += " facturascli.fecha <= '" + str(model.h_facturascli_fecha) + "'" if qry['where'] == "" else " AND facturascli.fecha <= '" + str(model.h_facturascli_fecha) + "'" if model.h_facturascli_fecha else ""
-        # qry.where += datosReg.hasOwnProperty("id") ? (qry.where == "" ? "" : " AND") + " i_sh_consumocliente.id = " + datosReg.id : "";
-        # qry.where += datosReg.hasOwnProperty("i_facturascli_codcliente") && datosReg.i_facturascli_codcliente != null ? (qry.where == "" ? "" : " AND") + " facturascli.codcliente = '" + datosReg.i_facturascli_codcliente + "'" : "";
-        # qry.where += datosReg.hasOwnProperty("i_facturascli_codagente") && datosReg.i_facturascli_codagente != null ? (qry.where == "" ? "" : " AND") + " facturascli.codagente = '" + datosReg.i_facturascli_codagente + "'" : "";
-        # qry.where += datosReg.hasOwnProperty("d_facturascli_fecha") && datosReg.d_facturascli_fecha != null ? (qry.where == "" ? "" : " AND") + " facturascli.fecha >= '" + datosReg.d_facturascli_fecha + "'" : "";
-        # qry.where += datosReg.hasOwnProperty("h_facturascli_fecha") && datosReg.h_facturascli_fecha != null ? (qry.where == "" ? "" : " AND") + " facturascli.fecha <= '" + datosReg.h_facturascli_fecha + "'" : "";
-        qry['group'] = ""
-        qry['order'] = " ORDER BY facturascli.fecha ASC"
+    def sanhigia_informes_checkCodAgente(self, cursor):
+        if not flfactinfo_def.iface.esadmin(qsatype.FLUtil.nameUser()):
+            return "disabled"
+        return True
 
-        print(qry)
-        q = qsatype.FLSqlQuery()
-        q.setTablesList("empresa, i_sh_consumocliente, agentes, facturascli, clientes")
-        q.setSelect(qry['select'])
-        q.setFrom(qry['from'])
-        q.setWhere(qry['where'] + qry['group'] + qry['order'])
-        if not q.exec_():
-            print("algo fallo")
-            return False
-        print("size: ", q.size())
-
+    def sanhigia_informes_generarReport(self, model):
+        _i = self.iface
         report = {}
-        report['cabeceras'] = ["Código", "Nombre", "Dirección", "CIF/NIF", "Agente", "Desde", "Hasta"]
-        report['columnas'] = ["codcliente", "nombrecliente", "direccion", "cifnif", "nombreap", "d_facturascli_fecha", "h_facturascli_fecha"]
-        report['tipos'] = ["string", "string", "address", "string", "string", "date", "date"]
-        report['level0'] = {}
-        report['level0']['cabeceras'] = ["Fecha", "Factura", "Ref.", "Descripción", "Cant.", "PVP Unit.", "PVP Total"]
-        report['level0']['columnas'] = ["fecha", "codigo", "referencia", "descripcion", "cantidad", "pvpunitario", "pvptotal"]
-        report['level0']['tipos'] = ["date", "string", "string", "string", "double", "currency", "currency"]
-        report['level0']['totales'] = ["cantidad", "pvptotal"]
-        report['level0']['colTotales'] = ["", "", "", "", "cantidad", "", "pvptotal"]
-        report['level0']['tipTotales'] = ["", "", "", "", "double", "", "currency"]
-        report['level0']['opTotales'] = ["", "", "", "", "suma", "", "suma"]
+        oParam = {}
+        oParam = _i.dameParamInforme(model)
+        report['reportName'] = "i_sh_consumocliente"
+        report['params'] = {}
+        formato = "%d-%m-%Y"
+        if model.i_facturascli_codagente and model.i_facturascli_codagente.nombreap != "":
+            report['params']['nombreagente'] = model.i_facturascli_codagente.nombreap
+        if model.i_facturascli_codcliente:
+            if model.i_facturascli_codcliente.nombre != "":
+                report['params']['nombrecliente'] = model.i_facturascli_codcliente.nombre
+            if model.i_facturascli_codcliente.cifnif != "":
+                report['params']['cifnif'] = model.i_facturascli_codcliente.cifnif
+            direccion = _i.dameDireccionCliente(model.i_facturascli_codcliente.codcliente)
+            if direccion != "":
+                report['params']['direccion'] = direccion
+        if model.d_facturascli_fecha and model.d_facturascli_fecha != "":
+            fechadesde = model.d_facturascli_fecha.strftime(formato)
+            report['params']['fechadesde'] = fechadesde
+        if model.h_facturascli_fecha and model.h_facturascli_fecha != "":
+            fechahasta = model.h_facturascli_fecha.strftime(formato)
+            report['params']['fechahasta'] = fechahasta
+        report['params']['WHERE'] = oParam['where']
+        report['disposition'] = "inline"
         return report
 
-    def sanhigia_dameInformeConsumocliente(self, model):
-        url = '/informes/i_sh_consumocliente/' + str(model.id) + '/consumocliente'
-        return url
+
+    def sanhigia_informes_dameParamInforme(self, model):
+        oParamInforme = {}
+        oParamInforme['where'] = ""
+        print("dameParamInforme__model.fechadesde:_", model.d_facturascli_fecha)
+        if model.i_facturascli_codcliente.codcliente and model.i_facturascli_codcliente.codcliente != "":
+            if oParamInforme['where'] != "":
+                oParamInforme['where'] += " AND "
+            oParamInforme['where'] += "facturascli.codcliente = '" + str(model.i_facturascli_codcliente.codcliente) + "'"
+        if model.i_facturascli_codagente and model.i_facturascli_codagente.codagente != "":
+            if oParamInforme['where'] != "":
+                oParamInforme['where'] += " AND "
+            oParamInforme['where'] += "facturascli.codagente = '" + str(model.i_facturascli_codagente.codagente) + "'"
+        if model.d_facturascli_fecha and model.d_facturascli_fecha != "":
+            if oParamInforme['where'] != "":
+                oParamInforme['where'] += " AND "
+            oParamInforme['where'] += "facturascli.fecha >= '" + str(model.d_facturascli_fecha) + "'"
+        if model.h_facturascli_fecha and model.h_facturascli_fecha != "":
+            if oParamInforme['where'] != "":
+                oParamInforme['where'] += " AND "
+            oParamInforme['where'] += "facturascli.fecha <= '" + str(model.h_facturascli_fecha) + "'"
+        print("WHERE_______________: " + oParamInforme['where'])
+        return oParamInforme
+
+    def sanhigia_informes_dameDireccionCliente(self, codCliente):
+        direccion = ""
+        q = qsatype.FLSqlQuery()
+        q.setSelect(u"dirtipovia,direccion,dirnum,dirotros,codpostal,ciudad,provincia")
+        q.setFrom(u"dirclientes")
+        q.setWhere(ustr(u"codcliente = '", codCliente, u"' AND domfacturacion"))
+        if not q.exec_():
+            return False
+        if q.first():
+            if q.value("dirtipovia") != "" and q.value("dirtipovia") is not None:
+                direccion += q.value("dirtipovia") + " "
+            if q.value("direccion") != "" and q.value("direccion") is not None:
+                direccion += q.value("direccion") + " "
+            if q.value("dirnum") != "" and q.value("dirnum") is not None:
+                direccion += q.value("dirnum") + " "
+            if q.value("dirotros") != "" and q.value("dirotros") is not None:
+                direccion += q.value("dirotros") + " "
+            if q.value("codpostal") != "" and q.value("codpostal") is not None:
+                direccion += "," + q.value("codpostal") + " "
+            if q.value("ciudad") != "" and q.value("ciudad") is not None:
+                direccion += q.value("ciudad") + " "
+            if q.value("provincia") != "" and q.value("provincia") is not None:
+                direccion += q.value("provincia") + " "
+        direccion = direccion[:-1]
+        print("Direccion____:", direccion)
+        return direccion
 
     def __init__(self, context=None):
         super().__init__(context)
 
-    def sanhigia_field_nombreagente(self, model):
-        try:
-            codagente = model.i_facturascli_codagente.codagente
-        except Exception:
-            return ""
-        nombreap = qsatype.FLUtil.sqlSelect(u"agentes", u"nombreap", ustr(u"codagente = '", codagente, "'"))
-        return nombreap
+    def bChCursor(self, fN, cursor):
+        return self.ctx.sanhigia_informes_bChCursor(fN, cursor)
+
+    def field_nombreagente(self, model):
+        return self.ctx.sanhigia_informes_field_nombreagente(model)
+
+    def field_nombrecliente(self, model):
+        return self.ctx.sanhigia_informes_field_nombrecliente(model)
 
     def getFilters(self, model, name, template=None):
         return self.ctx.sanhigia_informes_getFilters(model, name, template)
@@ -109,11 +183,20 @@ class sanhigia_informes(interna):
     def getDesc(self):
         return self.ctx.sanhigia_informes_getDesc()
 
-    def dameInformeConsumocliente(self, model):
-        return self.ctx.sanhigia_dameInformeConsumocliente(model)
+    def checkCodAgente(self, cursor):
+        return self.ctx.sanhigia_informes_checkCodAgente(cursor)
 
-    def report_consumocliente(self, model):
-        return self.ctx.sanhigia_report_consumocliente(model)
+    def iniciaValoresCursor(self, cursor=None):
+        return self.ctx.sanhigia_informes_iniciaValoresCursor(cursor)
+
+    def generarReport(self, model):
+        return self.ctx.sanhigia_informes_generarReport(model)
+
+    def dameParamInforme(self, model):
+        return self.ctx.sanhigia_informes_dameParamInforme(model)
+
+    def dameDireccionCliente(self, codCliente):
+        return self.ctx.sanhigia_informes_dameDireccionCliente(codCliente)
 
 
 # @class_declaration head #

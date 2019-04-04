@@ -22,13 +22,6 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/portal",
-            "value": {
-                "informes": {}
-            }
-        },
-        {
-            "type": "insertAfterNode",
             "path": "/models/flfacturac/root",
             "value": {
                 "sh_pedidosclipda": null
@@ -43,16 +36,16 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/models/flfactalma/articulos",
+            "path": "/models/flfactalma/familias",
             "value": {
-                "novedades": null
+                "subfamilias": null
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/models/flfactalma/familias",
+            "path": "/models/flfactalma/articulos",
             "value": {
-                "subfamilias": null
+                "novedades": null
             }
         },
         {
@@ -64,44 +57,16 @@
         },
         {
             "type": "insertAfterNode",
-            "path": "/models/flsisppal/auth_user",
+            "path": "/models/flfactppal/zonasgeo",
             "value": {
-                "sis_acl": null
+                "productosagtrans": null
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/models/flfactinfo/root",
+            "path": "/models/flfactppal/productosagtrans",
             "value": {
-                "i_sh_ventasfamilia": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/models/flfactinfo/root",
-            "value": {
-                "i_sh_ventasarticulo": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/models/flfactinfo/root",
-            "value": {
-                "i_sh_ventaspoblacion": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/models/flfactinfo/root",
-            "value": {
-                "i_sh_productividad": null
-            }
-        },
-        {
-            "type": "insertAfterNode",
-            "path": "/models/flfactinfo/root",
-            "value": {
-                "i_sh_consumocliente": null
+                "sh_previsiones": null
             }
         },
         {
@@ -109,6 +74,48 @@
             "path": "/models/flfactinfo/root",
             "value": {
                 "i_clientesventaart": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactinfo/i_clientesventaart",
+            "value": {
+                "i_sh_consumocliente": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactinfo/i_sh_consumocliente",
+            "value": {
+                "i_sh_productividad": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactinfo/i_sh_productividad",
+            "value": {
+                "i_sh_ventaspoblacion": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactinfo/i_sh_ventaspoblacion",
+            "value": {
+                "i_sh_ventasarticulo": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactinfo/i_sh_ventasarticulo",
+            "value": {
+                "i_sh_ventasfamilia": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flsisppal/auth_user",
+            "value": {
+                "sis_acl": null
             }
         }
     ]
