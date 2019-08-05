@@ -29,8 +29,8 @@ class sanhigia_informes(flfactalma):
         print("algo", oParam)
         idpedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         print(idpedido)
-        referencia = qsatype.FLUtil.sqlSelect(u"sh_lineaspedidosclipda", u"referencia", ustr(u"referencia = '", model.referencia, u"' AND idpedido = '", idpedido, u"'"))
-        cantidad = qsatype.FLUtil.sqlSelect(u"sh_lineaspedidosclipda", u"cantidad", ustr(u"referencia = '", model.referencia, u"' AND idpedido = '", idpedido, u"'"))
+        referencia = qsatype.FLUtil.sqlSelect(u"lineaspedidoscli", u"referencia", ustr(u"referencia = '", model.referencia, u"' AND idpedido = '", idpedido, u"'"))
+        cantidad = qsatype.FLUtil.sqlSelect(u"lineaspedidoscli", u"cantidad", ustr(u"referencia = '", model.referencia, u"' AND idpedido = '", idpedido, u"'"))
         # cantidad = qsatype.FLUtil.sqlSelect(u"sh_lineaspedidosclipda", u"cantidad", ustr(u"referencia = '", model.referencia, u"' AND idpedido = '", idpedido, u"'"))
         if referencia:
             resul = {}
@@ -85,22 +85,22 @@ class sanhigia_informes(flfactalma):
         # _i = self.iface
         print("insertarLinea___model: ", cursor)
         idpedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
-        curLinea = qsatype.FLSqlCursor(u"sh_lineaspedidosclipda")
+        curLinea = qsatype.FLSqlCursor(u"lineaspedidoscli")
         curLinea.setModeAccess(curLinea.Insert)
         curLinea.refreshBuffer()
         curLinea.setActivatedBufferCommited(True)
         curLinea.setValueBuffer(u"idpedido", idpedido)
         curLinea.setValueBuffer(u"referencia", cursor.valueBuffer("referencia"))
         curLinea.setValueBuffer(u"descripcion", cursor.valueBuffer("descripcion"))
-        curLinea.setValueBuffer(u"codimpuesto", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"codimpuesto", curLinea))
-        curLinea.setValueBuffer(u"iva", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"iva", curLinea))
+        curLinea.setValueBuffer(u"codimpuesto", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"codimpuesto", curLinea))
+        curLinea.setValueBuffer(u"iva", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"iva", curLinea))
         #curLinea.setValueBuffer(u"cantidad", model.cantidad)
         curLinea.setValueBuffer(u"cantidad", 1)
-        curLinea.setValueBuffer(u"pvpunitario", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"pvpunitario", curLinea))
-        curLinea.setValueBuffer(u"pvpsindto", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"pvpsindto", curLinea))
-        curLinea.setValueBuffer(u"pvptotal", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"pvptotal", curLinea))
-        curLinea.setValueBuffer(u"porcomision", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"porcomision", curLinea))
-        curLinea.setValueBuffer(u"recargo", qsatype.FactoriaModulos.get('formRecordsh_lineaspedidosclipda').iface.pub_commonCalculateField(u"recargo", curLinea) or 0)
+        curLinea.setValueBuffer(u"pvpunitario", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvpunitario", curLinea))
+        curLinea.setValueBuffer(u"pvpsindto", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvpsindto", curLinea))
+        curLinea.setValueBuffer(u"pvptotal", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvptotal", curLinea))
+        curLinea.setValueBuffer(u"porcomision", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"porcomision", curLinea))
+        curLinea.setValueBuffer(u"recargo", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"recargo", curLinea) or 0)
         if not curLinea.commitBuffer():
             return False
         return True

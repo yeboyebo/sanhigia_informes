@@ -82,14 +82,6 @@
                 "path": "models/flfacturac/"
             },
             {
-                "name": "app_facturacion__menu_facturacion.json",
-                "path": "apps/facturacion/templates/facturacion/"
-            },
-            {
-                "name": "app_facturacion__pedidoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
                 "name": "app_facturacion__newrecordsh_lineaspedidosclipda.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
@@ -102,23 +94,7 @@
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
-                "name": "app_facturacion__lineaspedidoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__newrecordpedidoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
                 "name": "app_facturacion__sh_lineaspedidosclipda.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__newrecordlineaspedidoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
-                "name": "app_facturacion__masterpedidoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
@@ -358,6 +334,30 @@
             {
                 "name": "app_facturacion__presupuestoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__menu_facturacion.json",
+                "path": "apps/facturacion/templates/facturacion/"
+            },
+            {
+                "name": "app_facturacion__masterpedidoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__pedidoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordpedidoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__newrecordlineaspedidoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_facturacion__lineaspedidoscli.json",
+                "path": "apps/facturacion/templates/facturacion/plantillas/"
             }
         ],
         "patchScript": [
@@ -424,6 +424,22 @@
             {
                 "name": "app_portal__views_portal.py",
                 "path": "apps/portal/viewset/"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__pedidoscli_def.py"
+            },
+            {
+                "path": "models/flfacturac/",
+                "name": "model_flfacturac__pedidoscli.py"
+            },
+            {
+                "name": "model_flfacturac__lineaspedidoscli.py",
+                "path": "models/flfacturac/"
+            },
+            {
+                "name": "model_flfacturac__lineaspedidoscli_def.py",
+                "path": "models/flfacturac/"
             }
         ]
     }

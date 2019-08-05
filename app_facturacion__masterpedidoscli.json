@@ -1,61 +1,155 @@
 {
-    "querystring": {
-        "p_l": 50,
-        "p_c": true,
-        "o_1": "codigo",
-        "o_2": "fecha"
-    },
-    "schema": {},
-    "layout": {
-        "masterPedidoscli": {
-            "componente": "YBGrid",
-            "label": "Pedidos de venta",
-            "prefix": "pedidoscli",
-            "filter": "buscador",
-            "multiselectable": true,
-            "colorRowField": "rowColor",
-            "columns": [
-                {"tipo": "field", "listpos": "title", "key": "codigo"},
-                {"tipo": "field", "listpos": "body", "key": "fecha"},
-                {"tipo": "field", "listpos": "subtitle", "key": "nombrecliente"},
-                {"tipo": "field", "listpos": "secondaryitem", "key": "total"},
-                {
-                    "tipo": "act",
-                    "key": "delete",
-                    "label": "Borrar Linea",
-                    "success": [
-                        {"slot": "refrescar"}
-                    ]
-                }
-            ],
-            "rowclick": "link",
-            "accionesGrid": [
-                {
-                    "tipo": "button",
-                    "key": "generarAlbaran",
-                    "label": "Generar Albaran",
-                    "success": [
-                        {"slot": "refrescar"}
-                    ]
-                }
-            ]
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring/root",
+            "value": {
+                "p_l": 50
+            }
         },
-        "newRecordTelest": {
-            "componente": "YBNewRecord",
-            "class": "info",
-            "icon": "add"
-        }
-    },
-    "acciones": {
-        "delete": {
-            "action": "deleteRow",
-            "icon": "delete"
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring/p_l",
+            "value": {
+                "p_c": true
+            }
         },
-        "generarAlbaran": {
-            "action": "gridAction",
-            "icon": "home",
-            "prefix": "sh_pedidosclipda",
-            "serverAction": "generarAlbaran"
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring/p_c",
+            "value": {
+                "o_1": "-fecha"
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring/o_1",
+            "value": {
+                "o_2": "-codigo"
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/querystring/o_2",
+            "value": {
+                "f_pedidosUsuario": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/root",
+            "value": {
+                "masterPedidoscli": {
+                    "componente": "YBGrid",
+                    "label": "Pedidos de venta",
+                    "prefix": "pedidoscli",
+                    "filter": "buscador",
+                    "multiselectable": true,
+                    "colorRowField": "rowColor",
+                    "columns": [
+                        {
+                            "tipo": "field",
+                            "listpos": "title",
+                            "key": "codigo"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "body",
+                            "key": "fecha"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "subtitle",
+                            "key": "nombrecliente"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "secondaryitem",
+                            "key": "total"
+                        },
+                        {
+                            "tipo": "act",
+                            "key": "delete",
+                            "label": "Borrar Linea",
+                            "success": [
+                                {
+                                    "slot": "refrescar"
+                                }
+                            ]
+                        },
+                        {
+                            "tipo": "act",
+                            "key": "enviar",
+                            "label": "Enviar Pedido",
+                            "success": [
+                                {
+                                    "slot": "toast",
+                                    "tipo": "success",
+                                    "mensaje": "Correo enviado"
+                                },
+                                {
+                                    "slot": "refrescar"
+                                }
+                            ],
+                            "error": [
+                                {
+                                    "slot": "toast",
+                                    "mensaje": "Error inesperado, consulte administrador"
+                                }
+                            ]
+                        }
+                    ],
+                    "rowclick": "link"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/masterPedidoscli",
+            "value": {
+                "newRecordTelest": {
+                    "componente": "YBNewRecord",
+                    "class": "info",
+                    "icon": "add"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/root",
+            "value": {
+                "delete": {
+                    "action": "deleteRow",
+                    "icon": "delete"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/delete",
+            "value": {
+                "enviar": {
+                    "action": "legacy",
+                    "serverAction": "enviarPedidoPDA",
+                    "prefix": "pedidoscli",
+                    "icon": "send"
+                }
+            }
+        },
+        {
+            "type": "deleteNode",
+            "path": "/initValidation",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/focus",
+            "value": null
+        },
+        {
+            "type": "deleteNode",
+            "path": "/drawIf",
+            "value": null
         }
-    }
+    ]
 }
