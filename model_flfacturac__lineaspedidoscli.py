@@ -40,3 +40,14 @@ class sanhigia_informes_lineaspedidoscli(flfacturac_lineaspedidoscli, helpers.Mi
     def field_colorRow(self):
         return form.iface.field_colorRow(self)
 
+    @helpers.decoradores.accion(aqparam=["oParam"])
+    def borrarLineas(self, oParam):
+        return form.iface.borrarLineas(self, oParam)
+
+    @helpers.decoradores.accion(aqparam=["oParam"])
+    def copiaLinea(self, oParam):
+        return form.iface.copiaLinea(self, oParam)
+
+    def copiaDatosLinea(self, curLP):
+        return form.iface.copiaDatosLinea(self, curLP)
+

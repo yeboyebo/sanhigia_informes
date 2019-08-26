@@ -20,7 +20,7 @@
                 "TEXT": "Pedidos de cliente sanhigia",
                 "URL": "facturacion/sh_pedidosclipda/master",
                 "ICON": "dashboard",
-                "VISIBLE": true,
+                "VISIBLE": false,
                 "COLOR": "rgb(30, 170, 30)"
             }
         },

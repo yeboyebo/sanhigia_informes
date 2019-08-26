@@ -98,7 +98,7 @@ class sanhigia_informes(flfacturac):
     def sanhigia_informes_validateCursor(self, cursor):
         referencia = cursor.valueBuffer("referencia")
         if referencia is None:
-            qsatype.FLUtil.ponMsgError("Error: La referencia no existe o no está selecionada")
+            qsatype.FLUtil.ponMsgError("Error: La referencia no existe o no está seleccionada")
             return False
         if qsatype.FLUtil.sqlSelect(u"articulos", u"sevende", ustr(u"referencia = '", referencia, u"'")) is False:
             qsatype.FLUtil.ponMsgError("Error: El artículo {0} ya no se vende. Selecciona otro.".format(referencia))
@@ -161,8 +161,6 @@ class sanhigia_informes(flfacturac):
                 return False
             if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"pda", u"Suspendido", ustr(u"idpedido = ", idPedido)):
                 return False
-
-
         return True
 
     def sanhigia_informes_getForeignFields(self, model, template=None):
@@ -196,6 +194,86 @@ class sanhigia_informes(flfacturac):
             return "cWarning"
         else:
             return None
+
+    def sanhigia_informes_borrarLineas(self, model, oParam):
+        print("borrando lineas")
+        response = {}
+        response['status'] = 1
+        response['return_data'] = False
+        if "selecteds" not in oParam or not oParam['selecteds']:
+            response['status'] = -1
+            response['msg'] = "Debes seleccionar al menos una línea"
+            return response
+        aChecked = oParam['selecteds'].split(u",")
+        if not aChecked[0]:
+            response['msg'] = "Error: Selecciona una o más líneas"
+            return response
+        print("linea: ", aChecked[0])
+        for i in range(len(aChecked)):
+            print("llega 1")
+            cursor = qsatype.FLSqlCursor("lineaspedidoscli")
+            cursor.select(ustr("idlinea = ", aChecked[i]))
+            print("llega 2")
+            cursor.setModeAccess(cursor.Del)
+            print("llega 3")
+            cursor.refreshBuffer()
+            print("llega 4")
+            if cursor.first():
+                print("llega 5")
+                if not cursor.commitBuffer():
+                    print("llega 6")
+                    return False
+            print("llega 7")
+        return response
+
+    def sanhigia_informes_copiaLinea(self, model, oParam):
+        print("copiando linea")
+        _i = self.iface
+        response = {}
+        idLinea = model.pk
+        cantidad = 1
+        dto = 100
+
+        curLP = qsatype.FLSqlCursor(u"lineaspedidoscli")
+        curLP.select("idlinea = " + str(idLinea))
+        if not curLP.first():
+            raise ValueError("Error no se encuentra la linea de pedido ")
+            return False
+        curLP.setModeAccess(curLP.Browse)
+        curLP.refreshBuffer()
+
+        if not _i.copiaDatosLinea(curLP):
+            return False
+
+        return True
+
+    def sanhigia_informes_copiaDatosLinea(self, curLP):
+        _i = self.iface
+
+        curNuevaLP = qsatype.FLSqlCursor(u"lineaspedidoscli")
+        curNuevaLP.setModeAccess(curNuevaLP.Insert)
+        curNuevaLP.refreshBuffer()
+
+        curNuevaLP.setValueBuffer(u"idpedido", curLP.valueBuffer("idpedido"))
+        curNuevaLP.setValueBuffer(u"referencia", curLP.valueBuffer(u"referencia"))
+        curNuevaLP.setValueBuffer(u"descripcion", curLP.valueBuffer(u"descripcion"))
+        curNuevaLP.setValueBuffer(u"pvpunitario", curLP.valueBuffer(u"pvpunitario"))
+        curNuevaLP.setValueBuffer(u"cantidad", 1)
+        curNuevaLP.setValueBuffer(u"codimpuesto", curLP.valueBuffer(u"codimpuesto"))
+        curNuevaLP.setValueBuffer(u"iva", curLP.valueBuffer(u"iva"))
+        curNuevaLP.setValueBuffer(u"recargo", curLP.valueBuffer(u"recargo"))
+        curNuevaLP.setValueBuffer(u"irpf", curLP.valueBuffer(u"irpf"))
+        curNuevaLP.setValueBuffer(u"dtolineal", curLP.valueBuffer(u"dtolineal"))
+        curNuevaLP.setValueBuffer(u"dtopor", 100)
+        curNuevaLP.setValueBuffer(u"porcomision", curLP.valueBuffer(u"porcomision"))
+        curNuevaLP.setValueBuffer(u"pvpsindto", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvpsindto", curNuevaLP))
+        curNuevaLP.setValueBuffer(u"pvptotal", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvptotal", curNuevaLP))
+
+        if not curNuevaLP.commitBuffer():
+            return False
+
+        return True
+
 
     def __init__(self, context=None):
         super().__init__(context)
@@ -235,4 +313,13 @@ class sanhigia_informes(flfacturac):
 
     def field_colorRow(self, model):
         return self.ctx.sanhigia_informes_field_colorRow(model)
+
+    def borrarLineas(self, model, oParam):
+        return self.ctx.sanhigia_informes_borrarLineas(model, oParam)
+
+    def copiaLinea(self, model, oParam):
+        return self.ctx.sanhigia_informes_copiaLinea(model, oParam)
+
+    def copiaDatosLinea(self, curLP):
+        return self.ctx.sanhigia_informes_copiaDatosLinea(curLP)
 

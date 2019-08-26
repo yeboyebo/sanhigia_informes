@@ -235,13 +235,15 @@
                     "prefix": "lineaspedidoscli",
                     "filter": "buscador",
                     "colorRowField": "rowColor",
-                    "avatar": false,
+                    "avatar": true,
+                    "multiselectable": true,
                     "columns": [
                         {
                             "tipo": "field",
                             "listpos": false,
                             "key": "referencia",
-                            "width": 120
+                            "width": 120,
+                            "avatar": true
                         },
                         {
                             "tipo": "field",
@@ -331,8 +333,8 @@
                         },
                         {
                             "tipo": "act",
-                            "key": "delete",
-                            "label": "Borrar Linea",
+                            "key": "copiaLinea",
+                            "label": "Copiar linea",
                             "success": [
                                 {
                                     "slot": "refrescar"
@@ -346,6 +348,15 @@
                             "key": "nuevaLinea",
                             "label": "Nuevo",
                             "success": []
+                        },
+                        {
+                            "key": "delete",
+                            "label": "Borrar Linea",
+                            "success": [
+                                {
+                                    "slot": "refrescar"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -405,8 +416,10 @@
             "path": "/acciones/root",
             "value": {
                 "delete": {
-                    "action": "deleteRow",
-                    "icon": "delete"
+                    "action": "gridAction",
+                    "icon": "delete",
+                    "prefix": "lineaspedidoscli",
+                    "serverAction": "borrarLineas"
                 }
             }
         },
@@ -499,6 +512,20 @@
                             "validaciones": null
                         }
                     ]
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/acciones/cambiarPrecio",
+            "value": {
+                "copiaLinea": {
+                    "label": "Copiar linea",
+                    "action": "legacy",
+                    "serverAction": "copiaLinea",
+                    "prefix": "lineaspedidoscli",
+                    "icon": "content_paste",
+                    "params": []
                 }
             }
         },
