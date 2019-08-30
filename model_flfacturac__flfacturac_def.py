@@ -79,20 +79,6 @@ class sanhigia_informes(flfacturac):
     def sanhigia_informes_bufferCommited_presupuestoscli(self, curPresupuesto=None):
         return True
 
-    def sanhigia_informes_afterCommit_lineaspedidoscli(self, curLinea=None):
-        # _i = self.iface
-        curPedido = qsatype.FLSqlCursor(u"pedidoscli")
-        curPedido.select(ustr(u"idpedido = ", curLinea.valueBuffer(u"idpedido")))
-        if not curPedido.first():
-            return False
-        curPedido.setModeAccess(curPedido.Edit)
-        curPedido.refreshBuffer()
-        if not qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.calcularTotalesCursor(curPedido):
-            return False
-        if not curPedido.commitBuffer():
-            return False
-        return True
-
     def __init__(self, context=None):
         super().__init__(context)
 
@@ -113,7 +99,4 @@ class sanhigia_informes(flfacturac):
 
     def bufferCommited_presupuestoscli(self, curPresupuesto=None):
         return self.ctx.sanhigia_informes_bufferCommited_presupuestoscli(curPresupuesto)
-
-    def afterCommit_lineaspedidoscli(self, curLinea=None):
-        return self.ctx.sanhigia_informes_afterCommit_lineaspedidoscli(curLinea)
 

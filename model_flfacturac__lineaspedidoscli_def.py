@@ -144,6 +144,7 @@ class sanhigia_informes(flfacturac):
         curLP.refreshBuffer()
         curLP.setActivatedBufferCommited(True)
 
+        curLP.setValueBuffer("dtomanual", True)
         curLP.setValueBuffer("dtopor", oParam['dtopor'])
 
         curLP.setValueBuffer(u"pvptotal", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvptotal", curLP))
@@ -224,6 +225,18 @@ class sanhigia_informes(flfacturac):
                     print("llega 6")
                     return False
             print("llega 7")
+
+        idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
+        curPedido = qsatype.FLSqlCursor(u"pedidoscli")
+        curPedido.select(ustr(u"idpedido = ", idPedido))
+        if not curPedido.first():
+            return False
+        curPedido.setModeAccess(curPedido.Edit)
+        curPedido.refreshBuffer()
+        if not qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.calcularTotalesCursor(curPedido):
+            return False
+        if not curPedido.commitBuffer():
+            return False
         return response
 
     def sanhigia_informes_copiaLinea(self, model, oParam):
@@ -264,6 +277,7 @@ class sanhigia_informes(flfacturac):
         curNuevaLP.setValueBuffer(u"recargo", curLP.valueBuffer(u"recargo"))
         curNuevaLP.setValueBuffer(u"irpf", curLP.valueBuffer(u"irpf"))
         curNuevaLP.setValueBuffer(u"dtolineal", curLP.valueBuffer(u"dtolineal"))
+        curNuevaLP.setValueBuffer(u"dtomanual", True)
         curNuevaLP.setValueBuffer(u"dtopor", 100)
         curNuevaLP.setValueBuffer(u"porcomision", curLP.valueBuffer(u"porcomision"))
         curNuevaLP.setValueBuffer(u"pvpsindto", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvpsindto", curNuevaLP))
