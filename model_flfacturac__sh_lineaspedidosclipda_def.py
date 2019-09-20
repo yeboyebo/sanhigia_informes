@@ -107,8 +107,6 @@ class sanhigia_informes(interna):
         disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
         if not disponible:
             disponible = 0
-        print("cantidad______validateCursor: ", cantidad)
-        print("disponible__________validateCursor: ", disponible)
         if cantidad > parseFloat(disponible):
             if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
                 return True
