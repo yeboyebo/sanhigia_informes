@@ -6,6 +6,9 @@ class sanhigia_informes_pedidoscli(flfacturac_pedidoscli, helpers.MixinConAccion
     class Meta:
         proxy = True
 
+    def iniciaValoresCursor(cursor=None):
+        return form.iface.iniciaValoresCursor(cursor)
+
     @helpers.decoradores.accion(aqparam=["oParam"])
     def enviarPedidoPDA(self, oParam):
         return form.iface.enviarPedidoPDA(self, oParam)
@@ -33,4 +36,7 @@ class sanhigia_informes_pedidoscli(flfacturac_pedidoscli, helpers.MixinConAccion
 
     def validateCursor(self):
         return form.iface.validateCursor(self)
+
+    def drawIf_pedidoscliForm(cursor):
+        return form.iface.drawIf_pedidoscliForm(cursor)
 

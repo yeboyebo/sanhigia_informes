@@ -18,7 +18,7 @@ class sanhigia_informes(flfacturac):
     def sanhigia_informes_getFilters(self, model, name, template=None):
         filters = []
         if name == 'pedidosUsuario':
-            filters = [{'criterio': 'editable__exact', 'valor': True}]
+            # filters = [{'criterio': 'editable__exact', 'valor': True}]
             usuario = qsatype.FLUtil.nameUser()
             codGrupo = qsatype.FLUtil.sqlSelect(u"flusers", u"idgroup", ustr(u"iduser = '", usuario, u"' AND idgroup = 'Administracion'"))
             if codGrupo:
@@ -28,6 +28,7 @@ class sanhigia_informes(flfacturac):
                 if not codagente:
                     codagente = '-1'
                 filters.append({'criterio': 'codagente__exact', 'valor': codagente})
+        print("sanhigia_informes_getFilters__filters: ", filters)
         return filters
 
     def sanhigia_informes_getForeignFields(self, model, template=None):
@@ -45,6 +46,11 @@ class sanhigia_informes(flfacturac):
     def sanhigia_informes_getDesc(self):
         desc = "nombrecliente"
         return desc
+
+    def sanhigia_informes_iniciaValoresCursor(self, cursor=None):
+        cursor.setValueBuffer(u"sh_estadopago", u"Borrador")
+        qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.iniciaValoresCursor(cursor)
+        return True
 
     def sanhigia_informes_enviarPedidoPDA(self, model, oParam):
         print("hola mundo")
@@ -163,7 +169,14 @@ class sanhigia_informes(flfacturac):
 
             # response = notifications.sendSisMail(asunto, cuerpo, [nombreCorreo], fichero)
             os.remove(fichero)
-            if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopedidopda", u"Enviado", ustr(u"idpedido = ", idPedido)):
+            if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopedidopda", u"Enviado", u"idpedido = {}".format(idPedido)):
+                return False
+            estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
+            if estadopago == "Borrador con promocion":
+                estadopago = "Pte. Validacion promocion"
+            elif estadopago == "Borrador":
+                estadopago = u""
+            if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopago", estadopago, u"idpedido = {}".format(idPedido)):
                 return False
         except Exception as e:
             print(e)
@@ -266,13 +279,18 @@ class sanhigia_informes(flfacturac):
         print("estado pago ", estadoPago)
         if estadoPago is None or estadoPago == u"":
             return True
-        elif estadoPago == u"Pte. Validacion promocion":
+        elif estadoPago == u"Borrador con promocion":
             print("entra aqui ", cursor.valueBuffer("observaciones"))
             if cursor.valueBuffer("observaciones") is None or cursor.valueBuffer("observaciones") == u"":
                 qsatype.FLUtil.ponMsgError("Alguna de las líneas tiene aplicada la promoción, debe rellenar las observaciones.")
                 return False
-
         return True
+
+    def sanhigia_informes_drawIf_pedidoscliForm(self, cursor):
+        estadopago = cursor.valueBuffer("sh_estadopago")
+        if estadopago == u"Borrador" or estadopago == u"Borrador con promocion":
+            return True
+        return "disabled"
 
     def __init__(self, context=None):
         super().__init__(context)
@@ -288,6 +306,9 @@ class sanhigia_informes(flfacturac):
 
     def getDesc(self):
         return self.ctx.sanhigia_informes_getDesc()
+
+    def iniciaValoresCursor(self, cursor=None):
+        return self.ctx.sanhigia_informes_iniciaValoresCursor(cursor)
 
     def enviarPedidoPDA(self, model, oParam):
         return self.ctx.sanhigia_informes_enviarPedidoPDA(model, oParam)
@@ -315,4 +336,7 @@ class sanhigia_informes(flfacturac):
 
     def validateCursor(self, cursor):
         return self.ctx.sanhigia_informes_validateCursor(cursor)
+
+    def drawIf_pedidoscliForm(self, cursor):
+        return self.ctx.sanhigia_informes_drawIf_pedidoscliForm(cursor)
 
