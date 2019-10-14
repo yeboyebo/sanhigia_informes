@@ -40,3 +40,7 @@ class sanhigia_informes_pedidoscli(flfacturac_pedidoscli, helpers.MixinConAccion
     def drawIf_pedidoscliForm(cursor):
         return form.iface.drawIf_pedidoscliForm(cursor)
 
+    @helpers.decoradores.accion(aqparam=["oParam", "cursor"])
+    def eliminarPedido(self, oParam, cursor):
+        return form.iface.eliminarPedido(self, oParam, cursor)
+

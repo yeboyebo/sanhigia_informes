@@ -292,6 +292,41 @@ class sanhigia_informes(flfacturac):
             return True
         return "disabled"
 
+    def sanhigia_informes_eliminarPedido(self, model, oParam, cursor):
+        response = {}
+        print(" sanhigia_informes_eliminarPedido_____0000000000000000: ")
+        estadopago = cursor.valueBuffer("sh_estadopago")
+        codigo = cursor.valueBuffer("codigo")
+        idPedido = cursor.valueBuffer("idpedido")
+        print(" sanhigia_informes_eliminarPedido_____estadopago: ", estadopago)
+        print(" sanhigia_informes_eliminarPedido_____codigo: ", codigo)
+        if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+            response["resul"] = False
+            response["msg"] = "El pedido '{}' no se puede eliminar porque ya está enviado".format(codigo)
+            return response
+        if "confirmacion" in oParam and oParam["confirmacion"]:
+            print(" sanhigia_informes_eliminarPedido_____1111111111111_____idPedido: ", idPedido)
+            cursor = qsatype.FLSqlCursor("pedidoscli")
+            cursor.select("idpedido = {}".format(idPedido))
+            cursor.setModeAccess(cursor.Del)
+            cursor.refreshBuffer()
+            if cursor.first():
+                if not cursor.commitBuffer():
+                    return False
+                    # if not qsatype.FLUtil.sqlDelete(u"pedidoscli", u"idpedido = {}".format(idPedido)):
+                    print(" sanhigia_informes_eliminarPedido_____22222222222222222: ")
+                    response["status"] = 1
+                    response["msg"] = "No se puedo eliminar el pedido"
+                    return response
+            response["resul"] = True
+            response["return_data"] = False
+            response["msg"] = "El pedido '{}' ha sido eliminado".format(codigo)
+            return response
+        response["status"] = 2
+        response["confirm"] = "El pedido '{}' será eliminado.¿Estás seguro?".format(codigo)
+        print(" sanhigia_informes_eliminarPedido_____444444444444444444: ")
+        return response
+
     def __init__(self, context=None):
         super().__init__(context)
 
@@ -339,4 +374,7 @@ class sanhigia_informes(flfacturac):
 
     def drawIf_pedidoscliForm(self, cursor):
         return self.ctx.sanhigia_informes_drawIf_pedidoscliForm(cursor)
+
+    def eliminarPedido(self, model, oParam, cursor):
+        return self.ctx.sanhigia_informes_eliminarPedido(model, oParam, cursor)
 

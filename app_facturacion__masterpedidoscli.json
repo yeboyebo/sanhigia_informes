@@ -69,11 +69,17 @@
                         },
                         {
                             "tipo": "act",
-                            "key": "delete",
-                            "label": "Borrar Linea",
+                            "key": "borrar",
+                            "label": "Eliminar Pedido",
                             "success": [
                                 {
                                     "slot": "refrescar"
+                                }
+                            ],
+                            "error": [
+                                {
+                                    "slot": "toast",
+                                    "mensaje": "Error inesperado, consulte administrador"
                                 }
                             ]
                         },
@@ -118,15 +124,17 @@
             "type": "insertAfterNode",
             "path": "/acciones/root",
             "value": {
-                "delete": {
-                    "action": "deleteRow",
+                "borrar": {
+                    "action": "legacy",
+                    "serverAction": "eliminarPedido",
+                    "prefix": "pedidoscli",
                     "icon": "delete"
                 }
             }
         },
         {
             "type": "insertAfterNode",
-            "path": "/acciones/delete",
+            "path": "/acciones/borrar",
             "value": {
                 "enviar": {
                     "action": "legacy",
