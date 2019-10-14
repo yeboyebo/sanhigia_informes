@@ -28,7 +28,6 @@ class sanhigia_informes(flfacturac):
                 if not codagente:
                     codagente = '-1'
                 filters.append({'criterio': 'codagente__exact', 'valor': codagente})
-        print("sanhigia_informes_getFilters__filters: ", filters)
         return filters
 
     def sanhigia_informes_getForeignFields(self, model, template=None):
@@ -53,7 +52,6 @@ class sanhigia_informes(flfacturac):
         return True
 
     def sanhigia_informes_enviarPedidoPDA(self, model, oParam):
-        print("hola mundo")
         try:
             response = True
             _i = self.iface
@@ -119,7 +117,6 @@ class sanhigia_informes(flfacturac):
                     direccion += u" " + ustr(u"", eValor)
 
                 if eCampo.nombre == "coddir" and eValor != "":
-                    print("Direccion: ", direccion)
                     cuerpo += "<td align='left'>" + direccion + "</td>"
                 xCampo.text = ustr(u"", eValor)
             xLineas = ET.SubElement(xPedido, "lineas")
@@ -158,11 +155,9 @@ class sanhigia_informes(flfacturac):
             # ruta = os.curdir
             # separador = os.sep
             # fichero = ruta + separador + model.codigo + ".xml"
-            print("Ruta y Fichero: ", fichero)
             xmlArbol.write(fichero)
             oDM = _i.datosConfigMailPDA()
             nombreCorreo = qsatype.FLUtil.sqlSelect(u"factppal_general", u"sh_mailrecepcion", ustr(u"1 = ", 1))
-            print("nombreCorreo: ", nombreCorreo)
             # connection = notifications.get_connection("smtp.gmail.com", "sanhigiapedidos@gmail.com", "a3b2z4Z4", "465", "SSL")
             connection = notifications.get_connection(oDM.hostcorreosaliente, oDM.usuariosmtp, oDM.passwordsmtp, oDM.puertosmtp, oDM.tipocxsmtp)
             response = notifications.sendMail(connection, oDM.usuariosmtp, asunto, cuerpo, [nombreCorreo], fichero)
@@ -239,8 +234,6 @@ class sanhigia_informes(flfacturac):
 
     def sanhigia_informes_queryGrid_histArticulosCli(self, model, filters):
         idpedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
-        print("IDPedido: ", idpedido)
-        print("IDPedido 2: ", model.idpedido)
         query = {}
         query["tablesList"] = ("articulos,lineaspedidoscli,pedidoscli")
         query["select"] = ("articulos.referencia, articulos.descripcion, MAX(pedidoscli.fecha) as fecha")
@@ -261,26 +254,18 @@ class sanhigia_informes(flfacturac):
             return False
         if q.first():
             oDM.hostcorreosaliente = q.value("sh_hostcorreosaliente")
-            print("hostcorreosaliente", oDM.hostcorreosaliente)
             oDM.puertosmtp = q.value("sh_puertosmtp")
-            print("puertosmtp", oDM.puertosmtp)
             oDM.tipocxsmtp = q.value("sh_tipocxsmtp")
-            print("tipocxsmtp", oDM.tipocxsmtp)
             oDM.tipoautsmtp = q.value("sh_tipoautsmtp")
-            print("tipoautsmtp", oDM.tipoautsmtp)
             oDM.usuariosmtp = q.value("sh_usuariosmtp")
-            print("usuariosmtp", oDM.usuariosmtp)
             oDM.passwordsmtp = q.value("sh_passwordsmtp")
-            print("passwordsmtp", oDM.passwordsmtp)
         return oDM
 
     def sanhigia_informes_validateCursor(self, cursor):
         estadoPago = cursor.valueBuffer("sh_estadopago")
-        print("estado pago ", estadoPago)
         if estadoPago is None or estadoPago == u"":
             return True
         elif estadoPago == u"Borrador con promocion":
-            print("entra aqui ", cursor.valueBuffer("observaciones"))
             if cursor.valueBuffer("observaciones") is None or cursor.valueBuffer("observaciones") == u"":
                 qsatype.FLUtil.ponMsgError("Alguna de las líneas tiene aplicada la promoción, debe rellenar las observaciones.")
                 return False
@@ -294,18 +279,14 @@ class sanhigia_informes(flfacturac):
 
     def sanhigia_informes_eliminarPedido(self, model, oParam, cursor):
         response = {}
-        print(" sanhigia_informes_eliminarPedido_____0000000000000000: ")
         estadopago = cursor.valueBuffer("sh_estadopago")
         codigo = cursor.valueBuffer("codigo")
         idPedido = cursor.valueBuffer("idpedido")
-        print(" sanhigia_informes_eliminarPedido_____estadopago: ", estadopago)
-        print(" sanhigia_informes_eliminarPedido_____codigo: ", codigo)
         if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
             response["resul"] = False
             response["msg"] = "El pedido '{}' no se puede eliminar porque ya está enviado".format(codigo)
             return response
         if "confirmacion" in oParam and oParam["confirmacion"]:
-            print(" sanhigia_informes_eliminarPedido_____1111111111111_____idPedido: ", idPedido)
             cursor = qsatype.FLSqlCursor("pedidoscli")
             cursor.select("idpedido = {}".format(idPedido))
             cursor.setModeAccess(cursor.Del)
@@ -314,7 +295,6 @@ class sanhigia_informes(flfacturac):
                 if not cursor.commitBuffer():
                     return False
                     # if not qsatype.FLUtil.sqlDelete(u"pedidoscli", u"idpedido = {}".format(idPedido)):
-                    print(" sanhigia_informes_eliminarPedido_____22222222222222222: ")
                     response["status"] = 1
                     response["msg"] = "No se puedo eliminar el pedido"
                     return response
@@ -324,7 +304,6 @@ class sanhigia_informes(flfacturac):
             return response
         response["status"] = 2
         response["confirm"] = "El pedido '{}' será eliminado.¿Estás seguro?".format(codigo)
-        print(" sanhigia_informes_eliminarPedido_____444444444444444444: ")
         return response
 
     def __init__(self, context=None):

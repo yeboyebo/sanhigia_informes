@@ -16,8 +16,6 @@ class sanhigia_informes(flfacturac):
         response = {}
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-        print(" sanhigia_informes______masUno: ", idPedido)
-        print(" sanhigia_informes______masUno: ", estadopago)
         if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
             response["resul"] = -1
             response["msg"] = "La linea no se puede modificar. El pedido ya está enviado"
@@ -37,8 +35,6 @@ class sanhigia_informes(flfacturac):
         response = {}
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-        print(" sanhigia_informes_menosUno_____idPedido: ", idPedido)
-        print(" sanhigia_informes_menosUno_____estadopago: ", estadopago)
         if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
             response["resul"] = -1
             response["msg"] = "La linea no se puede modificar. El pedido ya está enviado"
@@ -63,8 +59,6 @@ class sanhigia_informes(flfacturac):
         response = {}
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-        print(" sanhigia_informes_modificarCantidad_____idPedido: ", idPedido)
-        print(" sanhigia_informes_modificarCantidad_____estadopago: ", estadopago)
         if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
             response["resul"] = -1
             response["msg"] = "La linea no se puede modificar. El pedido ya está enviado"
@@ -135,8 +129,6 @@ class sanhigia_informes(flfacturac):
         disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
         if not disponible:
             disponible = 0
-        print("cantidad______validateCursor: ", cantidad)
-        print("disponible__________validateCursor: ", disponible)
         if cantidad > parseFloat(disponible):
             if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
                 return True
@@ -158,8 +150,6 @@ class sanhigia_informes(flfacturac):
         idLinea = model.pk
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-        print(" sanhigia_informes_cambiarPrecio_____idPedido: ", idPedido)
-        print(" sanhigia_informes_cambiarPrecio_____estadopago: ", estadopago)
         if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
             response["resul"] = -1
             response["msg"] = "La linea no se puede modificar. El pedido ya está enviado"
@@ -195,7 +185,6 @@ class sanhigia_informes(flfacturac):
 
     def sanhigia_informes_getForeignFields(self, model, template=None):
         fields = []
-        print(template)
         if template == "formRecord":
             fields = [
                 {'verbose_name': 'titulo', 'func': 'field_titulo'},
@@ -206,7 +195,6 @@ class sanhigia_informes(flfacturac):
         return fields
 
     def sanhigia_informes_field_titulo(self, model):
-        print(model.referencia.referencia)
         return str(model.referencia.referencia) + " - " + str(model.descripcion)
 
     def sanhigia_informes_field_calCantidad(self, model):
@@ -226,7 +214,6 @@ class sanhigia_informes(flfacturac):
             return None
 
     def sanhigia_informes_borrarLineas(self, model, oParam):
-        print("borrando lineas")
         response = {}
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
@@ -244,23 +231,14 @@ class sanhigia_informes(flfacturac):
         if not aChecked[0]:
             response['msg'] = "Error: Selecciona una o más líneas"
             return response
-        print("linea: ", aChecked[0])
         for i in range(len(aChecked)):
-            print("llega 1")
             cursor = qsatype.FLSqlCursor("lineaspedidoscli")
             cursor.select(ustr("idlinea = ", aChecked[i]))
-            print("llega 2")
             cursor.setModeAccess(cursor.Del)
-            print("llega 3")
             cursor.refreshBuffer()
-            print("llega 4")
             if cursor.first():
-                print("llega 5")
                 if not cursor.commitBuffer():
-                    print("llega 6")
                     return False
-            print("llega 7")
-
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         curPedido = qsatype.FLSqlCursor(u"pedidoscli")
         curPedido.select(ustr(u"idpedido = ", idPedido))
@@ -275,7 +253,6 @@ class sanhigia_informes(flfacturac):
         return response
 
     def sanhigia_informes_copiaLinea(self, model, oParam):
-        print("copiando linea")
         _i = self.iface
         idLinea = model.pk
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
