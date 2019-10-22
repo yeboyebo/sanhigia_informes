@@ -29,8 +29,6 @@ class sanhigia_informes(flfactalma):
         print("algo", oParam)
         idpedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idpedido))
-        print(" sanhigia_informes______subirLinea: ", idpedido)
-        print(" sanhigia_informes______subirLinea: ", estadopago)
         if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
             resul = {}
             resul['status'] = -1
@@ -91,7 +89,6 @@ class sanhigia_informes(flfactalma):
 
     def sanhigia_informes_insertarLinea(self, cursor, oParam):
         # _i = self.iface
-        print("insertarLinea___model: ", cursor)
         idpedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         curLinea = qsatype.FLSqlCursor(u"lineaspedidoscli")
         curLinea.setModeAccess(curLinea.Insert)
@@ -130,10 +127,8 @@ class sanhigia_informes(flfactalma):
             referencia = cursor.valueBuffer("referencia")
             # codAlmacen = qsatype.FLUtil.sqlSelect(u"presupuestoscli", u"codalmacen", ustr(u"idpresupuesto = '", idpresupuesto, u"'"))
             codAlmacen = "ALM"
-            print("codAlmacen: ", codAlmacen)
             cantidad = 1
             disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
-            print("subirLineaPres____disponible", disponible)
             if disponible == None:
                 disponible = 0
             if cantidad > disponible:

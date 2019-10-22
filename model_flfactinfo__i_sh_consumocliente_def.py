@@ -23,7 +23,6 @@ class sanhigia_informes(interna):
         #     return False
         if fN == u"i_facturascli_codcliente":
             codagente = qsatype.FLUtil.sqlSelect(u"clientes", u"codagente", ustr(u"codcliente = '", cursor.valueBuffer(u"i_facturascli_codcliente"), u"'"))
-            print("Codagente: ", codagente)
             cursor.setValueBuffer("i_facturascli_codagente", codagente)
 
     def sanhigia_informes_getFilters(self, model, name, template=None):
@@ -34,7 +33,6 @@ class sanhigia_informes(interna):
                 return filters
             else:
                 codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
-                print("codagente: ", codagente)
                 if not codagente:
                     codagente = '-1'
                 return [{'criterio': 'i_facturascli_codagente__exact', 'valor': codagente}]
@@ -67,14 +65,12 @@ class sanhigia_informes(interna):
 
     def sanhigia_informes_iniciaValoresCursor(self, cursor=None):
         usuario = qsatype.FLUtil.nameUser()
-        print("usuario: ", usuario)
         if flfactinfo_def.iface.esadmin(usuario):
             codagente = ''
         else:
             codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
             if not codagente:
                 codagente = ''
-        print("codagente: ", codagente)
         cursor.setValueBuffer(u"i_facturascli_codagente", codagente)
         return True
 
@@ -115,7 +111,6 @@ class sanhigia_informes(interna):
     def sanhigia_informes_dameParamInforme(self, model):
         oParamInforme = {}
         oParamInforme['where'] = ""
-        print("dameParamInforme__model.fechadesde:_", model.d_facturascli_fecha)
         if model.i_facturascli_codcliente.codcliente and model.i_facturascli_codcliente.codcliente != "":
             if oParamInforme['where'] != "":
                 oParamInforme['where'] += " AND "
@@ -132,7 +127,6 @@ class sanhigia_informes(interna):
             if oParamInforme['where'] != "":
                 oParamInforme['where'] += " AND "
             oParamInforme['where'] += "facturascli.fecha <= '" + str(model.h_facturascli_fecha) + "'"
-        print("WHERE_______________: " + oParamInforme['where'])
         return oParamInforme
 
     def sanhigia_informes_dameDireccionCliente(self, codCliente):
@@ -159,7 +153,6 @@ class sanhigia_informes(interna):
             if q.value("provincia") != "" and q.value("provincia") is not None:
                 direccion += q.value("provincia") + " "
         direccion = direccion[:-1]
-        print("Direccion____:", direccion)
         return direccion
 
     def __init__(self, context=None):

@@ -32,8 +32,6 @@ class sanhigia_informes(alta_clientes):
         q.setSelect("nombre, codcliente")
         q.setFrom("clientes")
         # q.setWhere("UPPER(nombre) LIKE '%" + oParam['val'].upper() + "%' OR UPPER(codcliente) LIKE '%" + oParam['val'].upper() + "%' OR UPPER(cifnif) LIKE '%" + oParam['val'].upper() + "%' OR codcliente in (SELECT cc.codcliente FROM contactosclientes cc INNER JOIN crm_contactos cr ON cc.codcontacto = cr.codcontacto WHERE UPPER(cr.nif) LIKE '%" + oParam['val'].upper() + "%')")
-        print(oParam['val'])
-        print(oParam)
         q.setWhere(ustr(u"codagente = '", codagente, u"' AND ((UPPER(nombre) LIKE '%" + oParam['val'].upper() + "%')" + " OR UPPER(codcliente) LIKE '%" + oParam['val'].upper() + "%') AND debaja = false"))
 
         if not q.exec_():
@@ -75,26 +73,20 @@ class sanhigia_informes(alta_clientes):
         ref3 = ''
         refs = ''
         if(filters):
-            print(filters)
             if("[d_fecha]" in filters and filters['[d_fecha]'] != ''):
-                print(filters['[d_fecha]'])
                 #fecha = "'" + filters['[d_fecha]'] + "'"
                 cacheController.setSessionVariable(ustr(u"fecha1_", qsatype.FLUtil.nameUser()), filters['[d_fecha]'])
                 fecha = "'" + cacheController.getSessionVariable(ustr(u"fecha1_", qsatype.FLUtil.nameUser())) + "'"
             if("[referencia_1]" in filters and filters['[referencia_1]'] != ''):
-                print("Hay referencia")
                 cacheController.setSessionVariable(ustr(u"referencia1_", qsatype.FLUtil.nameUser()), filters['[referencia_1]'])
                 ref = "'" + cacheController.getSessionVariable(ustr(u"referencia1_", qsatype.FLUtil.nameUser())) + "'"
             if("[referencia_2]" in filters and filters['[referencia_2]'] != ''):
-                print("Hay referencia")
                 cacheController.setSessionVariable(ustr(u"referencia2_", qsatype.FLUtil.nameUser()), filters['[referencia_2]'])
                 ref2 = "'" + cacheController.getSessionVariable(ustr(u"referencia2_", qsatype.FLUtil.nameUser())) + "'"
             if("[referencia_3]" in filters and filters['[referencia_3]'] != ''):
-                print("Hay referencia")
                 cacheController.setSessionVariable(ustr(u"referencia3_", qsatype.FLUtil.nameUser()), filters['[referencia_3]'])
                 ref3 = "'" + cacheController.getSessionVariable(ustr(u"referencia3_", qsatype.FLUtil.nameUser())) + "'"
         else:
-            print("borrando variables de sesion")
             if cacheController.getSessionVariable(ustr(u"referencia1_", qsatype.FLUtil.nameUser())):
                 cacheController.dropSessionVariable(ustr(u"referencia1_", qsatype.FLUtil.nameUser()))
             if cacheController.getSessionVariable(ustr(u"referencia2_", qsatype.FLUtil.nameUser())):
@@ -123,7 +115,6 @@ class sanhigia_informes(alta_clientes):
         if refs != '':
             refs = refs + ")"
             masWhere = masWhere + refs
-        print("____________ " + masWhere)
         query = {}
         query["tablesList"] = ("clientes,pedidoscli")
         query["select"] = ("c.codcliente, c.nombre, c.email, c.telefono1, MAX(antes.fecha) as fecha, (d.dirtipovia || ' ' || d.direccion || ' ' || d.dirnum || ' - ' || d.ciudad || ' ' || d.codpostal) as direc")
@@ -150,7 +141,6 @@ class sanhigia_informes(alta_clientes):
         ref2 = ''
         ref3 = ''
         masWhere = ''
-        print("-----------------------------------cliente: " + model.codcliente)
         if not cacheController.getSessionVariable(ustr(u"referencia1_", qsatype.FLUtil.nameUser())):
             pass
         else:
@@ -177,7 +167,6 @@ class sanhigia_informes(alta_clientes):
                     masWhere = " AND (lineaspedidoscli.referencia = " + ref3
         if masWhere != '':
             masWhere = masWhere + ')'
-        print("---------------mashwere: " + masWhere)
         query = {}
         query["tablesList"] = ("pedidoscli,lineaspedidoscli")
         query["select"] = ("lineaspedidoscli.referencia, lineaspedidoscli.descripcion, lineaspedidoscli.cantidad, lineaspedidoscli.pvpunitario, lineaspedidoscli.dtopor, pedidoscli.fecha, lineaspedidoscli.pvptotal, pedidoscli.codigo")
@@ -194,26 +183,20 @@ class sanhigia_informes(alta_clientes):
         ref3 = ''
         refs = ''
         if(filters):
-            print(filters)
             if("[d_fecha]" in filters and filters['[d_fecha]'] != ''):
-                print(filters['[d_fecha]'])
                 #fecha = "'" + filters['[d_fecha]'] + "'"
                 cacheController.setSessionVariable(ustr(u"fecha1_", qsatype.FLUtil.nameUser()), filters['[d_fecha]'])
                 fecha = "'" + cacheController.getSessionVariable(ustr(u"fecha1_", qsatype.FLUtil.nameUser())) + "'"
             if("[referencia_1]" in filters and filters['[referencia_1]'] != ''):
-                print("Hay referencia")
                 cacheController.setSessionVariable(ustr(u"referencia1_", qsatype.FLUtil.nameUser()), filters['[referencia_1]'])
                 ref = "'" + cacheController.getSessionVariable(ustr(u"referencia1_", qsatype.FLUtil.nameUser())) + "'"
             if("[referencia_2]" in filters and filters['[referencia_2]'] != ''):
-                print("Hay referencia")
                 cacheController.setSessionVariable(ustr(u"referencia2_", qsatype.FLUtil.nameUser()), filters['[referencia_2]'])
                 ref2 = "'" + cacheController.getSessionVariable(ustr(u"referencia2_", qsatype.FLUtil.nameUser())) + "'"
             if("[referencia_3]" in filters and filters['[referencia_3]'] != ''):
-                print("Hay referencia")
                 cacheController.setSessionVariable(ustr(u"referencia3_", qsatype.FLUtil.nameUser()), filters['[referencia_3]'])
                 ref3 = "'" + cacheController.getSessionVariable(ustr(u"referencia3_", qsatype.FLUtil.nameUser())) + "'"
         else:
-            print("borrando variables de sesion")
             if cacheController.getSessionVariable(ustr(u"referencia1_", qsatype.FLUtil.nameUser())):
                 cacheController.dropSessionVariable(ustr(u"referencia1_", qsatype.FLUtil.nameUser()))
             if cacheController.getSessionVariable(ustr(u"referencia2_", qsatype.FLUtil.nameUser())):
@@ -242,7 +225,6 @@ class sanhigia_informes(alta_clientes):
         if refs != '':
             refs = refs + ")"
             masWhere = masWhere + refs
-        print("____________ " + masWhere)
         query = {}
         query["tablesList"] = ("clientes,pedidoscli")
         query["select"] = ("c.codcliente, c.nombre, c.email, c.telefono1, MIN(antes.fecha) as fecha, (d.dirtipovia || ' ' || d.direccion || ' ' || d.dirnum || ' - ' || d.ciudad || ' ' || d.codpostal) as direc")
@@ -263,15 +245,10 @@ class sanhigia_informes(alta_clientes):
         if(filters):
             if filters['[trimestre]'] and filters['[trimestre]'] != "":
                 # trimestre = filters['[trimestre]']
-                print(filters['[trimestre]'])
                 cacheController.setSessionVariable(ustr(u"trimestre_", qsatype.FLUtil.nameUser()), filters['[trimestre]'])
                 trimestre = "'" + cacheController.getSessionVariable(ustr(u"trimestre_", qsatype.FLUtil.nameUser())) + "'"
-                print(trimestre)
             if filters['[anio_1]'] and filters['[anio_1]'] != "":
-                print("anio1-1: " + filters['[anio_1]'])
-                print("TRIMESTRE: " + trimestre)
                 if trimestre == "":
-                    print("anio1: " + filters['[anio_1]'])
                     anio1 = "'" + filters['[anio_1]'] + "-01-01'"
                     anio1f = "'" + filters['[anio_1]'] + "-12-31'"
                 elif trimestre == "'T1'":
@@ -289,10 +266,7 @@ class sanhigia_informes(alta_clientes):
                 cacheController.setSessionVariable(ustr(u"anio1_", qsatype.FLUtil.nameUser()), anio1)
                 cacheController.setSessionVariable(ustr(u"anio1f_", qsatype.FLUtil.nameUser()), anio1f)
             if filters['[anio_2]'] and filters['[anio_2]'] != "":
-                print("anio2-2: " + filters['[anio_2]'])
-                print("TRIMESTRE 2: " + trimestre)
                 if trimestre == "":
-                    print("anio2: " + filters['[anio_2]'])
                     anio2 = "'" + filters['[anio_2]'] + "-01-01'"
                     anio2f = "'" + filters['[anio_2]'] + "-12-31'"
                 elif trimestre == "'T1'":
@@ -309,8 +283,6 @@ class sanhigia_informes(alta_clientes):
                     anio2f = "'" + filters['[anio_2]'] + "-12-31'"
                 cacheController.setSessionVariable(ustr(u"anio2_", qsatype.FLUtil.nameUser()), anio2)
                 cacheController.setSessionVariable(ustr(u"anio2f_", qsatype.FLUtil.nameUser()), anio2f)
-            print(anio1f)
-            print(anio2f)
         if not anio1 or anio1 == "''":
             anio1 = "'2100-01-01'"
             anio1f = "'2100-01-01'"
@@ -319,7 +291,6 @@ class sanhigia_informes(alta_clientes):
             anio2 = "'2100-01-01'"
             anio2f = "'2100-01-01'"
             where = "1 = 2"
-        print('Seguimos con la query')
         usuario = qsatype.FLUtil.nameUser()
         codGrupo = qsatype.FLUtil.sqlSelect(u"flusers", u"idgroup", ustr(u"iduser = '", usuario, u"' AND idgroup = 'Administracion'"))
         if not codGrupo:

@@ -12,7 +12,6 @@ class sanhigia_informes(flfactinfo):
         #     return False
         if fN == u"i_pedidoscli_codcliente":
             codagente = qsatype.FLUtil.sqlSelect(u"clientes", u"codagente", ustr(u"codcliente = '", cursor.valueBuffer(u"i_pedidoscli_codcliente"), u"'"))
-            print("Codagente: ", codagente)
             cursor.setValueBuffer("i_pedidoscli_codagente", codagente)
 
     def sanhigia_informes_getFilters(self, model, name, template=None):
@@ -23,11 +22,9 @@ class sanhigia_informes(flfactinfo):
                 return filters
             else:
                 codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
-                print("codagente: ", codagente)
                 if not codagente:
                     codagente = '-1'
                 return [{'criterio': 'i_pedidoscli_codagente__exact', 'valor': codagente}]
-        print("Filters: ", filters)
         return filters
 
     def sanhigia_informes_getForeignFields(self, model, template=None):
@@ -95,8 +92,6 @@ class sanhigia_informes(flfactinfo):
         report['params']['WHERE'] = oParam['where']
         report['params']['ORDERBY'] = "pedidoscli.codigo"
         report['disposition'] = "inline"
-        print("lineas_____________", model.lineas)
-        print("Report___________________:", report)
         return report
 
     def sanhigia_informes_dameParamInforme(self, model):
@@ -214,8 +209,6 @@ class sanhigia_informes(flfactinfo):
             oParamInforme['order'] = " ORDER BY pedidoscli.codigo"
         else:
             oParamInforme['order'] = " ORDER BY " + oParamInforme['order']
-        print("WHERE_______________: " + oParamInforme['where'])
-        print("ORDER_______________: " + oParamInforme['order'])
         return oParamInforme
 
     # def sanhigia_report_pedidoscli(self, model, cursor):

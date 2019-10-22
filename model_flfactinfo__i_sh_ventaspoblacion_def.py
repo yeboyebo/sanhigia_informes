@@ -26,7 +26,6 @@ class sanhigia_informes(interna):
                 return filters
             else:
                 codagente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
-                print("codagente: ", codagente)
                 if not codagente:
                     codagente = '-1'
                 return [{'criterio': 'i_facturascli_codagente__exact', 'valor': codagente}]
@@ -101,7 +100,6 @@ class sanhigia_informes(interna):
             if oParamInforme['where'] != "":
                 oParamInforme['where'] += " AND "
             oParamInforme['where'] += "facturascli.fecha <= '" + str(model.h_facturascli_fecha) + "'"
-        print("WHERE_______________: " + oParamInforme['where'])
         return oParamInforme
 
     def __init__(self, context=None):
