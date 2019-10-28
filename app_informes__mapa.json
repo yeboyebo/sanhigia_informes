@@ -1,0 +1,87 @@
+{
+    "querystring": {},
+    "schema": {
+        "mapa": {
+            "custom": "generaMapaDirecciones"
+        }
+    },
+    "layout": {
+        "groupBoxPadre": {
+            "componente": "YBGroupBox",
+            "className": "",
+            "style": {},
+            "layout": {
+                "mapaDireccionesCliente": {
+                    "label": "Análisis",
+                    "classFilter": "col-md-4 filtroMapa",
+                    "classMap": "col-md-8 mapa",
+                    "componente": "YBMap",
+                    "filter": {
+                    	"radio": {
+                            "filterType": "custom",
+                            "tipo": 16,
+                            "key": "radio",
+                            "label": "Radio en KM"
+                        },
+                        "codcliente": {
+                            "filterType": "custom",
+                            "tipo": 55,
+                            "tofield": "codcliente",
+                            "key": "codcliente",
+                            "desc": "nombre",
+                            "showpk": false,
+                            "rel": "clientes",
+                            "label": "Cliente Referencia"
+                        },
+                        "referencia": {
+                            "filterType": "custom",
+                            "tipo": 55,
+                            "tofield": "referencia",
+                            "key": "referencia",
+                            "desc": "descripcion",
+                            "showpk": false,
+                            "rel": "articulos",
+                            "label": "Artículo Referencia"
+                        },
+                        "referencia2": {
+                            "filterType": "custom",
+                            "tipo": 55,
+                            "tofield": "referencia",
+                            "key": "referencia2",
+                            "desc": "descripcion",
+                            "showpk": false,
+                            "rel": "articulos",
+                            "label": "Artículo Referencia"
+                        },
+                        "referencia3": {
+                            "filterType": "custom",
+                            "tipo": 55,
+                            "tofield": "referencia",
+                            "key": "referencia3",
+                            "desc": "descripcion",
+                            "showpk": false,
+                            "rel": "articulos",
+                            "label": "Artículo Referencia"
+                        },
+                        "facturacion": {
+                            "filterType": "custom",
+                            "tipo": 16,
+                            "key": "facturacion",
+                            "label": "Mínimo de facturación"
+                        },
+                        "fechainicio": {
+                            "filterType": "custom",
+                            "tipo": 28,
+                            "key": "fechainicio",
+                            "label": "Fecha"
+                        }
+                    },
+                    "prefix": "mapa",
+                    "function": "getMapaDirecciones"
+                }
+            }
+        }
+    },
+    "acciones": {},
+    "drawIf": {}
+}

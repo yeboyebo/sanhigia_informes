@@ -1,7 +1,9 @@
 
 # @class_declaration sanhigia_informes #
 from YBLEGACY.constantes import *
-
+import datetime
+from datetime import date
+import calendar
 
 class sanhigia_informes(alta_clientes):
 
@@ -38,9 +40,170 @@ class sanhigia_informes(alta_clientes):
 
         return data
 
+    def sanhigia_informes_calculaDatosMapaDirecciones(self, oParam):
+        print("el oparam es: ",oParam)
+        mapa = {}
+        mapa["locations"] = []
+        having = ""
+        lineas = ""
+        where = "d.geo_estadogeo = 'OK'"
+        whereLatitudLongitud = "d.geo_estadogeo = 'OK'"
+        whereReferencias =""
+        hoy = date.today()
+        ultimo = calendar.monthrange(hoy.year,hoy.month)[1]
+        #print ("hoy es: ", hoy)
+        if not oParam:
+            mapa["locations"] = [
+                # ["Pol. ind. Lastra Monegros","prueba", 41.482558, -0.151526]
+                ["Pol. ind. Lastra Monegros", 41.482558, -0.151526]
+            ]
+            mapa["center"] = {"lat": 41.482558, "lng": -0.151526}
+            where += " AND f.fecha BETWEEN '{}-01-01' AND '{}-{}-{}'".format(str(hoy.year), str(hoy.year), str(hoy.month), str(ultimo))
+            return mapa
+
+        if oParam:
+            if "codcliente" in oParam:
+                whereLatitudLongitud += " AND d.codcliente =  '{}'".format(oParam["codcliente"])
+
+                latitud = qsatype.FLUtil.sqlSelect("dirclientes d", "DISTINCT(d.geo_latitud)", whereLatitudLongitud + " AND d.domfacturacion=true")
+                longitud = qsatype.FLUtil.sqlSelect("dirclientes d", "DISTINCT(d.geo_longitud)", whereLatitudLongitud + "AND d.domfacturacion=true")
+
+                if latitud == None and longitud == None:
+                    # Aquí debe de dar un error o alerta
+                    mapa["locations"] = [
+                        ["Pol. ind. Lastra Monegros", 41.482558, -0.151526]
+                    ]
+                    mapa["center"] = {"lat": 41.482558, "lng": -0.151526}
+                    return mapa
+                else:
+                    mapa["center"] = {"lat": latitud, "lng": longitud}
+
+                # mapa["center"] = {"lat": centerLa, "lng": centerLo}
+            if "d_fechainicio" not in oParam and "h_fechainicio" not in oParam and "fecha" not in oParam:
+                where += " AND f.fecha BETWEEN '{}-01-01' AND '{}-{}-{}'".format(str(hoy.year), str(hoy.year), str(hoy.month), str(ultimo))
+            else:
+                if "d_fechainicio" in oParam:
+                    where += " AND f.fecha BETWEEN ' {} ' AND ' {} '".format(oParam["d_fechainicio"], oParam["h_fechainicio"])
+                if "fecha" in oParam:
+                    where += "AND f.fecha = '{}'".format(oParam["fecha"])
+
+            if "radio" in oParam:
+                # latitud = qsatype.FLUtil.sqlSelect("dirclientes d", "DISTINCT(d.geo_latitud)", whereLatitudLongitud + " AND d.domfacturacion=true")
+                # longitud = qsatype.FLUtil.sqlSelect("dirclientes d", "DISTINCT(d.geo_longitud)", whereLatitudLongitud + " AND d.domfacturacion=true")
+
+                latitudT = latitud + (int(oParam["radio"])/110.57)
+                latitudT = round(latitudT,6)
+
+                longitudT = longitud + (int(oParam["radio"])/111.32)
+                longitudT = round(longitudT,6)
+
+                where += " AND d.geo_latitud BETWEEN "+str(latitud)+" AND "+str(latitudT)+ "AND d.geo_longitud BETWEEN "+str(longitud)+" AND "+str(longitudT)
+
+            else:
+                # latitud = qsatype.FLUtil.sqlSelect("dirclientes d", "DISTINCT(d.geo_latitud)", whereLatitudLongitud + " AND d.domfacturacion=true")
+                # longitud = qsatype.FLUtil.sqlSelect("dirclientes d", "DISTINCT(d.geo_longitud)", whereLatitudLongitud + " AND d.domfacturacion=true")
+
+                latitudT = latitud+(1/110.57)
+                latitudT = round(latitudT,6)
+
+                longitudT = longitud+(1/111.32)
+                longitudT = round(longitudT,6)
+
+                where += " AND d.geo_latitud BETWEEN "+str(latitud)+" AND "+str(latitudT)+ " AND d.geo_longitud BETWEEN "+str(longitud)+" AND "+str(longitudT)
+
+            if "facturacion" in oParam:
+                having = " HAVING SUM(f.neto) > {}".format(oParam["facturacion"])
+            else:
+                having = " HAVING SUM(f.neto) >= 100"
+
+            if "referencia" in oParam or "referencia2" in oParam or "referencia3" in oParam:
+                referencias = []
+                separador = ","
+                lineas += "INNER JOIN lineasfacturascli l ON f.idfactura = l.idfactura"
+                if "referencia" in oParam:
+                    referencias.append("'"+oParam["referencia"]+"'")
+                if "referencia2" in oParam:
+                    referencias.append("'"+oParam["referencia2"]+"'")
+                if "referencia3" in oParam:
+                    referencias.append("'"+oParam["referencia3"]+"'")
+
+                where += " AND l.referencia IN ({})".format(separador.join(referencias))
+                # print("prueba where: ",where1)
+
+
+        q = qsatype.FLSqlQuery()
+        q.setTablesList("dirclientes, facturascli, clientes")
+        q.setSelect("d.geo_latitud, d.direccion, d.geo_longitud, c.nombre, SUM(f.neto), d.dirotros")
+        q.setFrom("dirclientes d INNER JOIN clientes c ON d.codcliente = c.codcliente INNER JOIN facturascli f ON c.codcliente = f.codcliente {}".format(lineas))
+        # q.setFrom("dirclientes d INNER JOIN facturascli f ON d.codcliente = f.codcliente")
+        q.setWhere("{} GROUP BY f.codcliente, d.id, c.codcliente {} LIMIT 20".format(where, having))
+        #q.setWhere("1 =1 LIMIT 200")
+        if not q.exec_():
+            return []
+
+
+
+        # print(q.size())
+        # if q.size() == 20:
+        #     mapa["locations"] = [
+        #         ["Pol. ind. Lastra Monegros", 41.482558, -0.151526]
+        #     ]
+        #     mapa["center"] = {"lat": 41.482558, "lng": -0.151526}
+        # else:
+        while q.next():
+            print("el label es: ", q.value(5))
+            totalNeto = q.value(4)
+            totalNeto = qsatype.FLUtil.roundFieldValue(totalNeto, "facturascli", "neto")
+            if(q.value(5) == None):
+                label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+"<br> Facturación total: "+str(totalNeto)+" €"
+            else:
+                label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+" "+q.value(5)+"<br> Facturación total: "+str(totalNeto)+" €"
+            mapa["locations"].append([label, q.value(0), q.value(2)])
+            # mapa["center"] = {"lat": q.value(1), "lng": q.value(2)}
+        # mapa["center"] = {"lat": 41.482558, "lng": -0.151526}
+        #data.append({"id": str(q.value(0)), "descripcion": descripcion})
+
+
+        # mapa["locations"] = [
+        #      ['Label 1', 47.453740, 19.142052],
+        #      ['Label 2', 47.502547, 19.038126],
+        #      ['Label 3', 47.650821, 19.020171],
+        #      ['Label 4', 47.490881, 19.012405],
+        #      ['Label 5', 47.562505, 19.087996],
+        #      ['Label 6', 47.481118, 19.250704],
+        #      ['Label 7', 47.569537, 19.098241],
+        #      ['Label 8', 47.496817, 19.030732],
+        #      ['Label 9', 47.480566, 19.276519],
+        #      ['Label 10', 47.478538, 19.046445],
+        #      ['Label 11', 47.435689, 19.210308],
+        #      ['Label 12', 47.492465, 19.052041],
+        #      ['Label 13', 47.523764, 19.096748],
+        #      ['Label 14', 47.521279, 19.161779],
+        #      ['Label 15', 47.438614, 19.183433],
+        #      ['Label 16', 47.501973, 19.034013]
+        #    ]
+        # mapa["center"] = {"lat": 47.538736, "lng": 19.04631}
+        print(mapa)
+        return mapa
+
+    def sanhigia_informes_generaMapaDirecciones(self, model, template):
+        return self.iface.calculaDatosMapaDirecciones({})
+
+    def sanhigia_informes_getMapaDirecciones(self, oParam):
+        return self.iface.calculaDatosMapaDirecciones(oParam)
+
     def __init__(self, context=None):
         super().__init__(context)
 
     def getDireccion(self, model, oParam):
         return self.ctx.sanhigia_informes_getDireccion(model, oParam)
+
+    def generaMapaDirecciones(self, model, template):
+        return self.ctx.sanhigia_informes_generaMapaDirecciones(model, template)
+
+    def getMapaDirecciones(self, oParam):
+        return self.ctx.sanhigia_informes_getMapaDirecciones(oParam)
+
+    def calculaDatosMapaDirecciones(self, oParam):
+        return self.ctx.sanhigia_informes_calculaDatosMapaDirecciones(oParam)
 

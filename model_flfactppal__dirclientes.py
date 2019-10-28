@@ -10,3 +10,11 @@ class sanhigia_informes_dirclientes(alta_clientes_dirclientes, helpers.MixinConA
     def getDireccion(self, oParam):
         return form.iface.getDireccion(self, oParam)
 
+    @helpers.decoradores.accion(aqparam=["oParam"])
+    def generaMapaDirecciones(self, model, template):
+        return form.iface.generaMapaDirecciones(model, template)
+
+    @helpers.decoradores.accion(aqparam=["oParam"])
+    def getMapaDirecciones(self, oParam):
+        return form.iface.getMapaDirecciones(oParam)
+

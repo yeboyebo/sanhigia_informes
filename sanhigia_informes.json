@@ -102,10 +102,6 @@
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
-                "name": "app_informes__menu_informes.json",
-                "path": "apps/informes/templates/informes/"
-            },
-            {
                 "name": "app_informes__pedidoscli.json",
                 "path": "apps/informes/templates/informes/plantillas/"
             },
@@ -280,6 +276,14 @@
             {
                 "path": "models/flfactppal/",
                 "name": "model_flfactppal__sh_previsiones_def.py"
+            },
+            {
+                "name": "app_informes__mapa.json",
+                "path": "apps/informes/templates/informes/plantillas/"
+            },
+            {
+                "name": "client.css",
+                "path": "assets/dist/css/"
             }
         ],
         "patchJson": [
@@ -358,6 +362,10 @@
             {
                 "name": "app_facturacion__lineaspedidoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
+            },
+            {
+                "name": "app_informes__menu_informes.json",
+                "path": "apps/informes/templates/informes/"
             }
         ],
         "patchScript": [
