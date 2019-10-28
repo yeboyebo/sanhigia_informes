@@ -58,7 +58,6 @@ class sanhigia_informes(interna):
         return desc
 
     def sanhigia_informes_enviarPedidoPDA(self, model, oParam):
-        print("hola mundo")
         try:
             response = True
             _i = self.iface
@@ -124,7 +123,6 @@ class sanhigia_informes(interna):
                     direccion += u" " + ustr(u"", eValor)
 
                 if eCampo.nombre == "coddir" and eValor != "":
-                    print("Direccion: ", direccion)
                     cuerpo += "<td align='left'>" + direccion + "</td>"
                 xCampo.text = ustr(u"", eValor)
             xLineas = ET.SubElement(xPedido, "lineas")
@@ -163,11 +161,9 @@ class sanhigia_informes(interna):
             # ruta = os.curdir
             # separador = os.sep
             # fichero = ruta + separador + model.codigo + ".xml"
-            print("Ruta y Fichero: ", fichero)
             xmlArbol.write(fichero)
             oDM = _i.datosConfigMailPDA()
             nombreCorreo = qsatype.FLUtil.sqlSelect(u"factppal_general", u"sh_mailrecepcion", ustr(u"1 = ", 1))
-            print("nombreCorreo: ", nombreCorreo)
             # connection = notifications.get_connection("smtp.gmail.com", "sanhigiapedidos@gmail.com", "a3b2z4Z4", "465", "SSL")
             connection = notifications.get_connection(oDM.hostcorreosaliente, oDM.usuariosmtp, oDM.passwordsmtp, oDM.puertosmtp, oDM.tipocxsmtp)
             response = notifications.sendMail(connection, oDM.usuariosmtp, asunto, cuerpo, [nombreCorreo], fichero)
@@ -237,8 +233,6 @@ class sanhigia_informes(interna):
 
     def sanhigia_informes_queryGrid_histArticulosCli(self, model, filters):
         idpedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
-        print("IDPedido: ", idpedido)
-        print("IDPedido 2: ", model.idpedido)
         query = {}
         query["tablesList"] = ("articulos,lineaspedidoscli,pedidoscli")
         query["select"] = ("articulos.referencia, articulos.descripcion, MAX(pedidoscli.fecha) as fecha")
@@ -259,17 +253,11 @@ class sanhigia_informes(interna):
             return False
         if q.first():
             oDM.hostcorreosaliente = q.value("sh_hostcorreosaliente")
-            print("hostcorreosaliente", oDM.hostcorreosaliente)
             oDM.puertosmtp = q.value("sh_puertosmtp")
-            print("puertosmtp", oDM.puertosmtp)
             oDM.tipocxsmtp = q.value("sh_tipocxsmtp")
-            print("tipocxsmtp", oDM.tipocxsmtp)
             oDM.tipoautsmtp = q.value("sh_tipoautsmtp")
-            print("tipoautsmtp", oDM.tipoautsmtp)
             oDM.usuariosmtp = q.value("sh_usuariosmtp")
-            print("usuariosmtp", oDM.usuariosmtp)
             oDM.passwordsmtp = q.value("sh_passwordsmtp")
-            print("passwordsmtp", oDM.passwordsmtp)
         return oDM
 
     def __init__(self, context=None):

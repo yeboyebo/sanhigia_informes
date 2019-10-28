@@ -139,7 +139,7 @@
                             "className": "",
                             "style": {},
                             "layout": {
-                                "articuosForm": {
+                                "observacionesForm": {
                                     "prefix": "pedidoscli",
                                     "componente": "YBForm",
                                     "class": "claseGrid",
@@ -530,13 +530,19 @@
             }
         },
         {
-            "type": "deleteNode",
-            "path": "/focus",
-            "value": null
+            "type": "insertAfterNode",
+            "path": "/drawIf/root",
+            "value": {
+                "parentGroupBox": {
+                    "pedidoscliForm": "drawIf_pedidoscliForm",
+                    "articuosForm": "drawIf_pedidoscliForm",
+                    "observacionesForm": "drawIf_pedidoscliForm"
+                }
+            }
         },
         {
             "type": "deleteNode",
-            "path": "/drawIf",
+            "path": "/focus",
             "value": null
         }
     ]

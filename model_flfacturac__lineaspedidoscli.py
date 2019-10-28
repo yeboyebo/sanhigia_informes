@@ -51,3 +51,6 @@ class sanhigia_informes_lineaspedidoscli(flfacturac_lineaspedidoscli, helpers.Mi
     def copiaDatosLinea(self, curLP):
         return form.iface.copiaDatosLinea(self, curLP)
 
+    def drawIf_lineaspedidoscliForm(cursor):
+        return form.iface.drawIf_lineaspedidoscliForm(cursor)
+

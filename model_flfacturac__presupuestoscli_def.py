@@ -15,7 +15,7 @@ class sanhigia_informes(flfacturac):
     def sanhigia_informes_getFilters(self, model, name, template=None):
         filters = []
         if name == 'presupuestosUsuario':
-            filters = [{'criterio': 'editable__exact', 'valor': True}]
+            # filters = [{'criterio': 'editable__exact', 'valor': True}]
             usuario = qsatype.FLUtil.nameUser()
             codGrupo = qsatype.FLUtil.sqlSelect(u"flusers", u"idgroup", ustr(u"iduser = '", usuario, u"' AND idgroup = 'Administracion'"))
             if codGrupo:

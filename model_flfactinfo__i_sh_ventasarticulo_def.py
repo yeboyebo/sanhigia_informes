@@ -81,8 +81,6 @@ class sanhigia_informes(interna):
         _i = self.iface
         report = {}
         oParam = {}
-        print("generarReport__model.fechadesde: ", model.fechadesde)
-        print("generarReport__model.fechahasta: ", model.fechahasta)
         oParam = _i.dameParamInforme(model)
         report['reportName'] = "i_sh_ventasarticulo"
         report['params'] = {}
@@ -108,7 +106,6 @@ class sanhigia_informes(interna):
     def sanhigia_informes_dameParamInforme(self, model):
         oParamInforme = {}
         oParamInforme['where'] = ""
-        print("dameParamInforme__model.fechadesde:_", model.fechadesde)
         if model.codagente and model.codagente.codagente != "":
             if oParamInforme['where'] != "":
                 oParamInforme['where'] += " AND "
@@ -133,7 +130,6 @@ class sanhigia_informes(interna):
             if oParamInforme['where'] != "":
                 oParamInforme['where'] += " AND "
             oParamInforme['where'] += "articulos.codsubfamilia = '" + str(model.codsubfamilia.codsubfamilia) + "'"
-        print("WHERE_______________: " + oParamInforme['where'])
         return oParamInforme
 
     # def sanhigia_informes_report_ventasarticulo(self, model):
