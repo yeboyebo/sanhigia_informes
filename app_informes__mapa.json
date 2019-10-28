@@ -31,7 +31,8 @@
                             "desc": "nombre",
                             "showpk": false,
                             "rel": "clientes",
-                            "label": "Cliente Referencia"
+                            "label": "Cliente",
+                            "className": "col-md-8"
                         },
                         "referencia": {
                             "filterType": "custom",
@@ -41,7 +42,7 @@
                             "desc": "descripcion",
                             "showpk": false,
                             "rel": "articulos",
-                            "label": "Artículo Referencia"
+                            "label": "Referencia 1"
                         },
                         "referencia2": {
                             "filterType": "custom",
@@ -51,7 +52,7 @@
                             "desc": "descripcion",
                             "showpk": false,
                             "rel": "articulos",
-                            "label": "Artículo Referencia"
+                            "label": "Referencia 2"
                         },
                         "referencia3": {
                             "filterType": "custom",
@@ -61,7 +62,7 @@
                             "desc": "descripcion",
                             "showpk": false,
                             "rel": "articulos",
-                            "label": "Artículo Referencia"
+                            "label": "Referencia 3"
                         },
                         "facturacion": {
                             "filterType": "custom",

@@ -97,7 +97,7 @@ class sanhigia_informes(alta_clientes):
                 longitudT = longitud + (int(oParam["radio"])/111.32)
                 longitudT = round(longitudT,6)
 
-                where += " AND d.geo_latitud BETWEEN "+str(latitud)+" AND "+str(latitudT)+ "AND d.geo_longitud BETWEEN "+str(longitud)+" AND "+str(longitudT)
+                where += " AND d.geo_latitud BETWEEN "+str(latitud)+" AND "+str(latitudT)+ "AND d.geo_longitud BETWEEN "+str(longitud)+" AND "+str(longitudT) + "OR d.geo_latitud=" + str(latitud) + " AND d.geo_longitud = "+ str(longitud)
 
             else:
                 # latitud = qsatype.FLUtil.sqlSelect("dirclientes d", "DISTINCT(d.geo_latitud)", whereLatitudLongitud + " AND d.domfacturacion=true")
@@ -109,7 +109,7 @@ class sanhigia_informes(alta_clientes):
                 longitudT = longitud+(1/111.32)
                 longitudT = round(longitudT,6)
 
-                where += " AND d.geo_latitud BETWEEN "+str(latitud)+" AND "+str(latitudT)+ " AND d.geo_longitud BETWEEN "+str(longitud)+" AND "+str(longitudT)
+                where += " AND d.geo_latitud BETWEEN "+str(latitud)+" AND "+str(latitudT)+ " AND d.geo_longitud BETWEEN "+str(longitud)+" AND "+str(longitudT) + "OR d.geo_latitud=" + str(latitud) + " AND d.geo_longitud = "+ str(longitud)
 
             if "facturacion" in oParam:
                 having = " HAVING SUM(f.neto) > {}".format(oParam["facturacion"])
