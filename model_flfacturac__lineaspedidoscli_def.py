@@ -148,6 +148,7 @@ class sanhigia_informes(flfacturac):
     def sanhigia_informes_cambiarPrecio(self, model, oParam):
         response = {}
         idLinea = model.pk
+        # idLinea = model.idlinea.referencia
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
         estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
         if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
@@ -297,6 +298,17 @@ class sanhigia_informes(flfacturac):
         curNuevaLP.setValueBuffer(u"pvptotal", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvptotal", curNuevaLP))
 
         if not curNuevaLP.commitBuffer():
+            return False
+
+        # if not qsatype.FLUtil.sqlSelect(u"lineaspedidoscli", u"idlinea", ustr(u"idpedido = ", idPedido, u" AND dtopor > 0")):
+        #     if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopago", u"", ustr(u"idpedido = ", idPedido)):
+        #         return False
+        #     if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"pda", u"Pendiente", ustr(u"idpedido = ", idPedido)):
+        #         return False
+        # else:
+        if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopago", u"Borrador con promocion", u"idpedido = {}".format(curLP.valueBuffer("idpedido"))):
+            return False
+        if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"pda", u"Suspendido", u"idpedido = {}".format(curLP.valueBuffer("idpedido"))):
             return False
 
         return True
