@@ -18,3 +18,6 @@ class sanhigia_informes_presupuestoscli(flfacturac_presupuestoscli, helpers.Mixi
     def checkCondiciones(cursor):
         return form.iface.checkCondiciones(cursor)
 
+    def validateCursor(self):
+        return form.iface.validateCursor(self)
+

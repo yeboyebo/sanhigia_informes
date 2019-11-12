@@ -263,6 +263,10 @@ class sanhigia_informes(flfacturac):
 
     def sanhigia_informes_validateCursor(self, cursor):
         estadoPago = cursor.valueBuffer("sh_estadopago")
+        coddir = cursor.valueBuffer("coddir")
+        if not coddir:
+            qsatype.FLUtil.ponMsgError("El campo Dir. no esta informado. Por favor, selecciona un codigo valido.")
+            return False
         if estadoPago is None or estadoPago == u"":
             return True
         elif estadoPago == u"Borrador con promocion":

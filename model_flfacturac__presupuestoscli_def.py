@@ -12,6 +12,13 @@ class sanhigia_informes(flfacturac):
         cacheController.setSessionVariable(ustr(u"presupuestoscli_", qsatype.FLUtil.nameUser()), data["DATA"]["idpresupuesto"])
         return response
 
+    def sanhigia_informes_validateCursor(self, cursor):
+        coddir = cursor.valueBuffer("coddir")
+        if not coddir:
+            qsatype.FLUtil.ponMsgError("El campo Dir. no esta informado. Por favor, selecciona un codigo valido.")
+            return False
+        return True
+
     def sanhigia_informes_getFilters(self, model, name, template=None):
         filters = []
         if name == 'presupuestosUsuario':
@@ -80,6 +87,9 @@ class sanhigia_informes(flfacturac):
 
     def initValidation(self, name, data=None):
         return self.ctx.sanhigia_informes_initValidation(name, data)
+
+    def validateCursor(self, cursor):
+        return self.ctx.sanhigia_informes_validateCursor(cursor)
 
     def getFilters(self, model, name, template=None):
         return self.ctx.sanhigia_informes_getFilters(model, name, template)
