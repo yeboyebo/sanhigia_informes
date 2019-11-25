@@ -246,10 +246,6 @@
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
             {
-                "name": "app_facturacion__newrecordlineaspresupuestoscli.json",
-                "path": "apps/facturacion/templates/facturacion/plantillas/"
-            },
-            {
                 "name": "app_facturacion__lineaspresupuestoscli.json",
                 "path": "apps/facturacion/templates/facturacion/plantillas/"
             },
@@ -284,6 +280,30 @@
             {
                 "name": "client.css",
                 "path": "assets/dist/css/"
+            },
+            {
+                "name": "maps-icon_red.png",
+                "path": "assets/dist/img/icons/"
+            },
+            {
+                "name": "maps-icon_orange.png",
+                "path": "assets/dist/img/icons/"
+            },
+            {
+                "name": "maps-icon_blue.png",
+                "path": "assets/dist/img/icons/"
+            },
+            {
+                "name": "maps-icon_yellow.png",
+                "path": "assets/dist/img/icons/"
+            },
+            {
+                "name": "maps-icon_orange-light.png",
+                "path": "assets/dist/img/icons/"
+            },
+            {
+                "name": "maps-icon_yellow-light.png",
+                "path": "assets/dist/img/icons/"
             }
         ],
         "patchJson": [

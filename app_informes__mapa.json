@@ -5,6 +5,7 @@
             "custom": "generaMapaDirecciones"
         }
     },
+    "title": "GEOLOCALIZACIÓN DE CLIENTES",
     "layout": {
         "groupBoxPadre": {
             "componente": "YBGroupBox",
@@ -17,12 +18,6 @@
                     "classMap": "col-md-8 mapa",
                     "componente": "YBMap",
                     "filter": {
-                    	"radio": {
-                            "filterType": "custom",
-                            "tipo": 16,
-                            "key": "radio",
-                            "label": "Radio en KM"
-                        },
                         "codcliente": {
                             "filterType": "custom",
                             "tipo": 55,
@@ -34,41 +29,42 @@
                             "label": "Cliente",
                             "className": "col-md-8"
                         },
-                        "referencia": {
-                            "filterType": "custom",
-                            "tipo": 55,
-                            "tofield": "referencia",
-                            "key": "referencia",
-                            "desc": "descripcion",
-                            "showpk": false,
-                            "rel": "articulos",
-                            "label": "Referencia 1"
-                        },
-                        "referencia2": {
-                            "filterType": "custom",
-                            "tipo": 55,
-                            "tofield": "referencia",
-                            "key": "referencia2",
-                            "desc": "descripcion",
-                            "showpk": false,
-                            "rel": "articulos",
-                            "label": "Referencia 2"
-                        },
-                        "referencia3": {
-                            "filterType": "custom",
-                            "tipo": 55,
-                            "tofield": "referencia",
-                            "key": "referencia3",
-                            "desc": "descripcion",
-                            "showpk": false,
-                            "rel": "articulos",
-                            "label": "Referencia 3"
-                        },
+                        "referencia_1": {
+		                    "filterType": "custom",
+		                    "tipo": 55,
+		                    "tofield": "referencia",
+		                    "key": "referencia",
+		                    "desc": "descripcion",
+		                    "rel": "articulos",
+		                    "label": "Ref. 1",
+                            "className": "col-md-12"
+		                },
+		                "referencia_2": {
+		                    "filterType": "custom",
+		                    "tipo": 55,
+		                    "tofield": "referencia",
+		                    "key": "referencia",
+		                    "desc": "descripcion",
+		                    "rel": "articulos",
+		                    "label": "Ref. 2",
+                            "className": "col-md-12"
+		                },
+		                "referencia_3": {
+		                    "filterType": "custom",
+		                    "tipo": 55,
+		                    "tofield": "referencia",
+		                    "key": "referencia",
+		                    "desc": "descripcion",
+		                    "rel": "articulos",
+		                    "label": "Ref. 3",
+                            "className": "col-md-12"
+		                },
                         "facturacion": {
                             "filterType": "custom",
                             "tipo": 16,
                             "key": "facturacion",
-                            "label": "Mínimo de facturación"
+                            "label": "Mínimo de facturación",
+                            "value": 200
                         },
                         "fechainicio": {
                             "filterType": "custom",
