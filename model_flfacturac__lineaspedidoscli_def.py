@@ -80,7 +80,9 @@ class sanhigia_informes(flfacturac):
                 if disponibleSust <= 0 or parseFloat(cantidad) > parseFloat(disponibleSust):
                     haystockSust = False
                 else:
+                    descripcionSust = qsatype.FLUtil.sqlSelect(u"articulos", u"descripcion", u"referencia = '{}'".format(refSust))
                     curLP.setValueBuffer("referencia", refSust)
+                    curLP.setValueBuffer("descripcion", descripcionSust)
         if haystock:
             qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.bChCursor("cantidad", curLP)
             if not curLP.commitBuffer():
@@ -130,7 +132,9 @@ class sanhigia_informes(flfacturac):
             # qsatype.FLUtil.ponMsgError("Se ha cambiado la referencia {0} con su artículo sustitutivo {1}.".format(referencia, refSust))
             # return True
             # qsatype.FactoriaModulos.get('flfacturac').iface.pub_establecerSustitutivo(cursor, refSust)
+            descripcionSust = qsatype.FLUtil.sqlSelect(u"articulos", u"descripcion", u"referencia = '{}'".format(refSust))
             cursor.setValueBuffer("referencia", refSust)
+            cursor.setValueBuffer("descripcion", descripcionSust)
             resul = {}
             resul["resul"] = {}
             resul["resul"]['status'] = 2
