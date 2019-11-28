@@ -52,6 +52,11 @@ class sanhigia_informes(alta_clientes):
         whereReferencias =""
         hoy = date.today()
         ultimo = calendar.monthrange(hoy.year,hoy.month)[1]
+        usuario = qsatype.FLUtil.nameUser()
+        codAgente = qsatype.FLUtil.sqlSelect(u"agentes a INNER JOIN usuarios u ON a.idusuario = u.idusuario", u"codagente", ustr(u"u.idusuario = '", usuario, u"'"))
+        if not codAgente:
+            codAgente = '-1'
+
         if not oParam:
             mapa["locations"] = [
                 ["Pol. ind. Lastra Monegros", 41.482558, -0.151526, "blue"]
@@ -101,9 +106,9 @@ class sanhigia_informes(alta_clientes):
                         totalNeto = 0
 
                     if(otros == None):
-                        label = "<strong>"+nombre+"</strong>"+"<br>"+direccion+"<br> Facturación total: "+str(totalNeto)+" €"
+                        label = "<strong>"+nombre+"</strong>"+"<br>"+direccion+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €"
                     else:
-                        label = "<strong>"+nombre+"</strong>"+"<br>"+direccion+" "+otros+"<br> Facturación total: "+str(totalNeto)+" €"
+                        label = "<strong>"+nombre+"</strong>"+"<br>"+direccion+" "+otros+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €"
                     mapa["locations"].append([label, latitud, longitud, "blue"])
             else:
                 latitud = 41.482558
@@ -183,11 +188,14 @@ class sanhigia_informes(alta_clientes):
 
                 where += " AND l.referencia IN ({})".format(separador.join(referencias))
 
+        if codAgente != '-1':
+            where += " AND c.codagente = '{}'".format(codAgente)
+
         q = qsatype.FLSqlQuery()
         q.setTablesList("dirclientes, facturascli, clientes")
         q.setSelect("d.geo_latitud, d.direccion, d.geo_longitud, c.nombre, SUM(f.neto), d.dirotros")
         q.setFrom("dirclientes d INNER JOIN clientes c ON d.codcliente = c.codcliente INNER JOIN facturascli f ON c.codcliente = f.codcliente {}".format(lineas))
-        q.setWhere("{} GROUP BY f.codcliente, d.id, c.codcliente {} ORDER BY SUM(f.neto) DESC LIMIT 50".format(where, having))
+        q.setWhere("{} GROUP BY f.codcliente, d.id, c.codcliente, d.geo_latitud, d.direccion, geo_longitud, c.nombre, d.dirotros {} ORDER BY SUM(f.neto) DESC LIMIT 50".format(where, having))
         print("sql: ", q.sql())
         if not q.exec_():
             return []
@@ -195,9 +203,9 @@ class sanhigia_informes(alta_clientes):
             totalNeto = q.value(4)
             totalNeto = qsatype.FLUtil.roundFieldValue(totalNeto, "facturascli", "neto")
             if(q.value(5) == None):
-                label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+"<br> Facturación total: "+str(totalNeto)+" €"
+                label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €"
             else:
-                label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+" "+q.value(5)+"<br> Facturación total: "+str(totalNeto)+" €"
+                label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+" "+q.value(5)+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €"
             if(float(totalNeto) < float((minimo + (minimo * 25 / 100)))):
                 mapa["locations"].append([label, q.value(0), q.value(2), "yellow_light"])
             elif(float(totalNeto) < float((minimo + (minimo * 50 / 100)))):

@@ -24,6 +24,7 @@
                             "tofield": "codcliente",
                             "key": "codcliente",
                             "desc": "nombre",
+                            "function": "getCliente",
                             "showpk": false,
                             "rel": "clientes",
                             "label": "Cliente",
@@ -70,7 +71,8 @@
                             "filterType": "custom",
                             "tipo": 28,
                             "key": "fechainicio",
-                            "label": "Fecha"
+                            "label": "Fecha",
+                            "value": "ultimoaño"
                         }
                     },
                     "prefix": "mapa",
