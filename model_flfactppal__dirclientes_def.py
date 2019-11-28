@@ -106,10 +106,11 @@ class sanhigia_informes(alta_clientes):
                         totalNeto = 0
 
                     if(otros == None):
-                        label = "<strong>"+nombre+"</strong>"+"<br>"+direccion+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €"
+                        labelCentro = "<strong>"+nombre+"</strong>"+"<br>"+direccion+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €"
                     else:
-                        label = "<strong>"+nombre+"</strong>"+"<br>"+direccion+" "+otros+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €"
-                    mapa["locations"].append([label, latitud, longitud, "blue"])
+                        labelCentro = "<strong>"+nombre+"</strong>"+"<br>"+direccion+" "+otros+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €"
+                    latitudCentro = latitud
+                    longitudCentro = longitud
             else:
                 latitud = 41.482558
                 longitud = -0.151526
@@ -220,6 +221,7 @@ class sanhigia_informes(alta_clientes):
             #     mapa["locations"].append([label, q.value(0), q.value(2), "blue"])
             # else:
             #     mapa["locations"].append([label, q.value(0), q.value(2), "red"])
+        mapa["locations"].append([labelCentro, latitudCentro, longitudCentro, "blue"])
         mapa["zoom"] = oParam["zoom"]
         return mapa
 
