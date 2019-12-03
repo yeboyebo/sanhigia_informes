@@ -4,8 +4,8 @@
             "type": "insertAfterNode",
             "path": "/layout/root",
             "value": {
-                "newRecordLineaspedidoscli": {
-                    "prefix": "lineaspedidoscli",
+                "newRecordLineaspresupuestoscli": {
+                    "prefix": "lineaspresupuestoscli",
                     "componente": "YBForm",
                     "class": "claseGrid",
                     "submit": "create",

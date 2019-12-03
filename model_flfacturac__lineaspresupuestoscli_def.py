@@ -64,7 +64,7 @@ class sanhigia_informes(flfacturac):
         curLP.setModeAccess(curLP.Edit)
         curLP.refreshBuffer()
         curLP.setActivatedBufferCommited(True)
-        curLP.setValueBuffer("cantidad", str(cantidad))
+        curLP.setValueBuffer("cantidad", cantidad)
         qsatype.FactoriaModulos.get('formRecordlineaspresupuestoscli').iface.bChCursor("cantidad", curLP)
         if not curLP.commitBuffer():
             return False
@@ -82,7 +82,7 @@ class sanhigia_informes(flfacturac):
         if referencia is None:
             qsatype.FLUtil.ponMsgError("Error: La referencia no existe o no está selecionada")
             return False
-        if qsatype.FLUtil.sqlSelect(u"articulos", u"sevende", ustr(u"referencia = '", referencia, u"'")) is False:
+        if qsatype.FLUtil.sqlSelect(u"articulos", u"sevende", u"referencia = '{}'".format(referencia)) is False:
             qsatype.FLUtil.ponMsgError("Error: El artículo {0} ya no se vende. Selecciona otro.".format(referencia))
             return False
         return True

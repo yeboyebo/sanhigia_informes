@@ -386,6 +386,10 @@
             {
                 "name": "app_informes__menu_informes.json",
                 "path": "apps/informes/templates/informes/"
+            },
+            {
+                "path": "apps/facturacion/templates/facturacion/plantillas/",
+                "name": "app_facturacion__newrecordlineaspresupuestoscli.json"
             }
         ],
         "patchScript": [
