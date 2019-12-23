@@ -10,6 +10,7 @@ class sanhigia_informes(flfacturac):
 
     def sanhigia_informes_masUno(self, model, oParam):
         _i = self.iface
+        # nombrefun = "masUno"
         idLinea = model.pk
         cantidad = model.cantidad
         cantidad += 1
@@ -25,6 +26,7 @@ class sanhigia_informes(flfacturac):
 
     def sanhigia_informes_menosUno(self, model, oParam):
         _i = self.iface
+        # nombrefun = "menosUno"
         idLinea = model.pk
         cantidad = model.cantidad
         response = {}
@@ -43,6 +45,7 @@ class sanhigia_informes(flfacturac):
 
     def sanhigia_informes_modificarCantidad(self, model, oParam):
         _i = self.iface
+        # nombrefun = "modificarCantidad"
         idLinea = model.pk
         cantidad = oParam['cantidad']
         response = {}
@@ -58,6 +61,8 @@ class sanhigia_informes(flfacturac):
         response = {}
         haystock = True
         haystockSust = True
+        tieneSust = True
+
         curLP = qsatype.FLSqlCursor(u"lineaspedidoscli")
         curLP.select("idlinea = " + str(idLinea))
         if not curLP.first():
@@ -79,68 +84,135 @@ class sanhigia_informes(flfacturac):
                 disponibleSust = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", u"referencia = '{0}' AND codalmacen = '{1}'".format(refSust, codAlmacen))
                 if disponibleSust <= 0 or parseFloat(cantidad) > parseFloat(disponibleSust):
                     haystockSust = False
+                    if "confirmacion" in oParam and oParam["confirmacion"]:
+                        curLP.setValueBuffer("cantidad", cantidad)
+                    else:
+                        response['status'] = 2
+                        response['confirm'] = "El artículo {0} no tiene stock ni tampoco lo tiene su sustitutivo {1}. ¿Desea utilizar el artículo sin stock?".format(referencia, refSust)
+                        return response
                 else:
-                    descripcionSust = qsatype.FLUtil.sqlSelect(u"articulos", u"descripcion", u"referencia = '{}'".format(refSust))
-                    curLP.setValueBuffer("referencia", refSust)
-                    curLP.setValueBuffer("descripcion", descripcionSust)
+                    if "confirmacion" in oParam and oParam["confirmacion"]:
+                        descripcionSust = qsatype.FLUtil.sqlSelect(u"articulos", u"descripcion", u"referencia = '{}'".format(refSust))
+                        curLP.setValueBuffer("referencia", refSust)
+                        curLP.setValueBuffer("descripcion", descripcionSust)
+                    else:
+                        response['status'] = 2
+                        response['confirm'] = "No hay suficiente stock para el artículo {0} en el almacén {1}. ¿Desea utilizar su artículo sustitutivo {2}?".format(referencia, codAlmacen, refSust)
+                        # response['status'] = -1
+                        # response['data'] = {}
+                        # response["prefix"] = "lineaspedidoscli"
+                        # response["title"] = "No hay suficiente stock para el artículo {0} en el almacén {1}. \n Para utilizar el producto sustitutivo  {2} pulsa Sustituir.\nPara mantener el producto actual, pulsa Mantener".format(referencia, codAlmacen, refSust)
+                        # response["serverAction"] = "cambiarCantidad"
+                        # response["customButtons"] = [{"accion": "serverAction", "nombre": "Sustituir", "serverAction": nombrefun}, {"accion": "serverAction", "nombre": "Mantener", "serverAction": "mantenerAriculo"}]
+                        # response["params"] = {}
+                        return response
+            else:
+                tieneSust = False
+                if "confirmacion" in oParam and oParam["confirmacion"]:
+                    curLP.setValueBuffer("cantidad", cantidad)
+                else:
+                    response['status'] = 2
+                    response['confirm'] = "No hay suficiente stock para el artículo {0} en el almacén {1}. ¿Desea utilizar el artículo sin stock?".format(referencia, codAlmacen)
+                    return response
+        qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.bChCursor("cantidad", curLP)
         if haystock:
-            qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.bChCursor("cantidad", curLP)
+            # qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.bChCursor("cantidad", curLP)
             if not curLP.commitBuffer():
                 response["msg"] = "Error al guardar los cambios"
                 response["resul"] = -1
             else:
                 response["msg"] = "Cantidad actualizada correctamente"
                 response["resul"] = 1
-
-        elif haystockSust:
-            qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.bChCursor("cantidad", curLP)
+        elif haystockSust and tieneSust:
+            # qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.bChCursor("cantidad", curLP)
             if not curLP.commitBuffer():
                 response["msg"] = "Error al guardar los cambios"
                 response["resul"] = -1
             else:
-                # response["msg"] = mensaje + "\nCantidad actualizada correctamente"
-                response["msg"] = "Se ha cambiado la referencia {0} con su artículo sustitutivo {1}.\nCantidad actualizada correctamente".format(referencia, refSust)
+                response["msg"] = "Se ha cambiado la referencia {0} con su artículo sustitutivo {1}.<br>Cantidad actualizada correctamente".format(referencia, refSust)
                 response["resul"] = 1
-        else:
-            response["msg"] = "No hay suficiente stock para el artículo {0} y su sustitutivo {1}.\nPor favor, selecciona otro artículo o cambie la cantidad.".format(referencia, refSust)
-            response["resul"] = -1
+        elif not haystockSust and tieneSust:
+            # qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.bChCursor("cantidad", curLP)
+            if not curLP.commitBuffer():
+                response["msg"] = "Error al guardar los cambios"
+                response["resul"] = -1
+            else:
+                response["msg"] = "Se ha utilizado la referencia {0} sin stock.<br>Cantidad actualizada correctamente".format(refSust)
+                response["resul"] = 1
+            # response["msg"] = "No hay suficiente stock para el artículo {0} y su sustitutivo {1}.<br>Por favor, selecciona otro artículo o cambie la cantidad.".format(referencia, refSust)
+            # response["resul"] = -1
+        elif not haystock and not tieneSust:
+            # qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.bChCursor("cantidad", curLP)
+            if not curLP.commitBuffer():
+                response["msg"] = "Error al guardar los cambios"
+                response["resul"] = -1
+            else:
+                response["msg"] = "Se ha utilizado la referencia {0} sin stock.<br>Cantidad actualizada correctamente".format(referencia)
+                response["resul"] = 1
         return response
 
     def sanhigia_informes_validateCursor(self, cursor):
         referencia = cursor.valueBuffer("referencia")
+        idlinea = cursor.valueBuffer("idlinea")
         if referencia is None:
             qsatype.FLUtil.ponMsgError("Error: La referencia no existe o no está seleccionada")
             return False
         if qsatype.FLUtil.sqlSelect(u"articulos", u"sevende", u"referencia = '{}'".format(referencia)) is False:
-            qsatype.FLUtil.ponMsgError("Error: El artículo {0} ya no se vende.\nPor favor, selecciona otro.".format(referencia))
+            qsatype.FLUtil.ponMsgError("Error: El artículo {0} ya no se vende.<br>Por favor, selecciona otro.".format(referencia))
             return False
         codAlmacen = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codalmacen", u"idpedido = {}".format(cursor.valueBuffer("idpedido")))
         cantidad = parseFloat(cursor.valueBuffer("cantidad"))
         disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", u"referencia = '{0}' AND codalmacen = '{1}'".format(referencia, codAlmacen))
         if not disponible:
             disponible = 0
-        if cantidad > parseFloat(disponible):
-            refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", u"referencia = '{}'".format(referencia))
-            if not refSust or refSust == u"":
-                qsatype.FLUtil.ponMsgError("Para la referencia {0} no existe ningún artículo sustitutivo disponible.\nPor favor, selecciona otro artículo.".format(referencia))
-                return False
-            disponibleSust = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", u"referencia = '{0}' AND codalmacen = '{1}'".format(refSust, codAlmacen))
-            if disponibleSust <= 0 or cantidad > parseFloat(disponibleSust):
-                qsatype.FLUtil.ponMsgError("No hay suficiente stock para el artículo {0} y su sustitutivo {1}.\nPor favor, selecciona otro artículo o cambie la cantidad.".format(referencia, refSust))
-                return False
-            # Lo comento porque no me sale el toast de aviso de cambio con el sustitutivo
-            # qsatype.FLUtil.ponMsgError("Se ha cambiado la referencia {0} con su artículo sustitutivo {1}.".format(referencia, refSust))
-            # return True
-            # qsatype.FactoriaModulos.get('flfacturac').iface.pub_establecerSustitutivo(cursor, refSust)
-            descripcionSust = qsatype.FLUtil.sqlSelect(u"articulos", u"descripcion", u"referencia = '{}'".format(refSust))
-            cursor.setValueBuffer("referencia", refSust)
-            cursor.setValueBuffer("descripcion", descripcionSust)
-            resul = {}
-            resul["resul"] = {}
-            resul["resul"]['status'] = 2
-            resul["resul"]['confirm'] = "No hay suficiente stock para el artículo {0} en el almacén {1}. ¿Desea utilizar su artículo sustitutivo {2}?".format(referencia, codAlmacen, refSust)
-            resul["resul"]['onconfirm'] = "changedata"
-            return resul
+        sustituyo = cacheController.getSessionVariable(u"pregustaSust")
+        if not sustituyo or (sustituyo and sustituyo != idlinea):
+            if cantidad > parseFloat(disponible):
+                refSust = qsatype.FLUtil.sqlSelect(u"articulos", u"refsustitutivo", u"referencia = '{}'".format(referencia))
+                if not refSust or refSust == u"":
+                    # qsatype.FLUtil.ponMsgError("Para la referencia {0} no existe ningún artículo sustitutivo disponible.\nPor favor, selecciona otro artículo.".format(referencia))
+                    # return False
+                    resul = {}
+                    resul["resul"] = {}
+                    resul["resul"]['status'] = 2
+                    resul["resul"]['confirm'] = "El artículo {0} no tiene stock y no tiene sustitutivo<br> Para utilizar el artículo sin stock pulsa Confirmar y vuelve a guardar la línea.".format(referencia)
+                    resul["resul"]['onconfirm'] = "changedata"
+                    # cacheController.setSessionVariable(u"pregustaSust", referencia)
+                    cacheController.setSessionVariable(u"pregustaSust", idlinea)
+                    return resul
+                disponibleSust = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", u"referencia = '{0}' AND codalmacen = '{1}'".format(refSust, codAlmacen))
+                if disponibleSust <= 0 or cantidad > parseFloat(disponibleSust):
+                    # qsatype.FLUtil.ponMsgError("No hay suficiente stock para el artículo {0} y su sustitutivo {1}.<br>Por favor, selecciona otro artículo o cambie la cantidad.".format(referencia, refSust))
+                    # return False
+                    descripcionSust = qsatype.FLUtil.sqlSelect(u"articulos", u"descripcion", u"referencia = '{}'".format(refSust))
+                    cursor.setValueBuffer("referencia", refSust)
+                    cursor.setValueBuffer("descripcion", descripcionSust)
+                    resul = {}
+                    resul["resul"] = {}
+                    resul["resul"]['status'] = 2
+                    resul["resul"]['confirm'] = "El artículo {0} no tiene stock ni tampoco lo tiene su sustitutivo {1} en el almacén {2}. <br>Para utilizar el artículo sustitutivo {1} sin stock pulsa Confirmar y vuelve a guardar la línea.<br>Para utilizar el producto actual {0} sin stock, pulsa Cancelar y vuelve a guardar la línea".format(referencia, refSust, codAlmacen)
+                    resul["resul"]['onconfirm'] = "changedata"
+                    # cacheController.setSessionVariable(u"pregustaSust", referencia)
+                    cacheController.setSessionVariable(u"pregustaSust", idlinea)
+                    return resul
+                # Lo comento porque no me sale el toast de aviso de cambio con el sustitutivo
+                # qsatype.FLUtil.ponMsgError("Se ha cambiado la referencia {0} con su artículo sustitutivo {1}.".format(referencia, refSust))
+                # return True
+                # qsatype.FactoriaModulos.get('flfacturac').iface.pub_establecerSustitutivo(cursor, refSust)
+                descripcionSust = qsatype.FLUtil.sqlSelect(u"articulos", u"descripcion", u"referencia = '{}'".format(refSust))
+                cursor.setValueBuffer("referencia", refSust)
+                cursor.setValueBuffer("descripcion", descripcionSust)
+                resul = {}
+                resul["resul"] = {}
+                resul["resul"]['status'] = 2
+                resul["resul"]['confirm'] = "No hay suficiente stock para el artículo {0} en el almacén {1}. <br> Para utilizar el producto sustitutivo  {2} pulsa Confirmar y vuelve a guardar la línea<br>Para utilizar el producto actual {0} sin stock, pulsa Cancelar y vuelve a guardar la línea".format(referencia, codAlmacen, refSust)
+                resul["resul"]['onconfirm'] = "changedata"
+                # cacheController.setSessionVariable(u"pregustaSust", referencia)
+                cacheController.setSessionVariable(u"pregustaSust", idlinea)
+                return resul
+        else:
+            if sustituyo:
+                cacheController.dropSessionVariable("pregustaSust")
         return True
 
     def sanhigia_informes_cambiarPrecio(self, model, oParam):

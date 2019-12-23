@@ -18,8 +18,8 @@ class sanhigia_informes_lineaspedidoscli(flfacturac_lineaspedidoscli, helpers.Mi
     def modificarCantidad(self, oParam):
         return form.iface.modificarCantidad(self, oParam)
 
-    def cambiarCantidad(self, idLinea, cantidad):
-        return form.iface.cambiarCantidad(self, idLinea, cantidad)
+    def cambiarCantidad(idLinea, cantidad, oParam):
+        return form.iface.cambiarCantidad(idLinea, cantidad, oParam)
 
     def validateCursor(self):
         return form.iface.validateCursor(self)
