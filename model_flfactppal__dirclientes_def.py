@@ -194,29 +194,54 @@ class sanhigia_informes(alta_clientes):
 
         q = qsatype.FLSqlQuery()
         q.setTablesList("dirclientes, facturascli, clientes")
-        q.setSelect("d.geo_latitud, d.direccion, d.geo_longitud, c.nombre, SUM(f.neto), d.dirotros")
+        q.setSelect("d.geo_latitud, d.direccion, d.geo_longitud, c.nombre, SUM(f.neto), d.dirotros, d.dirnum, f.codcliente")
         q.setFrom("dirclientes d INNER JOIN clientes c ON d.codcliente = c.codcliente INNER JOIN facturascli f ON c.codcliente = f.codcliente {}".format(lineas))
         q.setWhere("{} GROUP BY f.codcliente, d.id, c.codcliente, d.geo_latitud, d.direccion, geo_longitud, c.nombre, d.dirotros {} ORDER BY SUM(f.neto) DESC LIMIT 50".format(where, having))
         print("sql: ", q.sql())
         if not q.exec_():
             return []
+        resultados = q.size()
+        cambio = int(resultados / 5)
+        contador = 1
+        print("resultado: ", resultados)
+        print("cambio: ", cambio)
+        if cambio < 1:
+            cambio = 1
         while q.next():
+            ultimaCompra = qsatype.FLUtil.sqlSelect(u"facturascli", u"fecha", ustr(u"codcliente = '",q.value(7) , u"' order by fecha desc"))
             totalNeto = q.value(4)
             totalNeto = qsatype.FLUtil.roundFieldValue(totalNeto, "facturascli", "neto")
-            if(q.value(5) == None):
-                label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €"
+            if(q.value(6) == None):
+                if(q.value(5) == None):
+                    label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €<br>Última compra: " + qsatype.FLUtil.dateAMDtoDMA(str(ultimaCompra))
+                else:
+                    label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+" "+q.value(5)+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €<br>Última compra: " + qsatype.FLUtil.dateAMDtoDMA(str(ultimaCompra))
             else:
-                label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+" "+q.value(5)+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €"
-            if(float(totalNeto) < float((minimo + (minimo * 25 / 100)))):
+                if(q.value(5) == None):
+                    label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+" Nº "+q.value(6)+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €<br>Última compra: " + qsatype.FLUtil.dateAMDtoDMA(str(ultimaCompra))
+                else:
+                    label = "<strong>"+q.value(3)+"</strong>"+"<br>"+q.value(1)+" Nº "+q.value(6)+ " - "+q.value(5)+"<br> Facturación total: "+str(qsatype.FLUtil.formatoMiles(totalNeto))+" €<br>Última compra: " + qsatype.FLUtil.dateAMDtoDMA(str(ultimaCompra))
+            if contador >= cambio * 5:
                 mapa["locations"].append([label, q.value(0), q.value(2), "yellow_light"])
-            elif(float(totalNeto) < float((minimo + (minimo * 50 / 100)))):
+            elif contador >= cambio * 4:
                 mapa["locations"].append([label, q.value(0), q.value(2), "yellow"])
-            elif(float(totalNeto) < float((minimo + (minimo * 75 / 100)))):
+            elif contador >= cambio * 3:
                 mapa["locations"].append([label, q.value(0), q.value(2), "orange_light"])
-            elif(float(totalNeto) < float((minimo * 2))):
+            elif contador >= cambio * 2:
                 mapa["locations"].append([label, q.value(0), q.value(2), "orange"])
-            else:
+            elif contador >= cambio:
                 mapa["locations"].append([label, q.value(0), q.value(2), "red"])
+            # if(float(totalNeto) < float((minimo + (minimo * 25 / 100)))):
+            #     mapa["locations"].append([label, q.value(0), q.value(2), "yellow_light"])
+            # elif(float(totalNeto) < float((minimo + (minimo * 50 / 100)))):
+            #     mapa["locations"].append([label, q.value(0), q.value(2), "yellow"])
+            # elif(float(totalNeto) < float((minimo + (minimo * 75 / 100)))):
+            #     mapa["locations"].append([label, q.value(0), q.value(2), "orange_light"])
+            # elif(float(totalNeto) < float((minimo * 2))):
+            #     mapa["locations"].append([label, q.value(0), q.value(2), "orange"])
+            # else:
+            #     mapa["locations"].append([label, q.value(0), q.value(2), "red"])
+            contador += 1
             # if(q.value(0) == mapa["center"]["lat"] and q.value(2) == mapa["center"]["lng"]):
             #     mapa["locations"].append([label, q.value(0), q.value(2), "blue"])
             # else:
