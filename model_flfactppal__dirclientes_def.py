@@ -196,7 +196,7 @@ class sanhigia_informes(alta_clientes):
         q.setTablesList("dirclientes, facturascli, clientes")
         q.setSelect("d.geo_latitud, d.direccion, d.geo_longitud, c.nombre, SUM(f.neto), d.dirotros, d.dirnum, f.codcliente")
         q.setFrom("dirclientes d INNER JOIN clientes c ON d.codcliente = c.codcliente INNER JOIN facturascli f ON c.codcliente = f.codcliente {}".format(lineas))
-        q.setWhere("{} GROUP BY f.codcliente, d.id, c.codcliente, d.geo_latitud, d.direccion, geo_longitud, c.nombre, d.dirotros {} ORDER BY SUM(f.neto) DESC LIMIT 50".format(where, having))
+        q.setWhere("{} GROUP BY f.codcliente, d.id, c.codcliente, d.geo_latitud, d.direccion, geo_longitud, c.nombre, d.dirotros,d.dirnum {} ORDER BY SUM(f.neto) DESC LIMIT 50".format(where, having))
         print("sql: ", q.sql())
         if not q.exec_():
             return []
