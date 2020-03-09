@@ -21,7 +21,13 @@ class sanhigia_informes(flfacturac):
             response["resul"] = -1
             response["msg"] = "La linea no se puede modificar. El pedido ya está enviado"
             return response
-        response = _i.cambiarCantidad(idLinea, cantidad, oParam)
+        cantMultiplos = qsatype.FLUtil.sqlSelect(u"articulos", u"sh_canmultiplovta", u"referencia = '{}'".format(model.referencia.referencia))
+        if not cantMultiplos or cantMultiplos == u"" or cantMultiplos == 0:
+            response = _i.cambiarCantidad(idLinea, cantidad, oParam)
+        elif cantidad % cantMultiplos != 0:
+            response = {}
+            response['status'] = -3
+            response['msg'] = "La referencia {0} tiene activada la opción múltiplos de cantidad.<br>La cantidad debe ser múltipla a {1}".format(model.referencia.referencia, cantMultiplos)
         return response
 
     def sanhigia_informes_menosUno(self, model, oParam):
@@ -40,7 +46,13 @@ class sanhigia_informes(flfacturac):
             cantidad -= 1
         else:
             cantidad = 1
-        response = _i.cambiarCantidad(idLinea, cantidad, oParam)
+        cantMultiplos = qsatype.FLUtil.sqlSelect(u"articulos", u"sh_canmultiplovta", u"referencia = '{}'".format(model.referencia.referencia))
+        if not cantMultiplos or cantMultiplos == u"" or cantMultiplos == 0:
+            response = _i.cambiarCantidad(idLinea, cantidad, oParam)
+        elif cantidad % cantMultiplos != 0:
+            response = {}
+            response['status'] = -3
+            response['msg'] = "La referencia {0} tiene activada la opción múltiplos de cantidad.<br>La cantidad debe ser múltipla a {1}".format(model.referencia.referencia, cantMultiplos)
         return response
 
     def sanhigia_informes_modificarCantidad(self, model, oParam):
@@ -55,6 +67,12 @@ class sanhigia_informes(flfacturac):
             response["resul"] = -1
             response["msg"] = "La linea no se puede modificar. El pedido ya está enviado"
             return response
+        cantMultiplos = qsatype.FLUtil.sqlSelect(u"articulos", u"sh_canmultiplovta", u"referencia = '{}'".format(model.referencia.referencia))
+        if cantMultiplos and cantMultiplos is not None and cantMultiplos != 0 and int(cantidad) % cantMultiplos != 0:
+            resul = {}
+            resul['status'] = -3
+            resul['msg'] = "La referencia {0} tiene activada la opción múltiplos de cantidad.<br>La cantidad debe ser múltipla a {1}".format(model.referencia.referencia, cantMultiplos)
+            return resul
         return _i.cambiarCantidad(idLinea, cantidad, oParam)
 
     def sanhigia_informes_cambiarCantidad(self, idLinea, cantidad, oParam):
@@ -152,6 +170,7 @@ class sanhigia_informes(flfacturac):
         return response
 
     def sanhigia_informes_validateCursor(self, cursor):
+        _i = self.iface
         referencia = cursor.valueBuffer("referencia")
         idlinea = cursor.valueBuffer("idlinea")
         if referencia is None:
@@ -162,6 +181,8 @@ class sanhigia_informes(flfacturac):
             return False
         codAlmacen = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codalmacen", u"idpedido = {}".format(cursor.valueBuffer("idpedido")))
         cantidad = parseFloat(cursor.valueBuffer("cantidad"))
+        if not _i.validaCantidadesMultiplos(cursor):
+            return False
         disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", u"referencia = '{0}' AND codalmacen = '{1}'".format(referencia, codAlmacen))
         if not disponible:
             disponible = 0
@@ -385,6 +406,18 @@ class sanhigia_informes(flfacturac):
             return True
         return "disabled"
 
+    def sanhigia_informes_validaCantidadesMultiplos(self, cursor):
+        referencia = cursor.valueBuffer(u"referencia")
+        cantidad = cursor.valueBuffer(u"cantidad")
+        cantMultiplos = qsatype.FLUtil.sqlSelect(u"articulos", u"sh_canmultiplovta", u"referencia = '{}'".format(referencia))
+        if not cantMultiplos or cantMultiplos == u"" or cantMultiplos == 0:
+            return True
+        if cantidad % cantMultiplos != 0:
+            qsatype.FLUtil.ponMsgError(u"La referencia {0} tiene activada la opción múltiplos de cantidad.<br>La cantidad debe ser múltipla a {1}".format(referencia, cantMultiplos))
+            return False
+        return True
+
+
     def __init__(self, context=None):
         super().__init__(context)
 
@@ -435,4 +468,7 @@ class sanhigia_informes(flfacturac):
 
     def drawIf_lineaspedidoscliForm(self, cursor):
         return self.ctx.sanhigia_informes_drawIf_lineaspedidoscliForm(cursor)
+
+    def validaCantidadesMultiplos(self, cursor):
+        return self.ctx.sanhigia_informes_validaCantidadesMultiplos(cursor)
 

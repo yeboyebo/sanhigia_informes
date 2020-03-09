@@ -48,8 +48,19 @@ class sanhigia_informes(flfactalma):
             referencia = cursor.valueBuffer("referencia")
             codAlmacen = "ALM"
             # qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codalmacen", ustr(u"idpedido = ", idpedido))
-            cantidad = 1
+            cantMultiplos = qsatype.FLUtil.sqlSelect(u"articulos", u"sh_canmultiplovta", u"referencia = '{}'".format(referencia))
+            if not cantMultiplos or cantMultiplos == u"" or cantMultiplos == 0:
+                cantidad = 1
+            else:
+                # qsatype.FLUtil.ponMsgError(u"La referencia {0} tiene activada la opción múltiplos de cantidad.<br>Se va a informar la cantidad con la múltipla {1}".format(referencia, cantMultiplos))
+                response = {}
+                response['status'] = 1
+                response['msg'] = "La referencia {0} tiene activada la opción múltiplos de cantidad.<br>Se va a informar la cantidad con la múltipla {1}".format(referencia, cantMultiplos)
+                cantidad = cantMultiplos
             disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
+            if disponible is None:
+                disponible = 0
+            oParam["cantidad"] = cantidad
             if cantidad > disponible:
                 if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
                     print("sale por aqui")
@@ -99,8 +110,8 @@ class sanhigia_informes(flfactalma):
         curLinea.setValueBuffer(u"descripcion", cursor.valueBuffer("descripcion"))
         curLinea.setValueBuffer(u"codimpuesto", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"codimpuesto", curLinea))
         curLinea.setValueBuffer(u"iva", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"iva", curLinea))
-        #curLinea.setValueBuffer(u"cantidad", model.cantidad)
-        curLinea.setValueBuffer(u"cantidad", 1)
+        # curLinea.setValueBuffer(u"cantidad", 1)
+        curLinea.setValueBuffer(u"cantidad", oParam["cantidad"])
         curLinea.setValueBuffer(u"pvpunitario", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvpunitario", curLinea))
         curLinea.setValueBuffer(u"pvpsindto", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvpsindto", curLinea))
         curLinea.setValueBuffer(u"pvptotal", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"pvptotal", curLinea))
@@ -127,9 +138,18 @@ class sanhigia_informes(flfactalma):
             referencia = cursor.valueBuffer("referencia")
             # codAlmacen = qsatype.FLUtil.sqlSelect(u"presupuestoscli", u"codalmacen", ustr(u"idpresupuesto = '", idpresupuesto, u"'"))
             codAlmacen = "ALM"
-            cantidad = 1
+            cantMultiplos = qsatype.FLUtil.sqlSelect(u"articulos", u"sh_canmultiplovta", u"referencia = '{}'".format(referencia))
+            if not cantMultiplos or cantMultiplos == u"" or cantMultiplos == 0:
+                cantidad = 1
+            else:
+                # qsatype.FLUtil.ponMsgError(u"La referencia {0} tiene activada la opción múltiplos de cantidad.<br>Se va a informar la cantidad con la múltipla {1}".format(referencia, cantMultiplos))
+                response = {}
+                response['status'] = 1
+                response['msg'] = "La referencia {0} tiene activada la opción múltiplos de cantidad.<br>Se va a informar la cantidad con la múltipla {1}".format(referencia, cantMultiplos)
+                cantidad = cantMultiplos
             disponible = qsatype.FLUtil.sqlSelect(u"stocks", u"disponible", ustr(u"referencia = '", referencia, u"' AND codalmacen = '", codAlmacen, u"'"))
-            if disponible == None:
+            oParam["cantidad"] = cantidad
+            if disponible is None:
                 disponible = 0
             if cantidad > disponible:
                 if qsatype.FLUtil.sqlSelect(u"articulos", u"referencia", ustr(u"refsustitutivo = '", referencia, u"'")):
@@ -179,8 +199,8 @@ class sanhigia_informes(flfactalma):
         curLinea.setValueBuffer(u"descripcion", cursor.valueBuffer("descripcion"))
         curLinea.setValueBuffer(u"codimpuesto", qsatype.FactoriaModulos.get('formRecordlineaspresupuestoscli').iface.commonCalculateField(u"codimpuesto", curLinea))
         curLinea.setValueBuffer(u"iva", qsatype.FactoriaModulos.get('formRecordlineaspresupuestoscli').iface.commonCalculateField(u"iva", curLinea))
-        #curLinea.setValueBuffer(u"cantidad", model.cantidad)
-        curLinea.setValueBuffer(u"cantidad", 1)
+        # curLinea.setValueBuffer(u"cantidad", 1)
+        curLinea.setValueBuffer(u"cantidad", oParam["cantidad"])
         curLinea.setValueBuffer(u"pvpunitario", qsatype.FactoriaModulos.get('formRecordlineaspresupuestoscli').iface.commonCalculateField(u"pvpunitario", curLinea))
         curLinea.setValueBuffer(u"pvpsindto", qsatype.FactoriaModulos.get('formRecordlineaspresupuestoscli').iface.commonCalculateField(u"pvpsindto", curLinea))
         curLinea.setValueBuffer(u"pvptotal", qsatype.FactoriaModulos.get('formRecordlineaspresupuestoscli').iface.commonCalculateField(u"pvptotal", curLinea))

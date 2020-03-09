@@ -242,6 +242,7 @@ class sanhigia_informes(flfacturac):
         query["where"] = "pedidoscli.codcliente = '{0}' AND lineaspedidoscli.idpedido <> '{1}' AND articulos.sevende".format(model.codcliente.codcliente, model.idpedido)
         query["groupby"] = " articulos.referencia, articulos.descripcion"
         query["orderby"] = "fecha DESC"
+        query["selectcount"] = "count(distinct(articulos.referencia, articulos.descripcion))"
         return query
 
     def sanhigia_informes_datosConfigMailPDA(self):
