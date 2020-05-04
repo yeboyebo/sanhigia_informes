@@ -48,7 +48,10 @@
                                         "direccion": {},
                                         "dirnum": {},
                                         "dirotros": {},
-                                        "codpostal": {},
+                                        "idcodpostal": {
+                                            "desc": "codpostal",
+                                            "label": "Código postal"
+                                        },
                                         "ciudad": {},
                                         "provincia": {},
                                         "codpais": {}

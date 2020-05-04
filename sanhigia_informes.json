@@ -398,6 +398,14 @@
             {
                 "path": "apps/facturacion/templates/facturacion/plantillas/",
                 "name": "app_facturacion__newrecordlineaspresupuestoscli.json"
+            },
+            {
+                "name": "app_principal__dirclientes.json",
+                "path": "apps/principal/templates/principal/plantillas/"
+            },
+            {
+                "name": "app_principal__newrecorddirclientes.json",
+                "path": "apps/principal/templates/principal/plantillas/"
             }
         ],
         "patchScript": [

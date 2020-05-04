@@ -8,6 +8,21 @@
                     "disabled": true
                 }
             }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/multiNewRecordClientes/forms/formDireccion/fields/gb__Direccion/fields/apartado",
+            "value": {
+                "idcodpostal": {
+                    "desc": "codpostal",
+                    "label": "Código postal"
+                }
+            }
+        },
+        {
+            "type": "deleteNode",
+            "path": "/layout/multiNewRecordClientes/forms/formDireccion/fields/gb__Direccion/fields/codpostal",
+            "value": null
         }
     ]
 }

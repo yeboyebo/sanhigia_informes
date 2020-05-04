@@ -17,7 +17,7 @@ from YBLEGACY.constantes import *
 class sanhigia_informes(interna):
 
     def sanhigia_informes_getDesc(self):
-        return None
+        return "codpostal"
 
     def __init__(self, context=None):
         super().__init__(context)

@@ -65,6 +65,11 @@
                         {
                             "tipo": "field",
                             "listpos": "secondaryitem",
+                            "key": "servido"
+                        },
+                        {
+                            "tipo": "field",
+                            "listpos": "secondaryitem",
                             "key": "total"
                         },
                         {

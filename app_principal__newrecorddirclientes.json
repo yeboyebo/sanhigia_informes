@@ -1,0 +1,19 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/layout/newRecordDirclientes/fields/gb__datosGenerales/fields/apartado",
+            "value": {
+                "idcodpostal": {
+                    "desc": "codpostal",
+                    "label": "Código postal"
+                }
+            }
+        },
+        {
+            "type": "deleteNode",
+            "path": "/layout/newRecordDirclientes/fields/gb__datosGenerales/fields/codpostal",
+            "value": null
+        }
+    ]
+}
