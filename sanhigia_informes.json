@@ -304,6 +304,14 @@
             {
                 "name": "maps-icon_yellow-light.png",
                 "path": "assets/dist/img/icons/"
+            },
+            {
+                "name": "model_flfactppal__codigospostales.py",
+                "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactppal__codigospostales_def.py",
+                "path": "models/flfactppal/"
             }
         ],
         "patchJson": [

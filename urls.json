@@ -1,24 +1,19 @@
 {
     "modifications": [
         {
-            "type": "insertAfterNode",
-            "path": "/portal/root",
-            "value": {
-                "authentication": {
-                    "url": "^login/$",
-                    "func": "auth_login"
-                }
-            }
+            "type": "updateNode",
+            "path": "/portal/authentication/url",
+            "value": "^login/$"
         },
         {
-            "type": "insertAfterNode",
-            "path": "/portal/authentication",
-            "value": {
-                "account": {
-                    "url": "^account/$",
-                    "func": "account_request"
-                }
-            }
+            "type": "updateNode",
+            "path": "/portal/account/url",
+            "value": "^account/$"
+        },
+        {
+            "type": "updateNode",
+            "path": "/portal/account/func",
+            "value": "account_request"
         },
         {
             "type": "insertAfterNode",
@@ -67,6 +62,13 @@
             "path": "/models/flfactppal/productosagtrans",
             "value": {
                 "sh_previsiones": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/models/flfactppal/sh_previsiones",
+            "value": {
+                "codigospostales": null
             }
         },
         {
