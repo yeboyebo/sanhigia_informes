@@ -108,6 +108,17 @@
                                     "mensaje": "Error inesperado, consulte administrador"
                                 }
                             ]
+                        },
+                        {
+                            "tipo": "act",
+                            "key": "verseguimiento",
+                            "label": "Ver seguimiento",
+                            "success": [
+                                {
+                                    "slot": "refrescar"
+                                }
+                            ],
+                            "error": []
                         }
                     ],
                     "rowclick": "link"
@@ -150,6 +161,27 @@
             }
         },
         {
+            "type": "insertAfterNode",
+            "path": "/acciones/enviar",
+            "value": {
+                "verseguimiento": {
+                    "action": "legacy",
+                    "serverAction": "visualizarSeguimiento",
+                    "prefix": "pedidoscli",
+                    "icon": "local_shipping"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/drawIf/root",
+            "value": {
+                "verseguimiento": {
+                    "verseguimineto": "drawIf_verSeguimiento"
+                }
+            }
+        },
+        {
             "type": "deleteNode",
             "path": "/initValidation",
             "value": null
@@ -157,11 +189,6 @@
         {
             "type": "deleteNode",
             "path": "/focus",
-            "value": null
-        },
-        {
-            "type": "deleteNode",
-            "path": "/drawIf",
             "value": null
         }
     ]

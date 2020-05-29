@@ -311,6 +311,59 @@ class sanhigia_informes(flfacturac):
         response["confirm"] = "El pedido '{}' será eliminado.¿Estás seguro?".format(codigo)
         return response
 
+    def sanhigia_informes_drawIf_verSeguimiento(self, cursor):
+        return "disabled"
+
+    def sanhigia_informes_visualizarSeguimiento(self, model):
+        _i = self.iface
+        idpedido = model.idpedido
+        codigo = model.codigo
+        fecha = model.fecha
+        fecha = fecha.strftime('%d - %m - %Y')
+        nombrecliente = model.nombrecliente
+        response = {}
+        oSeguimientos = []
+        oSeguimientos = _i.dameObjetoSeguimientos(idpedido)
+        if oSeguimientos is False:
+            resul = {}
+            resul['status'] = -1
+            resul['msg'] = "No existe número tracking para el albarán asociado al pedido {}".format(codigo)
+            return resul
+        if len(oSeguimientos) == 1:
+            oSeguimientos[0]["urlsegui"] = oSeguimientos[0]["urlsegui"].replace("#TN#", oSeguimientos[0]["numtracking"])
+            response["url"] = oSeguimientos[0]["urlsegui"]
+            response["newtab"] = True
+            return response
+
+        response["status"] = 2
+        response["confirm"] = "<div  style='overflow:hidden;''><div style='position:relative;float:left;'><div>Pedido " + codigo + "</div><br><table>"
+        response["customButtons"] = []
+        for oSegui in oSeguimientos:
+            oSegui["urlsegui"] = oSegui["urlsegui"].replace("#TN#", oSegui["numtracking"])
+            response["confirm"] += "<tr style='padding-top:10'><td style=''>Cod.Albarán - " + oSegui["codalbaran"] + "</td></tr><tr><td style=''>Agencia - " + oSegui["codagencia"] + "</td></tr><tr><td><a href='" + oSegui["urlsegui"] + "' target='_blank'>Ver Seguimiento - " + oSegui["numtracking"] + "</a></td></tr><tr><td><br></td></tr>"
+        response["confirm"] += "</table>"
+        return response
+
+    def sanhigia_informes_dameObjetoSeguimientos(self, idpedido):
+        oSeguimientos = []
+        q = qsatype.FLSqlQuery()
+        q.setTablesList(u"albaranescli,lineasalbaranescli,pedidoscli,agenciastrans")
+        q.setSelect(u"a.codigo,a.sh_numtracking,a.codagencia,at.urlsegui")
+        q.setFrom(u"albaranescli a INNER JOIN lineasalbaranescli la ON a.idalbaran = la.idalbaran INNER JOIN pedidoscli p ON la.idpedido = p.idpedido INNER JOIN agenciastrans at ON a.codagencia = at.codagencia")
+        q.setWhere(u"p.idpedido = {} AND a.sh_numtracking IS NOT NULL GROUP BY a.codigo, a.sh_numtracking,a.codagencia,at.urlsegui ORDER BY a.codigo".format(idpedido))
+        if not q.exec_():
+            return False
+        if q.size() == 0:
+            return False
+        while q.next():
+            oSeguimiento = {}
+            oSeguimiento["codalbaran"] = q.value("a.codigo")
+            oSeguimiento["numtracking"] = q.value("a.sh_numtracking")
+            oSeguimiento["urlsegui"] = q.value("at.urlsegui")
+            oSeguimiento["codagencia"] = q.value("a.codagencia")
+            oSeguimientos.append(oSeguimiento)
+        return oSeguimientos
+
     def __init__(self, context=None):
         super().__init__(context)
 
@@ -361,4 +414,13 @@ class sanhigia_informes(flfacturac):
 
     def eliminarPedido(self, model, oParam, cursor):
         return self.ctx.sanhigia_informes_eliminarPedido(model, oParam, cursor)
+
+    def drawIf_verSeguimiento(self, cursor):
+        return self.ctx.sanhigia_informes_drawIf_verSeguimiento(cursor)
+
+    def visualizarSeguimiento(self, model):
+        return self.ctx.sanhigia_informes_visualizarSeguimiento(model)
+
+    def dameObjetoSeguimientos(self, idpedido):
+        return self.ctx.sanhigia_informes_dameObjetoSeguimientos(idpedido)
 

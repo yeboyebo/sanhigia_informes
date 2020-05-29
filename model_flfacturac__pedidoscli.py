@@ -44,3 +44,16 @@ class sanhigia_informes_pedidoscli(flfacturac_pedidoscli, helpers.MixinConAccion
     def eliminarPedido(self, oParam, cursor):
         return form.iface.eliminarPedido(self, oParam, cursor)
 
+    def drawIf_verSeguimiento(cursor):
+        return form.iface.drawIf_verSeguimiento(cursor)
+
+    @helpers.decoradores.accion(aqparam=[])
+    def visualizarSeguimiento(self):
+        return form.iface.visualizarSeguimiento(self)
+
+    def dameObjetoSeguimientos(self, idpedido):
+        return self.ctx.sanhigia_informes_dameObjetoSeguimientos(self, idpedido)
+
+    def dameCuerpoEmailPrueba(self):
+        return self.ctx.sanhigia_informes_dameCuerpoEmailPrueba(self)
+

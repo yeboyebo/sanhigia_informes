@@ -118,6 +118,8 @@ class sanhigia_informes(alta_clientes):
                         ["Pol. ind. Lastra Monegros", latitud, longitud, "blue"]
                     ]
                 mapa["center"] = {"lat": latitud, "lng": longitud}
+                mapa["msg"] = "Debe indicar un cliente"
+                return mapa
             if "d_fechainicio" not in oParam and "h_fechainicio" not in oParam and "fecha" not in oParam:
                 where += ""
             else:
