@@ -76,6 +76,17 @@
                 "ICON": "content_paste",
                 "COLOR": "rgb(30, 170, 30)"
             }
+        },
+        {
+            "type": "insertAfterItem",
+            "path": "/items[Mapa]",
+            "value": {
+                "NAME": "InformeRepeticiones",
+                "TEXT": "Informe Repeticiones",
+                "ICON": "insert_chart",
+                "TYPE": "absolute",
+                "URL": "http://webapp.sanhigia.com:9000/"
+            }
         }
     ]
 }
