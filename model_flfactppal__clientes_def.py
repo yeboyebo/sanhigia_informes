@@ -313,6 +313,25 @@ class sanhigia_informes(alta_clientes):
         query["orderby"] = ("clientes.nombre DESC")
         return query
 
+    def sanhigia_informes_validateCursor(self, cursor):
+        telefono1 = cursor.valueBuffer("telefono1")
+        email = cursor.valueBuffer("email")
+        print("telefono1____:", telefono1)
+        if not telefono1:
+            qsatype.FLUtil.ponMsgError("El campo Teléfono 1 no esta informado. Por favor, selecciona un teléfono valido.")
+            return False
+        print("email____:", email)
+        if not email:
+            qsatype.FLUtil.ponMsgError("El campo E-mail no esta informado. Por favor, selecciona un email válido.")
+            return False
+        return True
+
+    def sanhigia_informes_drawIf_deshabilitarCamposGBComercial(self, cursor):
+        usuario = qsatype.FLUtil.nameUser()
+        codGrupo = qsatype.FLUtil.sqlSelect(u"flusers", u"idgroup", ustr(u"iduser = '", usuario, u"' AND idgroup = 'Administracion'"))
+        if not codGrupo:
+            return "disabled"
+
     def __init__(self, context=None):
         super().__init__(context)
 
@@ -339,4 +358,10 @@ class sanhigia_informes(alta_clientes):
 
     def queryGrid_comparativas(self, model, filters):
         return self.ctx.sanhigia_informes_queryGrid_comparativas(model, filters)
+
+    def validateCursor(self, cursor):
+        return self.ctx.sanhigia_informes_validateCursor(cursor)
+
+    def drawIf_deshabilitarCamposGBComercial(self, cursor):
+        return self.ctx.sanhigia_informes_drawIf_deshabilitarCamposGBComercial(cursor)
 

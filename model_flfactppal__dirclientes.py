@@ -18,3 +18,6 @@ class sanhigia_informes_dirclientes(alta_clientes_dirclientes, helpers.MixinConA
     def getMapaDirecciones(self, oParam):
         return form.iface.getMapaDirecciones(oParam)
 
+    # def validateCursor(self):
+    #     return form.iface.validateCursor(self)
+

@@ -167,10 +167,18 @@ class sanhigia_informes(flfacturac):
             if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopedidopda", u"Enviado", u"idpedido = {}".format(idPedido)):
                 return False
             estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
+            codcliente = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codcliente", u"idpedido = {}".format(idPedido))
             if estadopago == "Borrador con promocion":
                 estadopago = "Pte. Validacion promocion"
             elif estadopago == "Borrador":
-                estadopago = u""
+                codPago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codpago", u"idpedido = {}".format(idPedido))
+                bloqueaPedido = qsatype.FLUtil.sqlSelect(u"formaspago", u"sh_bloqueopedido", "codpago = '{}'".format(codPago))
+                if bloqueaPedido:
+                    estadopago = u"Forma de pago bloqueada"
+                elif qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.clienteTienePagosPtes(codcliente) and qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_forzardesbloqueopago", u"idpedido = {}".format(idPedido)) is False:
+                    estadopago = u"Pagos pendientes"
+                else:
+                    estadopago = u""
             if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopago", estadopago, u"idpedido = {}".format(idPedido)):
                 return False
         except Exception as e:
@@ -364,6 +372,12 @@ class sanhigia_informes(flfacturac):
             oSeguimientos.append(oSeguimiento)
         return oSeguimientos
 
+    def sanhigia_informes_drawIf_deshabilitarCampos(self, cursor):
+        usuario = qsatype.FLUtil.nameUser()
+        codGrupo = qsatype.FLUtil.sqlSelect(u"flusers", u"idgroup", ustr(u"iduser = '", usuario, u"' AND idgroup = 'Administracion'"))
+        if not codGrupo:
+            return "disabled"
+
     def __init__(self, context=None):
         super().__init__(context)
 
@@ -423,4 +437,7 @@ class sanhigia_informes(flfacturac):
 
     def dameObjetoSeguimientos(self, idpedido):
         return self.ctx.sanhigia_informes_dameObjetoSeguimientos(idpedido)
+
+    def drawIf_deshabilitarCampos(self, cursor):
+        return self.ctx.sanhigia_informes_drawIf_deshabilitarCampos(cursor)
 

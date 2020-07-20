@@ -252,6 +252,13 @@ class sanhigia_informes(alta_clientes):
         mapa["zoom"] = oParam["zoom"]
         return mapa
 
+    # def sanhigia_informes_validateCursor(self, cursor):
+    #     telefono = cursor.valueBuffer("telefono")
+    #     if not telefono:
+    #         qsatype.FLUtil.ponMsgError("El campo Teléfono no esta informado. Por favor, selecciona un teléfono valido.")
+    #         return False
+    #     return True
+
     def sanhigia_informes_generaMapaDirecciones(self, model, template):
         return self.iface.calculaDatosMapaDirecciones({})
 
@@ -272,4 +279,7 @@ class sanhigia_informes(alta_clientes):
 
     def calculaDatosMapaDirecciones(self, oParam):
         return self.ctx.sanhigia_informes_calculaDatosMapaDirecciones(oParam)
+
+    # def validateCursor(self, cursor):
+    #     return self.ctx.sanhigia_informes_validateCursor(cursor)
 

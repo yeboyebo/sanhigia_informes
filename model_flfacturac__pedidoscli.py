@@ -57,3 +57,6 @@ class sanhigia_informes_pedidoscli(flfacturac_pedidoscli, helpers.MixinConAccion
     def dameCuerpoEmailPrueba(self):
         return self.ctx.sanhigia_informes_dameCuerpoEmailPrueba(self)
 
+    def drawIf_deshabilitarCampos(cursor):
+        return form.iface.drawIf_deshabilitarCampos(cursor)
+

@@ -33,3 +33,9 @@ class sanhigia_informes_clientes(alta_clientes_clientes, helpers.MixinConAccione
     def queryGrid_comparativas(model, filters):
         return form.iface.queryGrid_comparativas(model, filters)
 
+    def validateCursor(self):
+        return form.iface.validateCursor(self)
+
+    def drawIf_deshabilitarCamposGBComercial(cursor):
+        return form.iface.drawIf_deshabilitarCamposGBComercial(cursor)
+

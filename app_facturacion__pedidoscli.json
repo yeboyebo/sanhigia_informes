@@ -98,7 +98,7 @@
                             "className": "",
                             "style": {},
                             "layout": {
-                                "articuosForm": {
+                                "datosForm": {
                                     "prefix": "pedidoscli",
                                     "componente": "YBForm",
                                     "class": "claseGrid",
@@ -113,7 +113,7 @@
                                     ],
                                     "groupbox": "",
                                     "fields": {
-                                        "gb__": {
+                                        "gb__datos": {
                                             "title": "",
                                             "fields": {
                                                 "fecha": {},
@@ -540,6 +540,15 @@
                     "pedidoscliForm": "drawIf_pedidoscliForm",
                     "articuosForm": "drawIf_pedidoscliForm",
                     "observacionesForm": "drawIf_pedidoscliForm"
+                }
+            }
+        },
+        {
+            "type": "insertAfterNode",
+            "path": "/drawIf/parentGroupBox",
+            "value": {
+                "gb__datos": {
+                    "codpago": "drawIf_deshabilitarCampos"
                 }
             }
         },

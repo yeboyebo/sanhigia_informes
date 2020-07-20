@@ -123,7 +123,9 @@
                                                 },
                                                 "recfinanciero": {},
                                                 "codalmacen": {},
-                                                "codpago": {},
+                                                "codpago": {
+                                                    "disabled": true
+                                                },
                                                 "coddivisa": {},
                                                 "tasaconv": {},
                                                 "totaleuros": {

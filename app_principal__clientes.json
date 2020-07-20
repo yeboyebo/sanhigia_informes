@@ -1,0 +1,13 @@
+{
+    "modifications": [
+        {
+            "type": "insertAfterNode",
+            "path": "/drawIf/root",
+            "value": {
+                "gb__comercial": {
+                    "codpago": "drawIf_deshabilitarCamposGBComercial"
+                }
+            }
+        }
+    ]
+}
