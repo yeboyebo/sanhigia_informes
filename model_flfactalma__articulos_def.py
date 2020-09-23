@@ -108,7 +108,11 @@ class sanhigia_informes(flfactalma):
         curLinea.setValueBuffer(u"idpedido", idpedido)
         curLinea.setValueBuffer(u"referencia", cursor.valueBuffer("referencia"))
         curLinea.setValueBuffer(u"descripcion", cursor.valueBuffer("descripcion"))
-        curLinea.setValueBuffer(u"codimpuesto", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"codimpuesto", curLinea))
+        codImpuesto = qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"codimpuesto", curLinea)
+        if codImpuesto == 0:
+            curLinea.setNull("codimpuesto")
+        else:
+            curLinea.setValueBuffer(u"codimpuesto", codImpuesto)
         curLinea.setValueBuffer(u"iva", qsatype.FactoriaModulos.get('formRecordlineaspedidoscli').iface.pub_commonCalculateField(u"iva", curLinea))
         # curLinea.setValueBuffer(u"cantidad", 1)
         curLinea.setValueBuffer(u"cantidad", oParam["cantidad"])
