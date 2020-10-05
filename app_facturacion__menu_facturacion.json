@@ -34,6 +34,17 @@
                 "ICON": "dashboard",
                 "COLOR": "rgb(30, 170, 30)"
             }
+        },
+        {
+            "type": "insertAfterItem",
+            "path": "/items[Toma de presupuestos]",
+            "value": {
+                "NAME": "Devoluciones",
+                "TEXT": "Devoluciones",
+                "ICON": "dashboard",
+                "TYPE": "absolute",
+                "URL": "http://webapp.sanhigia.com:9000/DevolucionesPedidos"
+            }
         }
     ]
 }
