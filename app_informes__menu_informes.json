@@ -85,7 +85,7 @@
                 "TEXT": "Informe Repeticiones",
                 "ICON": "insert_chart",
                 "TYPE": "absolute",
-                "URL": "http://webapp.sanhigia.com:9000/"
+                "URL": "http://webapp.sanhigia.com:9000/InformeRepeticiones"
             }
         }
     ]
