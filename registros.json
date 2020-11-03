@@ -37,6 +37,13 @@
         },
         {
             "type": "insertAfterNode",
+            "path": "/flfactalma/stocks",
+            "value": {
+                "movistock": null
+            }
+        },
+        {
+            "type": "insertAfterNode",
             "path": "/flfactppal/ejercicios",
             "value": {
                 "historicos": null
