@@ -312,6 +312,14 @@
             {
                 "name": "model_flfactppal__codigospostales_def.py",
                 "path": "models/flfactppal/"
+            },
+            {
+                "name": "model_flfactalma__movistock.py",
+                "path": "models/flfactalma/"
+            },
+            {
+                "name": "model_flfactalma__movistock_def.py",
+                "path": "models/flfactalma/"
             }
         ],
         "patchJson": [

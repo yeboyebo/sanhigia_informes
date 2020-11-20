@@ -50,18 +50,12 @@
                             "title": "Cantidad",
                             "fields": {
                                 "cantidad": {},
-                                "pvpunitario": {
-                                    "disabled": true
-                                },
+                                "pvpunitario": {},
                                 "pvpsindto": {
                                     "disabled": true
                                 },
-                                "dtolineal": {
-                                    "disabled": true
-                                },
-                                "dtopor": {
-                                    "disabled": true
-                                },
+                                "dtolineal": {},
+                                "dtopor": {},
                                 "gb__": {
                                     "title": "",
                                     "fields": {

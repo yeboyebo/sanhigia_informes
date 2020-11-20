@@ -48,10 +48,10 @@ class sanhigia_informes(flfacturac):
         return desc
 
     def sanhigia_informes_iniciaValoresCursor(self, cursor=None):
-        cursor.setValueBuffer(u"sh_estadopago", u"Borrador")
         qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.iniciaValoresCursor(cursor)
         if cursor.valueBuffer("fechasalida") is None:
             cursor.setValueBuffer("fechasalida", cursor.valueBuffer("fecha"))
+        cursor.setValueBuffer(u"sh_estadopago", u"Borrador")
         return True
 
     def sanhigia_informes_enviarPedidoPDA(self, model, oParam):

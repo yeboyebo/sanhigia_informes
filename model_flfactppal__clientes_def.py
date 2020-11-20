@@ -318,7 +318,7 @@ class sanhigia_informes(alta_clientes):
         email = cursor.valueBuffer("email")
         print("telefono1____:", telefono1)
         if not telefono1:
-            qsatype.FLUtil.ponMsgError("El campo Teléfono 1 no esta informado. Por favor, selecciona un teléfono valido.")
+            qsatype.FLUtil.ponMsgError("El campo Teléfono 1 no esta informado. Por favor, selecciona un teléfono válido.")
             return False
         print("email____:", email)
         if not email:
