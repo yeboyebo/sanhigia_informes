@@ -160,7 +160,8 @@
                                         "gb__": {
                                             "title": "",
                                             "fields": {
-                                                "observaciones": {}
+                                                "observaciones": {},
+                                                "sh_soloalbaranar": {}
                                             }
                                         }
                                     },
