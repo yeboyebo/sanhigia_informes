@@ -52,9 +52,10 @@ class sanhigia_informes(flfacturac):
         if cursor.valueBuffer("fechasalida") is None:
             cursor.setValueBuffer("fechasalida", cursor.valueBuffer("fecha"))
         cursor.setValueBuffer(u"sh_estadopago", u"Borrador")
+        cursor.setValueBuffer(u"sh_ctrlestadoborr", True)
         return True
 
-    def sanhigia_informes_enviarPedidoPDA(self, model, oParam):
+    def sanhigia_informes_enviarPedidoPDA(self, model, oParam, cursor):
         try:
             response = True
             _i = self.iface
@@ -164,24 +165,36 @@ class sanhigia_informes(flfacturac):
             # connection = notifications.get_connection("smtp.gmail.com", "sanhigiapedidos@gmail.com", "a3b2z4Z4", "465", "SSL")
             connection = notifications.get_connection(oDM.hostcorreosaliente, oDM.usuariosmtp, oDM.passwordsmtp, oDM.puertosmtp, oDM.tipocxsmtp)
             response = notifications.sendMail(connection, oDM.usuariosmtp, asunto, cuerpo, [nombreCorreo], fichero)
-
             # response = notifications.sendSisMail(asunto, cuerpo, [nombreCorreo], fichero)
             os.remove(fichero)
             if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopedidopda", u"Enviado", u"idpedido = {}".format(idPedido)):
                 return False
-            estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-            codcliente = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codcliente", u"idpedido = {}".format(idPedido))
+            estadopago = cursor.valueBuffer("sh_estadopago")
+            codcliente = cursor.valueBuffer("codcliente")
             if estadopago == "Borrador con promocion":
                 estadopago = "Pte. Validacion promocion"
             elif estadopago == "Borrador":
-                codPago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"codpago", u"idpedido = {}".format(idPedido))
+                codPago = cursor.valueBuffer("codpago")
                 bloqueaPedido = qsatype.FLUtil.sqlSelect(u"formaspago", u"sh_bloqueopedido", "codpago = '{}'".format(codPago))
+                estadopago = u""
+                if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadoborr", False, u"idpedido = {}".format(idPedido)):
+                    return False
+                if qsatype.FactoriaModulos.get('formpedidoscli').iface.esCanario(cursor):
+                    estadopago = u"Aplicar código aduanas"
+                    if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadoaduanas", True, u"idpedido = {}".format(idPedido)):
+                        return False
                 if bloqueaPedido:
                     estadopago = u"Forma de pago bloqueada"
-                elif qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.clienteTienePagosPtes(codcliente) and qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_forzardesbloqueopago", u"idpedido = {}".format(idPedido)) is False:
+                    if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadopagobloque", True, u"idpedido = {}".format(idPedido)):
+                        return False
+                if codPago and codPago == u"PA":
+                    estadopago = u"Pendiente validar PA"
+                    if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadovalidarpa", True, u"idpedido = {}".format(idPedido)):
+                        return False
+                if qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.clienteTienePagosPtes(codcliente) and cursor.valueBuffer("sh_forzardesbloqueopago") is False:
                     estadopago = u"Pagos pendientes"
-                else:
-                    estadopago = u""
+                    if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadopagospte", True, u"idpedido = {}".format(idPedido)):
+                        return False
             if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopago", estadopago, u"idpedido = {}".format(idPedido)):
                 return False
         except Exception as e:
@@ -399,8 +412,8 @@ class sanhigia_informes(flfacturac):
     def iniciaValoresCursor(self, cursor=None):
         return self.ctx.sanhigia_informes_iniciaValoresCursor(cursor)
 
-    def enviarPedidoPDA(self, model, oParam):
-        return self.ctx.sanhigia_informes_enviarPedidoPDA(model, oParam)
+    def enviarPedidoPDA(self, model, oParam, cursor):
+        return self.ctx.sanhigia_informes_enviarPedidoPDA(model, oParam, cursor)
 
     def dameCamposCab(self, idPedido):
         return self.ctx.sanhigia_informes_dameCamposCab(idPedido)

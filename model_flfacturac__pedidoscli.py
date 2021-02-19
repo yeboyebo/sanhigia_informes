@@ -9,9 +9,9 @@ class sanhigia_informes_pedidoscli(flfacturac_pedidoscli, helpers.MixinConAccion
     def iniciaValoresCursor(cursor=None):
         return form.iface.iniciaValoresCursor(cursor)
 
-    @helpers.decoradores.accion(aqparam=["oParam"])
-    def enviarPedidoPDA(self, oParam):
-        return form.iface.enviarPedidoPDA(self, oParam)
+    @helpers.decoradores.accion(aqparam=["oParam", "cursor"])
+    def enviarPedidoPDA(self, oParam, cursor):
+        return form.iface.enviarPedidoPDA(self, oParam, cursor)
 
     def dameCamposCab(self, idPedido):
         return self.ctx.sanhigia_informes_dameCamposCab(self, idPedido)
