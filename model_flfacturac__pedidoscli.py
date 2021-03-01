@@ -60,3 +60,6 @@ class sanhigia_informes_pedidoscli(flfacturac_pedidoscli, helpers.MixinConAccion
     def drawIf_deshabilitarCampos(cursor):
         return form.iface.drawIf_deshabilitarCampos(cursor)
 
+    # def bChCursor(fN, cursor):
+    #     return form.iface.bChCursor(fN, cursor)
+

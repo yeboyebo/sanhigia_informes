@@ -51,7 +51,7 @@ class sanhigia_informes(flfacturac):
         qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.iniciaValoresCursor(cursor)
         if cursor.valueBuffer("fechasalida") is None:
             cursor.setValueBuffer("fechasalida", cursor.valueBuffer("fecha"))
-        cursor.setValueBuffer(u"sh_estadopago", u"Borrador")
+        # cursor.setValueBuffer(u"sh_estadopago", u"Borrador")
         cursor.setValueBuffer(u"sh_ctrlestadoborr", True)
         return True
 
@@ -169,32 +169,16 @@ class sanhigia_informes(flfacturac):
             os.remove(fichero)
             if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopedidopda", u"Enviado", u"idpedido = {}".format(idPedido)):
                 return False
+            if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadoborr", False, u"idpedido = {}".format(idPedido)):
+                return False
+            cursor.setValueBuffer("sh_ctrlestadoborr", False)
             estadopago = cursor.valueBuffer("sh_estadopago")
-            codcliente = cursor.valueBuffer("codcliente")
             if estadopago == "Borrador con promocion":
                 estadopago = "Pte. Validacion promocion"
-            elif estadopago == "Borrador":
-                codPago = cursor.valueBuffer("codpago")
-                bloqueaPedido = qsatype.FLUtil.sqlSelect(u"formaspago", u"sh_bloqueopedido", "codpago = '{}'".format(codPago))
-                estadopago = u""
-                if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadoborr", False, u"idpedido = {}".format(idPedido)):
+                if not qsatype.FLUtil.execSql(u"UPDATE pedidoscli set sh_ctrlestadoptevalpagoweb = true WHERE idpedido = {}".format(idPedido)):
                     return False
-                if qsatype.FactoriaModulos.get('formpedidoscli').iface.esCanario(cursor):
-                    estadopago = u"Aplicar código aduanas"
-                    if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadoaduanas", True, u"idpedido = {}".format(idPedido)):
-                        return False
-                if bloqueaPedido:
-                    estadopago = u"Forma de pago bloqueada"
-                    if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadopagobloque", True, u"idpedido = {}".format(idPedido)):
-                        return False
-                if codPago and codPago == u"PA":
-                    estadopago = u"Pendiente validar PA"
-                    if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadovalidarpa", True, u"idpedido = {}".format(idPedido)):
-                        return False
-                if qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.clienteTienePagosPtes(codcliente) and cursor.valueBuffer("sh_forzardesbloqueopago") is False:
-                    estadopago = u"Pagos pendientes"
-                    if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadopagospte", True, u"idpedido = {}".format(idPedido)):
-                        return False
+            elif estadopago == "Borrador":
+                estadopago = qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.commonCalculateField(u"sh_estadopago", cursor)
             if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopago", estadopago, u"idpedido = {}".format(idPedido)):
                 return False
         except Exception as e:
@@ -287,6 +271,7 @@ class sanhigia_informes(flfacturac):
         return oDM
 
     def sanhigia_informes_validateCursor(self, cursor):
+        _fP = qsatype.FactoriaModulos.get('flfactppal').iface
         estadoPago = cursor.valueBuffer("sh_estadopago")
         coddir = cursor.valueBuffer("coddir")
         if not coddir:
@@ -298,20 +283,28 @@ class sanhigia_informes(flfacturac):
             if cursor.valueBuffer("observaciones") is None or cursor.valueBuffer("observaciones") == u"":
                 qsatype.FLUtil.ponMsgError("Alguna de las líneas tiene aplicada la promoción, debe rellenar las observaciones.")
                 return False
+        _fP.setValueBufferCursor(cursor, u"sh_ctrlestadopagospte", qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.commonCalculateField(u"sh_ctrlestadopagospte", cursor))
+        _fP.setValueBufferCursor(cursor, u"sh_ctrlestadovalidarpa", qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.commonCalculateField(u"sh_ctrlestadovalidarpa", cursor))
+        _fP.setValueBufferCursor(cursor, u"sh_ctrlestadopagobloque", qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.commonCalculateField(u"sh_ctrlestadopagobloque", cursor))
+        _fP.setValueBufferCursor(cursor, u"sh_ctrlestadoaduanas", qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.commonCalculateField(u"sh_ctrlestadoaduanas", cursor))
+        # _fP.setValueBufferCursor(cursor, u"sh_estadopago", qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.commonCalculateField(u"sh_estadopago", cursor))
         return True
 
     def sanhigia_informes_drawIf_pedidoscliForm(self, cursor):
-        estadopago = cursor.valueBuffer("sh_estadopago")
-        if estadopago == u"Borrador" or estadopago == u"Borrador con promocion":
+        # estadopago = cursor.valueBuffer("sh_estadopago")
+        ctrl_estadopago_borr = cursor.valueBuffer("sh_ctrlestadoborr")
+        # if estadopago == u"Borrador" or estadopago == u"Borrador con promocion":
+        if ctrl_estadopago_borr is True:
             return True
         return "disabled"
 
     def sanhigia_informes_eliminarPedido(self, model, oParam, cursor):
         response = {}
-        estadopago = cursor.valueBuffer("sh_estadopago")
+        # estadopago = cursor.valueBuffer("sh_estadopago")
+        ctrl_estadopago_borr = cursor.valueBuffer("sh_ctrlestadoborr")
         codigo = cursor.valueBuffer("codigo")
         idPedido = cursor.valueBuffer("idpedido")
-        if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        if ctrl_estadopago_borr is False:
             response["resul"] = False
             response["msg"] = "El pedido '{}' no se puede eliminar porque ya está enviado".format(codigo)
             return response
@@ -394,6 +387,14 @@ class sanhigia_informes(flfacturac):
         if not codGrupo:
             return "disabled"
 
+    # def sanhigia_informes_bChCursor(self, fN, cursor):
+    #     _fP = qsatype.FactoriaModulos.get('flfactppal').iface
+    #     if not qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.bChCursor(fN, cursor):
+    #         return False
+    #     if fN == u"codpago":
+    #         _fP.setValueBufferCursor(cursor, u"sh_ctrlestadovalidarpa", qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.commonCalculateField(u"sh_ctrlestadovalidarpa", cursor))
+    #         _fP.setValueBufferCursor(cursor, u"sh_ctrlestadopagobloque", qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.commonCalculateField(u"sh_ctrlestadopagobloque", cursor))
+
     def __init__(self, context=None):
         super().__init__(context)
 
@@ -456,4 +457,7 @@ class sanhigia_informes(flfacturac):
 
     def drawIf_deshabilitarCampos(self, cursor):
         return self.ctx.sanhigia_informes_drawIf_deshabilitarCampos(cursor)
+
+    # def bChCursor(self, fN, cursor):
+    #     return self.ctx.sanhigia_informes_bChCursor(fN, cursor)
 

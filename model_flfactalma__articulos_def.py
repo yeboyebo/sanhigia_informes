@@ -28,8 +28,10 @@ class sanhigia_informes(flfactalma):
         _i = self.iface
         print("algo", oParam)
         idpedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
-        estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idpedido))
-        if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        # estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idpedido))
+        ctrl_estadopago_borr = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_ctrlestadoborr", u"idpedido = {}".format(idpedido))
+        # if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        if ctrl_estadopago_borr is False:
             resul = {}
             resul['status'] = -1
             resul['msg'] = "La referencia no se puede añadir. El pedido ya está enviado"

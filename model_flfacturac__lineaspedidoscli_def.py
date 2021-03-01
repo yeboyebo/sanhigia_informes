@@ -16,8 +16,10 @@ class sanhigia_informes(flfacturac):
         cantidad += 1
         response = {}
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
-        estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-        if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        # estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
+        ctrl_estadopago_borr = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_ctrlestadoborr", u"idpedido = {}".format(idPedido))
+        # if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        if ctrl_estadopago_borr is False:
             response["resul"] = -1
             response["msg"] = "La linea no se puede modificar. El pedido ya está enviado"
             return response
@@ -37,8 +39,10 @@ class sanhigia_informes(flfacturac):
         cantidad = model.cantidad
         response = {}
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
-        estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-        if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        # estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
+        ctrl_estadopago_borr = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_ctrlestadoborr", u"idpedido = {}".format(idPedido))
+        # if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        if ctrl_estadopago_borr is False:
             response["resul"] = -1
             response["msg"] = "La linea no se puede modificar. El pedido ya está enviado"
             return response
@@ -62,8 +66,10 @@ class sanhigia_informes(flfacturac):
         cantidad = oParam['cantidad']
         response = {}
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
-        estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-        if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        # estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
+        ctrl_estadopago_borr = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_ctrlestadoborr", u"idpedido = {}".format(idPedido))
+        # if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        if ctrl_estadopago_borr is False:
             response["resul"] = -1
             response["msg"] = "La linea no se puede modificar. El pedido ya está enviado"
             return response
@@ -241,8 +247,10 @@ class sanhigia_informes(flfacturac):
         idLinea = model.pk
         # idLinea = model.idlinea.referencia
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
-        estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-        if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        # estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
+        ctrl_estadopago_borr = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_ctrlestadoborr", u"idpedido = {}".format(idPedido))
+        # if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        if ctrl_estadopago_borr is False:
             response["resul"] = -1
             response["msg"] = "La linea no se puede modificar. El pedido ya está enviado"
             return response
@@ -304,8 +312,10 @@ class sanhigia_informes(flfacturac):
     def sanhigia_informes_borrarLineas(self, model, oParam):
         response = {}
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
-        estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-        if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        # estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
+        ctrl_estadopago_borr = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_ctrlestadoborr", u"idpedido = {}".format(idPedido))
+        # if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        if ctrl_estadopago_borr is False:
             response["status"] = -1
             response["msg"] = "La linea no se puede borrar. El pedido ya está enviado"
             return response
@@ -344,8 +354,10 @@ class sanhigia_informes(flfacturac):
         _i = self.iface
         idLinea = model.pk
         idPedido = cacheController.getSessionVariable(ustr(u"sh_pedidocli_", qsatype.FLUtil.nameUser()))
-        estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
-        if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        # estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(idPedido))
+        ctrl_estadopago_borr = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_ctrlestadoborr", u"idpedido = {}".format(idPedido))
+        # if estadopago != u"Borrador" and estadopago != u"Borrador con promocion":
+        if ctrl_estadopago_borr is False:
             resul = {}
             resul['status'] = -1
             resul['msg'] = "La linea no se puede copiar. El pedido ya está enviado"
@@ -401,8 +413,10 @@ class sanhigia_informes(flfacturac):
         return True
 
     def sanhigia_informes_drawIf_lineaspedidoscliForm(self, cursor):
-        estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(cursor.valueBuffer("idpedido")))
-        if estadopago == u"Borrador" or estadopago == u"Borrador con promocion":
+        # estadopago = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_estadopago", u"idpedido = {}".format(cursor.valueBuffer("idpedido")))
+        ctrl_estadopago_borr = qsatype.FLUtil.sqlSelect(u"pedidoscli", u"sh_ctrlestadoborr", u"idpedido = {}".format(idPedido))
+        # if estadopago == u"Borrador" or estadopago == u"Borrador con promocion":
+        if ctrl_estadopago_borr is True:
             return True
         return "disabled"
 
