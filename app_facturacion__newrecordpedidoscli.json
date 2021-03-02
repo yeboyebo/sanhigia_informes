@@ -54,10 +54,10 @@
                                         },
                                         "ciudad": {},
                                         "provincia": {},
-                                        "codpais": {}
+                                        "codpais": {},
+                                        "sh_soloalbaranar": {}
                                     }
-                                },
-                                "sh_soloalbaranar": {}
+                                }
                             }
                         }
                     },
