@@ -6,7 +6,8 @@ from YBUTILS import notifications
 import xml.etree.cElementTree as ET
 import os
 import datetime
-
+import requests
+import json
 
 class sanhigia_informes(flfacturac):
 
@@ -123,11 +124,13 @@ class sanhigia_informes(flfacturac):
                 if eCampo.nombre == "coddir" and eValor != "":
                     cuerpo += "<td align='left'>" + direccion + "</td>"
                 xCampo.text = ustr(u"", eValor)
+
             xLineas = ET.SubElement(xPedido, "lineas")
             camposLineas = _i.dameCamposLineas(idPedido)
             cuerpo += "</tr><tr><th>Referencia</th><th>Descripción</th><th>Cantidad</th><th>Precio</th><th>Total</th></tr><tr></tr>"
             i = 0
             for eCampoLinea in camposLineas:
+
                 xLinea = ET.SubElement(xLineas, "linea")
                 cuerpo += "<tr>"
                 for eLinea in eCampoLinea:
@@ -163,6 +166,7 @@ class sanhigia_informes(flfacturac):
             oDM = _i.datosConfigMailPDA()
             nombreCorreo = qsatype.FLUtil.sqlSelect(u"factppal_general", u"sh_mailrecepcion", ustr(u"1 = ", 1))
             # connection = notifications.get_connection("smtp.gmail.com", "sanhigiapedidos@gmail.com", "a3b2z4Z4", "465", "SSL")
+
             connection = notifications.get_connection(oDM.hostcorreosaliente, oDM.usuariosmtp, oDM.passwordsmtp, oDM.puertosmtp, oDM.tipocxsmtp)
             response = notifications.sendMail(connection, oDM.usuariosmtp, asunto, cuerpo, [nombreCorreo], fichero)
             # response = notifications.sendSisMail(asunto, cuerpo, [nombreCorreo], fichero)
@@ -171,6 +175,7 @@ class sanhigia_informes(flfacturac):
                 return False
             if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_ctrlestadoborr", False, u"idpedido = {}".format(idPedido)):
                 return False
+
             cursor.setValueBuffer("sh_ctrlestadoborr", False)
             estadopago = cursor.valueBuffer("sh_estadopago")
             if estadopago == "Borrador con promocion":
@@ -178,12 +183,35 @@ class sanhigia_informes(flfacturac):
                 if not qsatype.FLUtil.execSql(u"UPDATE pedidoscli set sh_ctrlestadoptevalpagoweb = true WHERE idpedido = {}".format(idPedido)):
                     return False
             elif estadopago == "Borrador":
+                res = _i.llamadaAPIRiesgo(str(idPedido))
+                if res:
+                    qsatype.FLUtil.sqlUpdate("pedidoscli", ["ri_riesgo", "sh_ctrlestadoriesgo"], [res["ri_riesgo"], res["sh_ctrlestadoriesgo"]], "idpedido = {}".format(idPedido))
                 estadopago = qsatype.FactoriaModulos.get('formRecordpedidoscli').iface.commonCalculateField(u"sh_estadopago", cursor)
             if not qsatype.FLUtil.sqlUpdate(u"pedidoscli", u"sh_estadopago", estadopago, u"idpedido = {}".format(idPedido)):
                 return False
+
         except Exception as e:
+            print("_______")
             print(e)
         return response
+
+    def sanhigia_informes_llamadaAPIRiesgo(self, idPedido):
+        api = qsatype.FLUtil.sqlSelect("factppal_general", "ri_api", "1=1")
+        if api and api != "":
+            headers = {"Content-Type": "application/json"}
+
+            data = {
+                "pk": idPedido + "-nocalcularestado"
+            }
+
+            url = api + "-static-/calcula_riesgo_pedido"
+            response = requests.post(url, headers=headers, data=json.dumps(data))
+            stCode = response.status_code
+            if response and stCode == 200:
+                res = json.loads(response.text)
+                return res
+            else:
+                return False
 
     def sanhigia_informes_dameSelectCabXML(self):
         # _i = self.iface
@@ -418,6 +446,9 @@ class sanhigia_informes(flfacturac):
 
     def dameCamposCab(self, idPedido):
         return self.ctx.sanhigia_informes_dameCamposCab(idPedido)
+
+    def llamadaAPIRiesgo(self, idPedido):
+        return self.ctx.sanhigia_informes_llamadaAPIRiesgo(idPedido)
 
     def dameSelectCabXML(self):
         return self.ctx.sanhigia_informes_dameSelectCabXML()
